@@ -1,0 +1,2882 @@
+var animationData = {
+  "v": "4.8.0",
+  "meta": {
+    "g": "LottieFiles AE 3.5.4",
+    "a": "",
+    "k": "",
+    "d": "",
+    "tc": ""
+  },
+  "fr": 29.9700012207031,
+  "ip": 0,
+  "op": 134.000005457932,
+  "w": 1125,
+  "h": 1125,
+  "nm": "Absher individual dark mode",
+  "ddd": 0,
+  "assets": [
+    {
+      "id": "image_0",
+      "w": 56,
+      "h": 495,
+      "u": "",
+      "p": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAHvCAYAAAAByhw9AAAACXBIWXMAAAABAAAAAQBPJcTWAAAAJHpUWHRDcmVhdG9yAAAImXNMyU9KVXBMK0ktUnBNS0tNLikGAEF6Bs5qehXFAAADgklEQVR4nO3X0XESURhH8f/H5N10YEpIB9KBKYESYgeWkA6kBKzA2EHswHQgFVwfXDLMmpDE2YWc6zkvwO7AfL+5u1yo/GOttfMkyySXw+Nb7Prste9orV0lWSX5OPk403f+YuAAu0nyfr55pu9ZYGvtIsk6yYe5h5mjg8DW2jLJJsm7o0wzQ4unTrTWVkm+BYxLngAOuC/HHWWe/gIOl2UXuGQEHPa2zYlmmaXxCq4Dv+fGPQCHS5Oweb+q/RX8fKoh5myRPKweciN/rt0Krk45xJztgFcnnWLGFsPl2dU3536LvN3/cpO0SHJx6iHm7L8Adp1AegLpCaQnkJ5AegLpCaQnkJ5AegLpCaQnkJ5AegLpCaQnkJ5AegLpCaQnkJ5AegLpCaQnkJ5AegLpCaQnkJ5AegLpCaQnkJ5AegLpCaQnkJ5AegLpCaQnkJ5AegLpCaQnkJ5AegLpCaQnkJ5AegLpCaQnkJ5AegLpCaQnkJ5AegLpCaQnkJ5AegLpCaQnkJ5AegLpCaQnkJ5AegLpCaQnkJ5AegLpCaQnkJ5AegLpCaQnkJ5AegLpCaQnkJ5AegLpCaQnkJ5AegLpCaQnkJ5AegLpCaQnkJ5AegLpCaQnkJ5AegLpCaQnkJ5AegLpCaQnkJ5AegLpCaQnkJ5AegLpCaQnkJ5AegLpCaQnkJ5AegLpCaQnkJ5AegLpCaQnkJ5AegLpCaQnkJ5AegLpCaQnkJ5AegLpCaQnkJ5AegLpCaQnkJ5AegLpCaQnkJ5AegLpCaQnkJ5AegLpCaQnkJ5AegLpCaQnkJ5AegLpCaQnkJ5AegLpCaQnkJ5AegLpCaQnkJ5AegLpCaQnkJ5AegLpCaQnkJ5AegLpCaQnkJ5AegLpCaQnkJ5AegLpCaQnkJ5AegLpCaQnkJ5AegLpCaQnkJ5AegLpCaQnkJ5AegLpCaQnkJ5AegLpCaQnkJ5AegLpCaQnkJ5AegLpCaQnkJ5AegLpCaQnkJ5AegLpCaQnkF7XwKq67Rm4Tfpewbukb+AmEYjtR1X9TPoF3uye9Ai8r6r17kWPwOv9F70Bv1bVZv9AT8D7JKvxwV6A2yRXVfVrfKIH4DbJsqruHjtJBx7EJWzg9yQXh3AJE7hN8qmqlo/dc+POjjDQVG3z5xfKzUtgu9468D7JbZLNeH97adVau0xyPuVUU1RVt1N8zm+pSFPazQCuvwAAAABJRU5ErkJggg==",
+      "e": 1
+    },
+    {
+      "id": "image_1",
+      "w": 56,
+      "h": 385,
+      "u": "",
+      "p": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAGBCAYAAAAzNHIXAAAACXBIWXMAAAABAAAAAQBPJcTWAAAAJHpUWHRDcmVhdG9yAAAImXNMyU9KVXBMK0ktUnBNS0tNLikGAEF6Bs5qehXFAAAC+ElEQVR4nO3X0XESURhH8f9l8m46kA5MCbGDdCAdiB1gB5RAOrADpQOswKSDdPD5ADgMgwQjG3LunPMCuwsz328uw+5teWFVdZ3kNsnN5vUtNr36l09vUHdJpkk+DDLSebs+GVhVs6xh7wYbZ4CeBVbVbZJFkvdDDzNEo2MXN6v2PVBccmQFq2qR5NPrjTJMB1ewF1xyAFhV83SCS/aAVXWX5POFZhmkP8DNPW5xuVGGaXcFZ4Hd406pJUlVjZP8uuwog/Rxu4KTS04xZP0Dq+om4CeV5xrl7W51ztIo6/1ct42SjC89xJAd3U30kEB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6Aun1Dlx1DWytPfUMXCZ9/0S/JQKxLVtrD0m/wNn2TY/AZWvtx/agR+B096A34JfW2mr3RE/A+9bafP9kL8D71trk0IUegH/FJXzg12O4JLl6pUHO3TLJdP8P5VA04M8k89ba4tQvEICPWT9XLk5Zsf1aVU2SjM881P/2lGSV5GH7TPnSfgOs60+7//uCZwAAAABJRU5ErkJggg==",
+      "e": 1
+    },
+    {
+      "id": "image_2",
+      "w": 56,
+      "h": 385,
+      "u": "",
+      "p": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAGBCAYAAAAzNHIXAAAACXBIWXMAAAABAAAAAQBPJcTWAAAAJHpUWHRDcmVhdG9yAAAImXNMyU9KVXBMK0ktUnBNS0tNLikGAEF6Bs5qehXFAAAC+ElEQVR4nO3X0XESURhH8f9l8m46kA5MCbGDdCAdiB1gB5RAOrADpQOswKSDdPD5ADgMgwQjG3LunPMCuwsz328uw+5teWFVdZ3kNsnN5vUtNr36l09vUHdJpkk+DDLSebs+GVhVs6xh7wYbZ4CeBVbVbZJFkvdDDzNEo2MXN6v2PVBccmQFq2qR5NPrjTJMB1ewF1xyAFhV83SCS/aAVXWX5POFZhmkP8DNPW5xuVGGaXcFZ4Hd406pJUlVjZP8uuwog/Rxu4KTS04xZP0Dq+om4CeV5xrl7W51ztIo6/1ct42SjC89xJAd3U30kEB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6Aun1Dlx1DWytPfUMXCZ9/0S/JQKxLVtrD0m/wNn2TY/AZWvtx/agR+B096A34JfW2mr3RE/A+9bafP9kL8D71trk0IUegH/FJXzg12O4JLl6pUHO3TLJdP8P5VA04M8k89ba4tQvEICPWT9XLk5Zsf1aVU2SjM881P/2lGSV5GH7TPnSfgOs60+7//uCZwAAAABJRU5ErkJggg==",
+      "e": 1
+    },
+    {
+      "id": "image_3",
+      "w": 56,
+      "h": 385,
+      "u": "",
+      "p": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAGBCAYAAAAzNHIXAAAACXBIWXMAAAABAAAAAQBPJcTWAAAAJHpUWHRDcmVhdG9yAAAImXNMyU9KVXBMK0ktUnBNS0tNLikGAEF6Bs5qehXFAAAC+ElEQVR4nO3X0XESURhH8f9l8m46kA5MCbGDdCAdiB1gB5RAOrADpQOswKSDdPD5ADgMgwQjG3LunPMCuwsz328uw+5teWFVdZ3kNsnN5vUtNr36l09vUHdJpkk+DDLSebs+GVhVs6xh7wYbZ4CeBVbVbZJFkvdDDzNEo2MXN6v2PVBccmQFq2qR5NPrjTJMB1ewF1xyAFhV83SCS/aAVXWX5POFZhmkP8DNPW5xuVGGaXcFZ4Hd406pJUlVjZP8uuwog/Rxu4KTS04xZP0Dq+om4CeV5xrl7W51ztIo6/1ct42SjC89xJAd3U30kEB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6AukJpCeQnkB6Aun1Dlx1DWytPfUMXCZ9/0S/JQKxLVtrD0m/wNn2TY/AZWvtx/agR+B096A34JfW2mr3RE/A+9bafP9kL8D71trk0IUegH/FJXzg12O4JLl6pUHO3TLJdP8P5VA04M8k89ba4tQvEICPWT9XLk5Zsf1aVU2SjM881P/2lGSV5GH7TPnSfgOs60+7//uCZwAAAABJRU5ErkJggg==",
+      "e": 1
+    },
+    {
+      "id": "image_4",
+      "w": 56,
+      "h": 467,
+      "u": "",
+      "p": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAHTCAYAAAByctvrAAAACXBIWXMAAAABAAAAAQBPJcTWAAAAJHpUWHRDcmVhdG9yAAAImXNMyU9KVXBMK0ktUnBNS0tNLikGAEF6Bs5qehXFAAADYklEQVR4nO3X723aUBhH4d9FfG83KCNkg6YTNCMwQkZIN0gmKGzABmWEdIN0gzLB7YfaEaIhQIRxzu05EuKPAb2Pro1xyRurtX5Mcp3kqrvv+/zW7xygL9NTP1FrvUkyT/L17OMM0NHADnaf5NNw45y/g8Ba6yzJIu9r1zu6V4G11uskqyQfLjLNAE32bai1zpP8CBiX7AF2uO+XHWWY/gHWWq/SCC7ZAXbntvU4owzT7gouAj/mdnsGdr+YiJP3KW2v4N1YQwzZJHlePeSJ/FD9Cs7HHGLIeuDNqFMM2KTbPZv65dxukr/Xc832XwBnYw8xZHuvJlpJID2B9ATSE0hPID2B9ATSE0hPID2B9ATSE0hPID2B9ATSE0hPID2B9ATSE0hPID2B9ATSE0hPID2B9ATSE0hPID2B9ATSE0hPID2B9ATSE0hPID2B9ATSE0hPID2B9ATSE0hPID2B9ATSE0hPID2B9ATSE0hPID2B9ATSE0hPID2B9ATSE0hPID2B9ATSE0hPID2B9ATSE0hPID2B9ATSE0hPID2B9ATSE0hPID2B9ATSE0hPID2B9ATSE0hPID2B9ATSE0hPID2B9ATSE0hPID2B9ATSE0hPID2B9ATSE0hPID2B9ATSE0hPID2B9ATSE0hPID2B9ATSE0hPID2B9ATSE0hPID2B9ATSE0hPID2B9ATSE0hPID2B9ATSE0hPID2B9ATSE0hPID2B9ATSE0hPID2B9ATSE0hPID2B9ATSE0hPID2B9ATSE0hPID2B9ATSE0hPID2B9ATSE0hPID2B9ATSE0hPID2B9ATSE0hPID2B9ATSE0hPID2B9ATSE0hPID2B9ATSE0hPID2B9ATSE0hPID2B9ATSE0hPID2B9ATSE0hPID2B9ATSE0hPID2B9ATSE0hPID2B9ATSE0hPID2B9ATSE0hPID2B9ATSE0hPID2B9ATSE0hPID2B9FoHPjUNLKU0DfyZtL2LPiZtA1dJu8BNknXSLnBVSvmdtAu86x+0CFyWUp76J60BN0lut19oDXjbH3t9LQGXpZTF7outAJellPlLG1oA7sUlfODDa7gkmV5okHO3STIvpawOvZG2gpsk35LMjsElnBX8leQ+yWL3NHCoabrLinfYY3dbb/8zObU/ov9QJDSNpuYAAAAASUVORK5CYII=",
+      "e": 1
+    },
+    {
+      "id": "image_5",
+      "w": 56,
+      "h": 522,
+      "u": "",
+      "p": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAIKCAYAAAB2q4yRAAAACXBIWXMAAAABAAAAAQBPJcTWAAAAJHpUWHRDcmVhdG9yAAAImXNMyU9KVXBMK0ktUnBNS0tNLikGAEF6Bs5qehXFAAADsklEQVR4nO3X0XESURxG8e8yeZcOTAl0IB2IFZh0kBIoIVagJWAHUIHYQeggqeD6AGQQ3ZDobsi5c84L7Cw78//NvezOlvxjtdZxkmmSye7zLXZz8dIraq2zJFdJPvY+Tv+Nnw3cwW6TvB9unv47CdxtxUWSD8OP039PAmutkyTLJO9eZZoBGnWdqLVeJfkRMC7pAO5wX193lGH6A7jblrdnmGWQfgMe3FDQ2/Kw4xXEPQZO9QistU6TfD7fKMN0uILzcw0xZKPk8caCfJCfar+CN2edYsD2wNlZpxiw0W57NvNYOG6Ut/su10ujbF9Ym22U5PLcQwxZ59tEKwmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6QmkJ5CeQHoC6Qmk1zrwvmlgKWXdMnCTtL1F10nbwGXSNnCRtAtclVLuknaB8/2XFoGrUspyf9AicH540Brwy+HqJW0Bf+Zo9ZJ2gA9JZqWU++MTLQAfkkz3j4Xj6MBNtrh11w/IwO9JJk/hEiZwk+RTKeWv/7njSMBNkutSymUpZfHciy4GHKiPVtm+9nw7tRW7KrXWSZJxr2P9f3ddd8WX9gvLhFUCb+UEjgAAAABJRU5ErkJggg==",
+      "e": 1
+    },
+    {
+      "id": "image_6",
+      "w": 56,
+      "h": 56,
+      "u": "",
+      "p": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAA4CAYAAACohjseAAAACXBIWXMAAAABAAAAAQBPJcTWAAAAJHpUWHRDcmVhdG9yAAAImXNMyU9KVXBMK0ktUnBNS0tNLikGAEF6Bs5qehXFAAACf0lEQVRoge2a0ZGbMBRFj2jALoFUEDoIHaxTwXoriEvYEpwKgjtwOqAEuwPcgbeCmw8JL4sBJ2sJGSZnhhkG+HgHCSHpPUMAJGVADqRANvBo5Y4SOBhjziHi8YKktaS9pLM+z0HSRlIa2wcASamk7Z1Sfewl5bHElk5sDMpRRSWtFKbFblFIWoYUW8p2m5hUCtGakjLZAeBRWPuWi9Elb7Gds1xNccshGZLD/oAXd7+pcDxL2gw9YLouyo5WJfA1QFAh+G6M2Xfd6BPcA09BQ/LLG5AZY6r2jasuKmnFtOTAfkZF140PLei6ZsVjf3dDvBhjiuaFdgu+Ml05gK1as52LoOwM/sfYEXlmAXwYVZstODjcTohewfW4cQRjocZULgG7WGXa316bVX2StC/MhKd6sKkF83ixBCMHSNycc07dsyYH24J51DDCkYEVTOPGEYxvYAWH9i0nT+96cA5IymctCDNvQfgvOH3mLlgl2BX8LDHGzFrwBLaLlnHjCMYBrOAhciChKAESlzY+xo0lCCW8j6JFtDDCcDLGXLooQOe294Qp6pME7HAK/I4UTAiK+qT5o78/3/YY7Jo5ivbWfYlbKE6YL03Brq37KbNrZ5iu0mcua/o8UkA+eQPSdrVU12R7g5vmTIx1VynYlaB7aD1GRB7Z/VOGFy7b+b9CReSRozGmd+Osdz3oEok/Q0TkkSP37uvKllA9Igf5Ku2SLXF8JPzJNSRjFeG1KbyKtSRT2fLGGJxlK0DCI1vdO2Zrhi2l7JFcSnoNLFroEcqb9V6v7YNK9sV5Eev90X8G2W6UuyPj71YmJ+y+UAmU9UrcF14Fu3DSXTONqqu2zDd/AH3J4VCTw9TGAAAAAElFTkSuQmCC",
+      "e": 1
+    },
+    {
+      "id": "image_7",
+      "w": 56,
+      "h": 56,
+      "u": "",
+      "p": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAA4CAYAAACohjseAAAACXBIWXMAAAABAAAAAQBPJcTWAAAAJHpUWHRDcmVhdG9yAAAImXNMyU9KVXBMK0ktUnBNS0tNLikGAEF6Bs5qehXFAAACf0lEQVRoge2a0ZGbMBRFj2jALoFUEDoIHaxTwXoriEvYEpwKgjtwOqAEuwPcgbeCmw8JL4sBJ2sJGSZnhhkG+HgHCSHpPUMAJGVADqRANvBo5Y4SOBhjziHi8YKktaS9pLM+z0HSRlIa2wcASamk7Z1Sfewl5bHElk5sDMpRRSWtFKbFblFIWoYUW8p2m5hUCtGakjLZAeBRWPuWi9Elb7Gds1xNccshGZLD/oAXd7+pcDxL2gw9YLouyo5WJfA1QFAh+G6M2Xfd6BPcA09BQ/LLG5AZY6r2jasuKmnFtOTAfkZF140PLei6ZsVjf3dDvBhjiuaFdgu+Ml05gK1as52LoOwM/sfYEXlmAXwYVZstODjcTohewfW4cQRjocZULgG7WGXa316bVX2StC/MhKd6sKkF83ixBCMHSNycc07dsyYH24J51DDCkYEVTOPGEYxvYAWH9i0nT+96cA5IymctCDNvQfgvOH3mLlgl2BX8LDHGzFrwBLaLlnHjCMYBrOAhciChKAESlzY+xo0lCCW8j6JFtDDCcDLGXLooQOe294Qp6pME7HAK/I4UTAiK+qT5o78/3/YY7Jo5ivbWfYlbKE6YL03Brq37KbNrZ5iu0mcua/o8UkA+eQPSdrVU12R7g5vmTIx1VynYlaB7aD1GRB7Z/VOGFy7b+b9CReSRozGmd+Osdz3oEok/Q0TkkSP37uvKllA9Igf5Ku2SLXF8JPzJNSRjFeG1KbyKtSRT2fLGGJxlK0DCI1vdO2Zrhi2l7JFcSnoNLFroEcqb9V6v7YNK9sV5Eev90X8G2W6UuyPj71YmJ+y+UAmU9UrcF14Fu3DSXTONqqu2zDd/AH3J4VCTw9TGAAAAAElFTkSuQmCC",
+      "e": 1
+    },
+    {
+      "id": "image_8",
+      "w": 56,
+      "h": 56,
+      "u": "",
+      "p": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAA4CAYAAACohjseAAAACXBIWXMAAAABAAAAAQBPJcTWAAAAJHpUWHRDcmVhdG9yAAAImXNMyU9KVXBMK0ktUnBNS0tNLikGAEF6Bs5qehXFAAACf0lEQVRoge2a0ZGbMBRFj2jALoFUEDoIHaxTwXoriEvYEpwKgjtwOqAEuwPcgbeCmw8JL4sBJ2sJGSZnhhkG+HgHCSHpPUMAJGVADqRANvBo5Y4SOBhjziHi8YKktaS9pLM+z0HSRlIa2wcASamk7Z1Sfewl5bHElk5sDMpRRSWtFKbFblFIWoYUW8p2m5hUCtGakjLZAeBRWPuWi9Elb7Gds1xNccshGZLD/oAXd7+pcDxL2gw9YLouyo5WJfA1QFAh+G6M2Xfd6BPcA09BQ/LLG5AZY6r2jasuKmnFtOTAfkZF140PLei6ZsVjf3dDvBhjiuaFdgu+Ml05gK1as52LoOwM/sfYEXlmAXwYVZstODjcTohewfW4cQRjocZULgG7WGXa316bVX2StC/MhKd6sKkF83ixBCMHSNycc07dsyYH24J51DDCkYEVTOPGEYxvYAWH9i0nT+96cA5IymctCDNvQfgvOH3mLlgl2BX8LDHGzFrwBLaLlnHjCMYBrOAhciChKAESlzY+xo0lCCW8j6JFtDDCcDLGXLooQOe294Qp6pME7HAK/I4UTAiK+qT5o78/3/YY7Jo5ivbWfYlbKE6YL03Brq37KbNrZ5iu0mcua/o8UkA+eQPSdrVU12R7g5vmTIx1VynYlaB7aD1GRB7Z/VOGFy7b+b9CReSRozGmd+Osdz3oEok/Q0TkkSP37uvKllA9Igf5Ku2SLXF8JPzJNSRjFeG1KbyKtSRT2fLGGJxlK0DCI1vdO2Zrhi2l7JFcSnoNLFroEcqb9V6v7YNK9sV5Eev90X8G2W6UuyPj71YmJ+y+UAmU9UrcF14Fu3DSXTONqqu2zDd/AH3J4VCTw9TGAAAAAElFTkSuQmCC",
+      "e": 1
+    },
+    {
+      "id": "image_9",
+      "w": 56,
+      "h": 56,
+      "u": "",
+      "p": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAA4CAYAAACohjseAAAACXBIWXMAAAABAAAAAQBPJcTWAAAAJHpUWHRDcmVhdG9yAAAImXNMyU9KVXBMK0ktUnBNS0tNLikGAEF6Bs5qehXFAAACbElEQVRogd2a7ZHaMBCG36UB6ODcwZEK4lSQ6yCkgpAOKMElUILTgdKB0wElmAre/JDs8xkL5rBWsvXMMHwz+3hlS6xWoADJEsAeQOHufVzczQBoRKTViGc2JHckDyRrki2fx5A8kixSOwEASBYkzzOlfNS0IyGJ2M6JxcCQvDfMg8sdqZOxR1Qkd5piO9phk5ILNbJJcu9+fAm0JA+h5VIMyUfMl+Ry5ToeSso9OdgJeDv7SOnyU0TOvjcnBWmvVg2AF6WgQvNFRJqpNzaeL5yxHjkAMPRMITeCJI8AvquHFJYtbFJu+DBE3VG4YPnnnY9vImKGL4wzWGG9csBEFntB2hX8j4jBaPAynjqGGTzGjUWN0/CJAFmce2P6c7HL4BvykQOAQ/dgKJgTvU8nWKaJQ40tXTVg4x7kNDw7SsBmMF45IC57wAoWaeNQowDyzuAr4P83kQ1ZC5IsNgD0SnHpKTYAlrkfEIY26yEqIk3WgoC9yFxSB6HEFchbsAGsoEkbhxoGsIKT9cQMsBl028Z/EwejgQHeVzJ1ujhU+NPt9+cq2Pv0hV+SNdZX0Z7iKiL98nM40VcJgtHgg8e4dG8AfI0ZTWCuAIphv814qbb24m81bia62R8kWQH4FS2kcPwTkZvqxJTg2jY/OyY3QW/+TbgUv8EtVlfCb98Orxfa3rM1cH76sHD5ks/LrUByvtyCJcPJDSSX0hSkN1czbUNew1htlSRLxmvOa0meoohNiB4URVuSJ2r2iH5CtGS41uaaAdslvc14z0K7oVrivev+9c7Hr7DLQtPdh+68Dy7og7YPpwDQfnpZNYP/paMZdpcz6RwAAAAASUVORK5CYII=",
+      "e": 1
+    },
+    {
+      "id": "image_10",
+      "w": 56,
+      "h": 56,
+      "u": "",
+      "p": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAA4CAYAAACohjseAAAACXBIWXMAAAABAAAAAQBPJcTWAAAAJHpUWHRDcmVhdG9yAAAImXNMyU9KVXBMK0ktUnBNS0tNLikGAEF6Bs5qehXFAAAB4ElEQVRoge2a3XGCQBRGj07eQwexg1gCqSB0EDsIJdBBLMES0kEswU5Sws2Dl8yGAVmRuz+YM8OLo+s98y13l58VmSIiJbDRowC2PV+rH8KVNB0R2QKlHlvgyfOnRZKCIlIAFWehCnicOlZSgiJSATvgda4xowtqWjVnMd+p5000QRHZAA3wZvk/wQVDibUEE3SmYs0NTeNaggjqmnXA4BwbY205uIgUIrIHvoggB4YJxkzNxSRBEamJmJrLrAlqI9kTqEP6MJugyh2B57nGnINZpqhuhk8kJgczJKhyRwKubddwU4Kpy8ENgjnIwURBbSifJC4HEwSdbhl9jfNhSoJ7EuyWQ1wlqDuUZBZxH7wFdW/5YVeKDV6Cet4dbEuxwTfBhkyaSpdRQZ2a7/al2HBRMOep2TKWYE2mU7NlUFDvftXhSrHhUoINGWzFxugV1PSyWtCHGEqwCVmEJavuB9o5vyPUYsFLX4LZNxaXPsFd6CIs+SOoz+eyXve6dBPcxSjCkl9BbS6zPVlNBTfBKloVhriCZawiLLmPBPUeZ/b7zj7aBMuYRVhyN4J973ktglZwUbsXl7XeVFosa86vIy6WuxAsYhdhyZoFd1AwftMpBf4Fc2fxgiu9klhqJz39AITVib8wpoyjAAAAAElFTkSuQmCC",
+      "e": 1
+    },
+    {
+      "id": "comp_0",
+      "layers": [
+        {
+          "ddd": 0,
+          "ind": 1,
+          "ty": 2,
+          "nm": "line1",
+          "refId": "image_0",
+          "sr": 1,
+          "ks": {
+            "o": {
+              "a": 0,
+              "k": 100,
+              "ix": 11
+            },
+            "r": {
+              "a": 0,
+              "k": 0,
+              "ix": 10
+            },
+            "p": {
+              "a": 0,
+              "k": [
+                357.06,
+                672.02,
+                0
+              ],
+              "ix": 2
+            },
+            "a": {
+              "a": 0,
+              "k": [
+                27.597,
+                247.163,
+                0
+              ],
+              "ix": 1
+            },
+            "s": {
+              "a": 0,
+              "k": [
+                100,
+                100,
+                100
+              ],
+              "ix": 6
+            }
+          },
+          "ao": 0,
+          "hasMask": true,
+          "masksProperties": [
+            {
+              "inv": false,
+              "mode": "a",
+              "pt": {
+                "a": 1,
+                "k": [
+                  {
+                    "i": {
+                      "x": 0.667,
+                      "y": 1
+                    },
+                    "o": {
+                      "x": 0.333,
+                      "y": 0
+                    },
+                    "t": 15,
+                    "s": [
+                      {
+                        "i": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ]
+                        ],
+                        "o": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ]
+                        ],
+                        "v": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            495
+                          ],
+                          [
+                            56,
+                            495
+                          ],
+                          [
+                            56,
+                            0
+                          ]
+                        ],
+                        "c": true
+                      }
+                    ]
+                  },
+                  {
+                    "i": {
+                      "x": 0.667,
+                      "y": 1
+                    },
+                    "o": {
+                      "x": 0.167,
+                      "y": 0
+                    },
+                    "t": 32,
+                    "s": [
+                      {
+                        "i": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ]
+                        ],
+                        "o": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ]
+                        ],
+                        "v": [
+                          [
+                            -0.029,
+                            -495
+                          ],
+                          [
+                            -0.029,
+                            0
+                          ],
+                          [
+                            55.971,
+                            0
+                          ],
+                          [
+                            55.971,
+                            -495
+                          ]
+                        ],
+                        "c": true
+                      }
+                    ]
+                  },
+                  {
+                    "i": {
+                      "x": 0.833,
+                      "y": 1
+                    },
+                    "o": {
+                      "x": 0.167,
+                      "y": 0
+                    },
+                    "t": 99,
+                    "s": [
+                      {
+                        "i": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ]
+                        ],
+                        "o": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ]
+                        ],
+                        "v": [
+                          [
+                            -0.029,
+                            -495
+                          ],
+                          [
+                            -0.029,
+                            0
+                          ],
+                          [
+                            55.971,
+                            0
+                          ],
+                          [
+                            55.971,
+                            -495
+                          ]
+                        ],
+                        "c": true
+                      }
+                    ]
+                  },
+                  {
+                    "t": 111.000004521123,
+                    "s": [
+                      {
+                        "i": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ]
+                        ],
+                        "o": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ]
+                        ],
+                        "v": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            495
+                          ],
+                          [
+                            56,
+                            495
+                          ],
+                          [
+                            56,
+                            0
+                          ]
+                        ],
+                        "c": true
+                      }
+                    ]
+                  }
+                ],
+                "ix": 1
+              },
+              "o": {
+                "a": 0,
+                "k": 100,
+                "ix": 3
+              },
+              "x": {
+                "a": 0,
+                "k": 0,
+                "ix": 4
+              },
+              "nm": "Mask 1"
+            }
+          ],
+          "ip": 0,
+          "op": 603.000024560694,
+          "st": 0,
+          "bm": 0
+        },
+        {
+          "ddd": 0,
+          "ind": 2,
+          "ty": 2,
+          "nm": "line2",
+          "refId": "image_1",
+          "sr": 1,
+          "ks": {
+            "o": {
+              "a": 0,
+              "k": 100,
+              "ix": 11
+            },
+            "r": {
+              "a": 0,
+              "k": 0,
+              "ix": 10
+            },
+            "p": {
+              "a": 0,
+              "k": [
+                439.62,
+                615.82,
+                0
+              ],
+              "ix": 2
+            },
+            "a": {
+              "a": 0,
+              "k": [
+                27.597,
+                192.471,
+                0
+              ],
+              "ix": 1
+            },
+            "s": {
+              "a": 0,
+              "k": [
+                100,
+                100,
+                100
+              ],
+              "ix": 6
+            }
+          },
+          "ao": 0,
+          "hasMask": true,
+          "masksProperties": [
+            {
+              "inv": false,
+              "mode": "a",
+              "pt": {
+                "a": 1,
+                "k": [
+                  {
+                    "i": {
+                      "x": 0.667,
+                      "y": 1
+                    },
+                    "o": {
+                      "x": 0.333,
+                      "y": 0
+                    },
+                    "t": 43,
+                    "s": [
+                      {
+                        "i": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ]
+                        ],
+                        "o": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ]
+                        ],
+                        "v": [
+                          [
+                            -0.403,
+                            0.967
+                          ],
+                          [
+                            -0.403,
+                            385.968
+                          ],
+                          [
+                            55.597,
+                            385.968
+                          ],
+                          [
+                            55.597,
+                            0.967
+                          ]
+                        ],
+                        "c": true
+                      }
+                    ]
+                  },
+                  {
+                    "i": {
+                      "x": 0.667,
+                      "y": 1
+                    },
+                    "o": {
+                      "x": 0.333,
+                      "y": 0
+                    },
+                    "t": 56,
+                    "s": [
+                      {
+                        "i": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ]
+                        ],
+                        "o": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ]
+                        ],
+                        "v": [
+                          [
+                            -0.286,
+                            389.837
+                          ],
+                          [
+                            -0.286,
+                            774.837
+                          ],
+                          [
+                            55.714,
+                            774.837
+                          ],
+                          [
+                            55.714,
+                            389.837
+                          ]
+                        ],
+                        "c": true
+                      }
+                    ]
+                  },
+                  {
+                    "i": {
+                      "x": 0.667,
+                      "y": 1
+                    },
+                    "o": {
+                      "x": 0.333,
+                      "y": 0
+                    },
+                    "t": 72,
+                    "s": [
+                      {
+                        "i": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ]
+                        ],
+                        "o": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ]
+                        ],
+                        "v": [
+                          [
+                            -0.286,
+                            389.837
+                          ],
+                          [
+                            -0.286,
+                            774.837
+                          ],
+                          [
+                            55.714,
+                            774.837
+                          ],
+                          [
+                            55.714,
+                            389.837
+                          ]
+                        ],
+                        "c": true
+                      }
+                    ]
+                  },
+                  {
+                    "t": 83.0000033806593,
+                    "s": [
+                      {
+                        "i": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ]
+                        ],
+                        "o": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ]
+                        ],
+                        "v": [
+                          [
+                            -0.403,
+                            0.967
+                          ],
+                          [
+                            -0.403,
+                            385.968
+                          ],
+                          [
+                            55.597,
+                            385.968
+                          ],
+                          [
+                            55.597,
+                            0.967
+                          ]
+                        ],
+                        "c": true
+                      }
+                    ]
+                  }
+                ],
+                "ix": 1
+              },
+              "o": {
+                "a": 0,
+                "k": 100,
+                "ix": 3
+              },
+              "x": {
+                "a": 0,
+                "k": 0,
+                "ix": 4
+              },
+              "nm": "Mask 1"
+            }
+          ],
+          "ip": 0,
+          "op": 603.000024560694,
+          "st": 0,
+          "bm": 0
+        },
+        {
+          "ddd": 0,
+          "ind": 3,
+          "ty": 2,
+          "nm": "line3",
+          "refId": "image_2",
+          "sr": 1,
+          "ks": {
+            "o": {
+              "a": 0,
+              "k": 100,
+              "ix": 11
+            },
+            "r": {
+              "a": 0,
+              "k": 0,
+              "ix": 10
+            },
+            "p": {
+              "a": 0,
+              "k": [
+                520.26,
+                615.82,
+                0
+              ],
+              "ix": 2
+            },
+            "a": {
+              "a": 0,
+              "k": [
+                27.597,
+                192.471,
+                0
+              ],
+              "ix": 1
+            },
+            "s": {
+              "a": 0,
+              "k": [
+                100,
+                100,
+                100
+              ],
+              "ix": 6
+            }
+          },
+          "ao": 0,
+          "hasMask": true,
+          "masksProperties": [
+            {
+              "inv": false,
+              "mode": "a",
+              "pt": {
+                "a": 1,
+                "k": [
+                  {
+                    "i": {
+                      "x": 0.667,
+                      "y": 1
+                    },
+                    "o": {
+                      "x": 0.333,
+                      "y": 0
+                    },
+                    "t": 19,
+                    "s": [
+                      {
+                        "i": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ]
+                        ],
+                        "o": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ]
+                        ],
+                        "v": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            385
+                          ],
+                          [
+                            56,
+                            385
+                          ],
+                          [
+                            56,
+                            0
+                          ]
+                        ],
+                        "c": true
+                      }
+                    ]
+                  },
+                  {
+                    "i": {
+                      "x": 0.667,
+                      "y": 1
+                    },
+                    "o": {
+                      "x": 0.167,
+                      "y": 0
+                    },
+                    "t": 32,
+                    "s": [
+                      {
+                        "i": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ]
+                        ],
+                        "o": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ]
+                        ],
+                        "v": [
+                          [
+                            0.167,
+                            -385
+                          ],
+                          [
+                            0.167,
+                            0
+                          ],
+                          [
+                            56.167,
+                            0
+                          ],
+                          [
+                            56.167,
+                            -385
+                          ]
+                        ],
+                        "c": true
+                      }
+                    ]
+                  },
+                  {
+                    "i": {
+                      "x": 0.833,
+                      "y": 1
+                    },
+                    "o": {
+                      "x": 0.167,
+                      "y": 0
+                    },
+                    "t": 97,
+                    "s": [
+                      {
+                        "i": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ]
+                        ],
+                        "o": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ]
+                        ],
+                        "v": [
+                          [
+                            0.167,
+                            -385
+                          ],
+                          [
+                            0.167,
+                            0
+                          ],
+                          [
+                            56.167,
+                            0
+                          ],
+                          [
+                            56.167,
+                            -385
+                          ]
+                        ],
+                        "c": true
+                      }
+                    ]
+                  },
+                  {
+                    "t": 108.00000439893,
+                    "s": [
+                      {
+                        "i": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ]
+                        ],
+                        "o": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ]
+                        ],
+                        "v": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            385
+                          ],
+                          [
+                            56,
+                            385
+                          ],
+                          [
+                            56,
+                            0
+                          ]
+                        ],
+                        "c": true
+                      }
+                    ]
+                  }
+                ],
+                "ix": 1
+              },
+              "o": {
+                "a": 0,
+                "k": 100,
+                "ix": 3
+              },
+              "x": {
+                "a": 0,
+                "k": 0,
+                "ix": 4
+              },
+              "nm": "Mask 1"
+            }
+          ],
+          "ip": 0,
+          "op": 603.000024560694,
+          "st": 0,
+          "bm": 0
+        },
+        {
+          "ddd": 0,
+          "ind": 4,
+          "ty": 2,
+          "nm": "line4",
+          "refId": "image_3",
+          "sr": 1,
+          "ks": {
+            "o": {
+              "a": 0,
+              "k": 100,
+              "ix": 11
+            },
+            "r": {
+              "a": 0,
+              "k": 0,
+              "ix": 10
+            },
+            "p": {
+              "a": 0,
+              "k": [
+                602.82,
+                615.82,
+                0
+              ],
+              "ix": 2
+            },
+            "a": {
+              "a": 0,
+              "k": [
+                27.597,
+                192.471,
+                0
+              ],
+              "ix": 1
+            },
+            "s": {
+              "a": 0,
+              "k": [
+                100,
+                100,
+                100
+              ],
+              "ix": 6
+            }
+          },
+          "ao": 0,
+          "hasMask": true,
+          "masksProperties": [
+            {
+              "inv": false,
+              "mode": "a",
+              "pt": {
+                "a": 1,
+                "k": [
+                  {
+                    "i": {
+                      "x": 0.667,
+                      "y": 1
+                    },
+                    "o": {
+                      "x": 0.333,
+                      "y": 0
+                    },
+                    "t": 43,
+                    "s": [
+                      {
+                        "i": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ]
+                        ],
+                        "o": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ]
+                        ],
+                        "v": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            385
+                          ],
+                          [
+                            56,
+                            385
+                          ],
+                          [
+                            56,
+                            0
+                          ]
+                        ],
+                        "c": true
+                      }
+                    ]
+                  },
+                  {
+                    "i": {
+                      "x": 0.667,
+                      "y": 1
+                    },
+                    "o": {
+                      "x": 0.333,
+                      "y": 0
+                    },
+                    "t": 56,
+                    "s": [
+                      {
+                        "i": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ]
+                        ],
+                        "o": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ]
+                        ],
+                        "v": [
+                          [
+                            -0.265,
+                            389
+                          ],
+                          [
+                            -0.265,
+                            770
+                          ],
+                          [
+                            55.735,
+                            770
+                          ],
+                          [
+                            55.735,
+                            389
+                          ]
+                        ],
+                        "c": true
+                      }
+                    ]
+                  },
+                  {
+                    "i": {
+                      "x": 0.667,
+                      "y": 1
+                    },
+                    "o": {
+                      "x": 0.333,
+                      "y": 0
+                    },
+                    "t": 72,
+                    "s": [
+                      {
+                        "i": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ]
+                        ],
+                        "o": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ]
+                        ],
+                        "v": [
+                          [
+                            -0.265,
+                            389
+                          ],
+                          [
+                            -0.265,
+                            770
+                          ],
+                          [
+                            55.735,
+                            770
+                          ],
+                          [
+                            55.735,
+                            389
+                          ]
+                        ],
+                        "c": true
+                      }
+                    ]
+                  },
+                  {
+                    "t": 85.000003462121,
+                    "s": [
+                      {
+                        "i": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ]
+                        ],
+                        "o": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ]
+                        ],
+                        "v": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            385
+                          ],
+                          [
+                            56,
+                            385
+                          ],
+                          [
+                            56,
+                            0
+                          ]
+                        ],
+                        "c": true
+                      }
+                    ]
+                  }
+                ],
+                "ix": 1
+              },
+              "o": {
+                "a": 0,
+                "k": 100,
+                "ix": 3
+              },
+              "x": {
+                "a": 0,
+                "k": 0,
+                "ix": 4
+              },
+              "nm": "Mask 1"
+            }
+          ],
+          "ip": 0,
+          "op": 603.000024560694,
+          "st": 0,
+          "bm": 0
+        },
+        {
+          "ddd": 0,
+          "ind": 5,
+          "ty": 2,
+          "nm": "line5",
+          "refId": "image_4",
+          "sr": 1,
+          "ks": {
+            "o": {
+              "a": 0,
+              "k": 100,
+              "ix": 11
+            },
+            "r": {
+              "a": 0,
+              "k": 0,
+              "ix": 10
+            },
+            "p": {
+              "a": 0,
+              "k": [
+                686.38,
+                574.62,
+                0
+              ],
+              "ix": 2
+            },
+            "a": {
+              "a": 0,
+              "k": [
+                27.597,
+                233.182,
+                0
+              ],
+              "ix": 1
+            },
+            "s": {
+              "a": 0,
+              "k": [
+                100,
+                100,
+                100
+              ],
+              "ix": 6
+            }
+          },
+          "ao": 0,
+          "hasMask": true,
+          "masksProperties": [
+            {
+              "inv": false,
+              "mode": "a",
+              "pt": {
+                "a": 1,
+                "k": [
+                  {
+                    "i": {
+                      "x": 0.667,
+                      "y": 1
+                    },
+                    "o": {
+                      "x": 0.333,
+                      "y": 0
+                    },
+                    "t": 19,
+                    "s": [
+                      {
+                        "i": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ]
+                        ],
+                        "o": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ]
+                        ],
+                        "v": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            467
+                          ],
+                          [
+                            56,
+                            467
+                          ],
+                          [
+                            56,
+                            0
+                          ]
+                        ],
+                        "c": true
+                      }
+                    ]
+                  },
+                  {
+                    "i": {
+                      "x": 0.667,
+                      "y": 1
+                    },
+                    "o": {
+                      "x": 0.167,
+                      "y": 0
+                    },
+                    "t": 35,
+                    "s": [
+                      {
+                        "i": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ]
+                        ],
+                        "o": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ]
+                        ],
+                        "v": [
+                          [
+                            0.285,
+                            -474.703
+                          ],
+                          [
+                            0.285,
+                            -7.703
+                          ],
+                          [
+                            56.285,
+                            -7.703
+                          ],
+                          [
+                            56.285,
+                            -474.703
+                          ]
+                        ],
+                        "c": true
+                      }
+                    ]
+                  },
+                  {
+                    "i": {
+                      "x": 0.833,
+                      "y": 1
+                    },
+                    "o": {
+                      "x": 0.167,
+                      "y": 0
+                    },
+                    "t": 95,
+                    "s": [
+                      {
+                        "i": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ]
+                        ],
+                        "o": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ]
+                        ],
+                        "v": [
+                          [
+                            0.285,
+                            -474.703
+                          ],
+                          [
+                            0.285,
+                            -7.703
+                          ],
+                          [
+                            56.285,
+                            -7.703
+                          ],
+                          [
+                            56.285,
+                            -474.703
+                          ]
+                        ],
+                        "c": true
+                      }
+                    ]
+                  },
+                  {
+                    "t": 108.00000439893,
+                    "s": [
+                      {
+                        "i": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ]
+                        ],
+                        "o": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ]
+                        ],
+                        "v": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            467
+                          ],
+                          [
+                            56,
+                            467
+                          ],
+                          [
+                            56,
+                            0
+                          ]
+                        ],
+                        "c": true
+                      }
+                    ]
+                  }
+                ],
+                "ix": 1
+              },
+              "o": {
+                "a": 0,
+                "k": 100,
+                "ix": 3
+              },
+              "x": {
+                "a": 0,
+                "k": 0,
+                "ix": 4
+              },
+              "nm": "Mask 1"
+            }
+          ],
+          "ip": 0,
+          "op": 603.000024560694,
+          "st": 0,
+          "bm": 0
+        },
+        {
+          "ddd": 0,
+          "ind": 6,
+          "ty": 2,
+          "nm": "line6",
+          "refId": "image_5",
+          "sr": 1,
+          "ks": {
+            "o": {
+              "a": 0,
+              "k": 100,
+              "ix": 11
+            },
+            "r": {
+              "a": 0,
+              "k": 0,
+              "ix": 10
+            },
+            "p": {
+              "a": 0,
+              "k": [
+                767.94,
+                546.7,
+                0
+              ],
+              "ix": 2
+            },
+            "a": {
+              "a": 0,
+              "k": [
+                27.598,
+                260.601,
+                0
+              ],
+              "ix": 1
+            },
+            "s": {
+              "a": 0,
+              "k": [
+                100,
+                100,
+                100
+              ],
+              "ix": 6
+            }
+          },
+          "ao": 0,
+          "hasMask": true,
+          "masksProperties": [
+            {
+              "inv": false,
+              "mode": "a",
+              "pt": {
+                "a": 1,
+                "k": [
+                  {
+                    "i": {
+                      "x": 0.667,
+                      "y": 1
+                    },
+                    "o": {
+                      "x": 0.333,
+                      "y": 0
+                    },
+                    "t": 38,
+                    "s": [
+                      {
+                        "i": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ]
+                        ],
+                        "o": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ]
+                        ],
+                        "v": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            522
+                          ],
+                          [
+                            56,
+                            522
+                          ],
+                          [
+                            56,
+                            0
+                          ]
+                        ],
+                        "c": true
+                      }
+                    ]
+                  },
+                  {
+                    "i": {
+                      "x": 0.667,
+                      "y": 1
+                    },
+                    "o": {
+                      "x": 0.333,
+                      "y": 0
+                    },
+                    "t": 57,
+                    "s": [
+                      {
+                        "i": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ]
+                        ],
+                        "o": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ]
+                        ],
+                        "v": [
+                          [
+                            -0.443,
+                            525.888
+                          ],
+                          [
+                            -0.443,
+                            1042.056
+                          ],
+                          [
+                            55.557,
+                            1042.056
+                          ],
+                          [
+                            55.557,
+                            525.888
+                          ]
+                        ],
+                        "c": true
+                      }
+                    ]
+                  },
+                  {
+                    "i": {
+                      "x": 0.667,
+                      "y": 1
+                    },
+                    "o": {
+                      "x": 0.333,
+                      "y": 0
+                    },
+                    "t": 72,
+                    "s": [
+                      {
+                        "i": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ]
+                        ],
+                        "o": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ]
+                        ],
+                        "v": [
+                          [
+                            -0.443,
+                            525.888
+                          ],
+                          [
+                            -0.443,
+                            1042.056
+                          ],
+                          [
+                            55.557,
+                            1042.056
+                          ],
+                          [
+                            55.557,
+                            525.888
+                          ]
+                        ],
+                        "c": true
+                      }
+                    ]
+                  },
+                  {
+                    "t": 89.0000036250443,
+                    "s": [
+                      {
+                        "i": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ]
+                        ],
+                        "o": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            0
+                          ]
+                        ],
+                        "v": [
+                          [
+                            0,
+                            0
+                          ],
+                          [
+                            0,
+                            522
+                          ],
+                          [
+                            56,
+                            522
+                          ],
+                          [
+                            56,
+                            0
+                          ]
+                        ],
+                        "c": true
+                      }
+                    ]
+                  }
+                ],
+                "ix": 1
+              },
+              "o": {
+                "a": 0,
+                "k": 100,
+                "ix": 3
+              },
+              "x": {
+                "a": 0,
+                "k": 0,
+                "ix": 4
+              },
+              "nm": "Mask 1"
+            }
+          ],
+          "ip": 0,
+          "op": 603.000024560694,
+          "st": 0,
+          "bm": 0
+        },
+        {
+          "ddd": 0,
+          "ind": 7,
+          "ty": 2,
+          "nm": "circle1",
+          "refId": "image_6",
+          "sr": 1,
+          "ks": {
+            "o": {
+              "a": 1,
+              "k": [
+                {
+                  "i": {
+                    "x": [
+                      0.833
+                    ],
+                    "y": [
+                      0.833
+                    ]
+                  },
+                  "o": {
+                    "x": [
+                      0.167
+                    ],
+                    "y": [
+                      0.167
+                    ]
+                  },
+                  "t": 40,
+                  "s": [
+                    100
+                  ]
+                },
+                {
+                  "i": {
+                    "x": [
+                      0.833
+                    ],
+                    "y": [
+                      0.833
+                    ]
+                  },
+                  "o": {
+                    "x": [
+                      0.167
+                    ],
+                    "y": [
+                      0.167
+                    ]
+                  },
+                  "t": 44,
+                  "s": [
+                    0
+                  ]
+                },
+                {
+                  "i": {
+                    "x": [
+                      0.833
+                    ],
+                    "y": [
+                      0.833
+                    ]
+                  },
+                  "o": {
+                    "x": [
+                      0.167
+                    ],
+                    "y": [
+                      0.167
+                    ]
+                  },
+                  "t": 84,
+                  "s": [
+                    0
+                  ]
+                },
+                {
+                  "t": 88.0000035843135,
+                  "s": [
+                    100
+                  ]
+                }
+              ],
+              "ix": 11
+            },
+            "r": {
+              "a": 0,
+              "k": 0,
+              "ix": 10
+            },
+            "p": {
+              "a": 0,
+              "k": [
+                439.62,
+                368.54,
+                0
+              ],
+              "ix": 2
+            },
+            "a": {
+              "a": 0,
+              "k": [
+                27.597,
+                27.597,
+                0
+              ],
+              "ix": 1
+            },
+            "s": {
+              "a": 0,
+              "k": [
+                100,
+                100,
+                100
+              ],
+              "ix": 6
+            }
+          },
+          "ao": 0,
+          "ip": 0,
+          "op": 603.000024560694,
+          "st": 0,
+          "bm": 0
+        },
+        {
+          "ddd": 0,
+          "ind": 8,
+          "ty": 2,
+          "nm": "circle2",
+          "refId": "image_7",
+          "sr": 1,
+          "ks": {
+            "o": {
+              "a": 1,
+              "k": [
+                {
+                  "i": {
+                    "x": [
+                      0.833
+                    ],
+                    "y": [
+                      0.833
+                    ]
+                  },
+                  "o": {
+                    "x": [
+                      0.167
+                    ],
+                    "y": [
+                      0.167
+                    ]
+                  },
+                  "t": 31,
+                  "s": [
+                    100
+                  ]
+                },
+                {
+                  "i": {
+                    "x": [
+                      0.833
+                    ],
+                    "y": [
+                      0.833
+                    ]
+                  },
+                  "o": {
+                    "x": [
+                      0.167
+                    ],
+                    "y": [
+                      0.167
+                    ]
+                  },
+                  "t": 35,
+                  "s": [
+                    0
+                  ]
+                },
+                {
+                  "i": {
+                    "x": [
+                      0.833
+                    ],
+                    "y": [
+                      0.833
+                    ]
+                  },
+                  "o": {
+                    "x": [
+                      0.167
+                    ],
+                    "y": [
+                      0.167
+                    ]
+                  },
+                  "t": 94,
+                  "s": [
+                    0
+                  ]
+                },
+                {
+                  "t": 99.0000040323527,
+                  "s": [
+                    100
+                  ]
+                }
+              ],
+              "ix": 11
+            },
+            "r": {
+              "a": 0,
+              "k": 0,
+              "ix": 10
+            },
+            "p": {
+              "a": 0,
+              "k": [
+                520.26,
+                368.54,
+                0
+              ],
+              "ix": 2
+            },
+            "a": {
+              "a": 0,
+              "k": [
+                27.597,
+                27.597,
+                0
+              ],
+              "ix": 1
+            },
+            "s": {
+              "a": 0,
+              "k": [
+                100,
+                100,
+                100
+              ],
+              "ix": 6
+            }
+          },
+          "ao": 0,
+          "ip": 0,
+          "op": 603.000024560694,
+          "st": 0,
+          "bm": 0
+        },
+        {
+          "ddd": 0,
+          "ind": 9,
+          "ty": 2,
+          "nm": "circle3",
+          "refId": "image_8",
+          "sr": 1,
+          "ks": {
+            "o": {
+              "a": 1,
+              "k": [
+                {
+                  "i": {
+                    "x": [
+                      0.833
+                    ],
+                    "y": [
+                      0.833
+                    ]
+                  },
+                  "o": {
+                    "x": [
+                      0.167
+                    ],
+                    "y": [
+                      0.167
+                    ]
+                  },
+                  "t": 40,
+                  "s": [
+                    100
+                  ]
+                },
+                {
+                  "i": {
+                    "x": [
+                      0.833
+                    ],
+                    "y": [
+                      0.833
+                    ]
+                  },
+                  "o": {
+                    "x": [
+                      0.167
+                    ],
+                    "y": [
+                      0.167
+                    ]
+                  },
+                  "t": 44,
+                  "s": [
+                    0
+                  ]
+                },
+                {
+                  "i": {
+                    "x": [
+                      0.833
+                    ],
+                    "y": [
+                      0.833
+                    ]
+                  },
+                  "o": {
+                    "x": [
+                      0.167
+                    ],
+                    "y": [
+                      0.167
+                    ]
+                  },
+                  "t": 84,
+                  "s": [
+                    0
+                  ]
+                },
+                {
+                  "t": 88.0000035843135,
+                  "s": [
+                    100
+                  ]
+                }
+              ],
+              "ix": 11
+            },
+            "r": {
+              "a": 0,
+              "k": 0,
+              "ix": 10
+            },
+            "p": {
+              "a": 0,
+              "k": [
+                602.82,
+                368.54,
+                0
+              ],
+              "ix": 2
+            },
+            "a": {
+              "a": 0,
+              "k": [
+                27.597,
+                27.597,
+                0
+              ],
+              "ix": 1
+            },
+            "s": {
+              "a": 0,
+              "k": [
+                100,
+                100,
+                100
+              ],
+              "ix": 6
+            }
+          },
+          "ao": 0,
+          "ip": 0,
+          "op": 603.000024560694,
+          "st": 0,
+          "bm": 0
+        },
+        {
+          "ddd": 0,
+          "ind": 10,
+          "ty": 2,
+          "nm": "circle4",
+          "refId": "image_9",
+          "sr": 1,
+          "ks": {
+            "o": {
+              "a": 1,
+              "k": [
+                {
+                  "i": {
+                    "x": [
+                      0.833
+                    ],
+                    "y": [
+                      0.833
+                    ]
+                  },
+                  "o": {
+                    "x": [
+                      0.167
+                    ],
+                    "y": [
+                      0.167
+                    ]
+                  },
+                  "t": 13,
+                  "s": [
+                    100
+                  ]
+                },
+                {
+                  "i": {
+                    "x": [
+                      0.833
+                    ],
+                    "y": [
+                      0.833
+                    ]
+                  },
+                  "o": {
+                    "x": [
+                      0.167
+                    ],
+                    "y": [
+                      0.167
+                    ]
+                  },
+                  "t": 16,
+                  "s": [
+                    0
+                  ]
+                },
+                {
+                  "i": {
+                    "x": [
+                      0.833
+                    ],
+                    "y": [
+                      0.833
+                    ]
+                  },
+                  "o": {
+                    "x": [
+                      0.167
+                    ],
+                    "y": [
+                      0.167
+                    ]
+                  },
+                  "t": 109,
+                  "s": [
+                    0
+                  ]
+                },
+                {
+                  "t": 112.000004561854,
+                  "s": [
+                    100
+                  ]
+                }
+              ],
+              "ix": 11
+            },
+            "r": {
+              "a": 0,
+              "k": 0,
+              "ix": 10
+            },
+            "p": {
+              "a": 0,
+              "k": [
+                685.38,
+                863.5,
+                0
+              ],
+              "ix": 2
+            },
+            "a": {
+              "a": 0,
+              "k": [
+                27.597,
+                27.597,
+                0
+              ],
+              "ix": 1
+            },
+            "s": {
+              "a": 0,
+              "k": [
+                100,
+                100,
+                100
+              ],
+              "ix": 6
+            }
+          },
+          "ao": 0,
+          "ip": 0,
+          "op": 603.000024560694,
+          "st": 0,
+          "bm": 0
+        },
+        {
+          "ddd": 0,
+          "ind": 11,
+          "ty": 2,
+          "nm": "semicircle",
+          "refId": "image_10",
+          "sr": 1,
+          "ks": {
+            "o": {
+              "a": 1,
+              "k": [
+                {
+                  "i": {
+                    "x": [
+                      0.833
+                    ],
+                    "y": [
+                      0.833
+                    ]
+                  },
+                  "o": {
+                    "x": [
+                      0.167
+                    ],
+                    "y": [
+                      0.167
+                    ]
+                  },
+                  "t": 37,
+                  "s": [
+                    100
+                  ]
+                },
+                {
+                  "i": {
+                    "x": [
+                      0.833
+                    ],
+                    "y": [
+                      0.833
+                    ]
+                  },
+                  "o": {
+                    "x": [
+                      0.167
+                    ],
+                    "y": [
+                      0.167
+                    ]
+                  },
+                  "t": 40,
+                  "s": [
+                    0
+                  ]
+                },
+                {
+                  "i": {
+                    "x": [
+                      0.833
+                    ],
+                    "y": [
+                      0.833
+                    ]
+                  },
+                  "o": {
+                    "x": [
+                      0.167
+                    ],
+                    "y": [
+                      0.167
+                    ]
+                  },
+                  "t": 91,
+                  "s": [
+                    0
+                  ]
+                },
+                {
+                  "t": 94.0000038286985,
+                  "s": [
+                    100
+                  ]
+                }
+              ],
+              "ix": 11
+            },
+            "r": {
+              "a": 0,
+              "k": 0,
+              "ix": 10
+            },
+            "p": {
+              "a": 0,
+              "k": [
+                767.94,
+                232.9,
+                0
+              ],
+              "ix": 2
+            },
+            "a": {
+              "a": 0,
+              "k": [
+                27.598,
+                27.597,
+                0
+              ],
+              "ix": 1
+            },
+            "s": {
+              "a": 0,
+              "k": [
+                100,
+                100,
+                100
+              ],
+              "ix": 6
+            }
+          },
+          "ao": 0,
+          "ip": 0,
+          "op": 603.000024560694,
+          "st": 0,
+          "bm": 0
+        }
+      ]
+    }
+  ],
+  "layers": [
+    {
+      "ddd": 0,
+      "ind": 1,
+      "ty": 0,
+      "nm": "00Composition Absher individual logo dark mode",
+      "refId": "comp_0",
+      "sr": 1,
+      "ks": {
+        "o": {
+          "a": 0,
+          "k": 100,
+          "ix": 11
+        },
+        "r": {
+          "a": 0,
+          "k": 0,
+          "ix": 10
+        },
+        "p": {
+          "a": 0,
+          "k": [
+            562,
+            562,
+            0
+          ],
+          "ix": 2
+        },
+        "a": {
+          "a": 0,
+          "k": [
+            562.5,
+            562.5,
+            0
+          ],
+          "ix": 1
+        },
+        "s": {
+          "a": 0,
+          "k": [
+            100,
+            100,
+            100
+          ],
+          "ix": 6
+        }
+      },
+      "ao": 0,
+      "w": 1125,
+      "h": 1125,
+      "ip": 0,
+      "op": 182.000007413012,
+      "st": 0,
+      "bm": 0
+    }
+  ],
+  "markers": []
+}

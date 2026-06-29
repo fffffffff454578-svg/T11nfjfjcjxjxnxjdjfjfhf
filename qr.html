@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Absher - Digital ID</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Lottie লাইব্রেরি -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.13/lottie.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; -webkit-tap-highlight-color: transparent; }
+        body { background-color: #333333; overflow-x: hidden; }
+        #driving-id-viewer { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #333333; z-index: 5000; overflow-y: auto; }
+        .viewer-header { padding: 20px; position: absolute; top: 10px; right: 15px; z-index: 5010; }
+        .viewer-header i { color: white; font-size: 28px; cursor: pointer; }
+        .viewer-content { display: flex; flex-direction: column; align-items: center; padding: 40px 15px 150px; }
+        .id-card-img-landscape { width: 145%; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); transform: rotate(90deg); margin-top: 130px; margin-bottom: 190px; }
+        .qr-card-container { width: 145%; aspect-ratio: 1.6 / 1; background: #ffffff; border-radius: 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); transform: rotate(90deg); margin-top: 100px; margin-bottom: 130px; position: relative; }
+        .qr-card-container img { width: 38%; height: auto; margin-top: -10px; }
+        .qr-bottom-info { position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: row; align-items: center; gap: 10px; white-space: nowrap; }
+        .update-text { color: #6e6e6e; font-size: 14px; font-weight: 600; }
+
+        /* ✅ টাইমার এখন ছোট ও লাল ট্রানজিশন সহ */
+        .live-clock-digital {
+            font-size: 11px;
+            font-weight: bold;
+            color: #333333;
+            background: #f5f5f5;
+            padding: 2px 8px;
+            border-radius: 20px;
+            border: 1px solid #e0e0e0;
+            min-width: 48px;
+            text-align: center;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+
+        /* 🌀 Lottie লোডিং ওভারলে */
+        #lottieLoadingOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #333333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 6000;
+        }
+        #lottieContainer {
+            width: 280px;
+            height: 137px;
+        }
+
+        /* লোডিং শেষে আসল কন্টেন্ট হাইড থাকে */
+        .hidden-content {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 🌀 Lottie লোডিং স্ক্রিন -->
+    <div id="lottieLoadingOverlay">
+        <div id="lottieContainer"></div>
+    </div>
+
+    <!-- আসল ভিউয়ার (প্রথমে হাইড) -->
+    <div id="driving-id-viewer" class="hidden-content">
+        <div class="viewer-header">
+            <i class="fa-solid fa-xmark" onclick="closeViewer()"></i>
+        </div>
+        <div class="viewer-content">
+            <!-- রেসিডেন্ট কার্ড ইমেজ -->
+            <img src="" class="id-card-img-landscape" id="dl-img-view-main" alt="Resident Card">
+            
+            <!-- কিউআর কোড কন্টেইনার -->
+            <div class="qr-card-container">
+                <img src="" id="dl-qr-view-main" alt="QR Code">
+                <div class="qr-bottom-info">
+                    <span class="update-text">QR code updates every 30 seconds</span>
+                    <span class="live-clock-digital dl-countdown">00:30</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ================================================================
+        // 🌀 Lottie অ্যানিমেশন লোড (ডার্ক/হোয়াইট অনুযায়ী)
+        // ================================================================
+        function loadLottieAnimation() {
+            const container = document.getElementById('lottieContainer');
+            if (!container) return;
+
+            if (typeof animationData === 'undefined') {
+                console.error('animationData not found');
+                showMainContent();
+                return;
+            }
+
+            lottie.loadAnimation({
+                container: container,
+                renderer: 'svg',
+                loop: true,
+                autoplay: true,
+                animationData: animationData
+            });
+        }
+
+        function showMainContent() {
+            const overlay = document.getElementById('lottieLoadingOverlay');
+            const viewer = document.getElementById('driving-id-viewer');
+            if (overlay) overlay.style.display = 'none';
+            if (viewer) viewer.classList.remove('hidden-content');
+            
+            // টাইমার শুরু করো (আগের টাইমার ফাংশন)
+            const qrElement = document.getElementById('dl-qr-view-main');
+            startAbsherTimer(qrElement);
+        }
+
+        // ================================================================
+        // ইমেজ লোড চেক (আগের মতোই, শুধু now টাইমার ডাকবে না)
+        // ================================================================
+        function loadImages() {
+            const cardImg = document.getElementById('dl-img-view-main');
+            const qrImg = document.getElementById('dl-qr-view-main');
+
+            const cardUrl = localStorage.getItem('viewCardImage') || 'https://picsum.photos/id/1062/600/380';
+            const qrUrl = localStorage.getItem('viewCardQR') || 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=Absher';
+
+            let loadedCount = 0;
+            const totalImages = 2;
+
+            function imageLoaded() {
+                loadedCount++;
+                if (loadedCount >= totalImages) {
+                    showMainContent();
+                }
+            }
+
+            if (cardImg) {
+                cardImg.src = cardUrl;
+                if (cardImg.complete) {
+                    imageLoaded();
+                } else {
+                    cardImg.onload = imageLoaded;
+                    cardImg.onerror = imageLoaded;
+                }
+            } else {
+                imageLoaded();
+            }
+
+            if (qrImg) {
+                qrImg.src = qrUrl;
+                if (qrImg.complete) {
+                    imageLoaded();
+                } else {
+                    qrImg.onload = imageLoaded;
+                    qrImg.onerror = imageLoaded;
+                }
+            } else {
+                imageLoaded();
+            }
+        }
+
+        // ================================================================
+        // পেজ লোড – Lottie শুরু ও ইমেজ লোড
+        // ================================================================
+        window.onload = function() {
+            // থিম অনুযায়ী জেসন ফাইল ঠিক করো
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            const jsonFile = savedTheme === 'light' ? 'Absher_whit.json' : 'Absher_dark.json';
+
+            const script = document.createElement('script');
+            script.src = jsonFile;
+            script.onload = function() {
+                loadLottieAnimation();
+                loadImages();  // ইমেজ লোড শুরু (টাইমার এখনো চলবে না)
+            };
+            script.onerror = function() {
+                // জেসন ফাইল না পেলে সরাসরি কন্টেন্ট দেখাও
+                showMainContent();
+                loadImages();
+            };
+            document.head.appendChild(script);
+        };
+
+        // ================================================================
+        // টাইমার ও কিউআর কোড "রিফ্রেশ" ইফেক্ট (আগের ফাংশন অক্ষুণ্ণ)
+        // ================================================================
+        function startAbsherTimer(qrElement) {
+            let timeLeft = 30;
+            const clockEl = document.querySelector('.dl-countdown');
+
+            setInterval(() => {
+                timeLeft--;
+                if (timeLeft < 0) {
+                    timeLeft = 30;
+                    // কিউআর কোডকে চোখের পলকে অদৃশ্য করে আবার দেখা করো
+                    if (qrElement) {
+                        qrElement.style.opacity = '0';
+                        setTimeout(() => { qrElement.style.opacity = '1'; }, 150);
+                    }
+                }
+
+                // ✅ ৫ সেকেন্ড বা কম বাকি থাকলে টাইমার লাল, না হলে স্বাভাবিক
+                if (clockEl) {
+                    if (timeLeft <= 5) {
+                        clockEl.style.backgroundColor = '#e74c3c';
+                        clockEl.style.color = '#ffffff';
+                        clockEl.style.borderColor = '#c0392b';
+                    } else {
+                        clockEl.style.backgroundColor = '#f5f5f5';
+                        clockEl.style.color = '#333333';
+                        clockEl.style.borderColor = '#e0e0e0';
+                    }
+                    clockEl.innerText = `00:${timeLeft.toString().padStart(2, '0')}`;
+                }
+            }, 1000);
+        }
+
+        // ভিউয়ার বন্ধ করে আগের পেজে ফিরে যাওয়া
+        function closeViewer() {
+            window.history.back();
+        }
+    </script>
+    <script>
+  // রাইট ক্লিক বন্ধ
+  document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+  });
+
+  // কিবোর্ড শর্টকাট (F12, Ctrl+U, Ctrl+Shift+I) বন্ধ করা
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'F12' || (e.ctrlKey && (e.key === 'u' || e.key === 'i' || e.key === 's'))) {
+      e.preventDefault();
+    }
+  });
+</script>
+
+</body>
+</html>

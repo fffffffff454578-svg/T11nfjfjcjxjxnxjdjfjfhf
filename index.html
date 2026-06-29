@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Absher Clone</title>
+    
+    <!-- Supabase JS Library (v2) - ভবিষ্যতে কানেকশনের জন্য প্রস্তুত -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <style>
+        /* আরবি লেখার প্রফেশনাল লুকের জন্য গুগল ফন্ট ইম্পোর্ট */
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap');
+
+        /* ডিফল্ট মার্জিন-প্যাডিং রিমুভ এবং ফন্ট সেটআপ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+            -webkit-tap-highlight-color: transparent; /* মোবাইলে ক্লিক করলে যেন নীল দাগ না পড়ে */
+        }
+
+        /* মূল বডি: ডিফল্ট ডার্ক মোড ব্যাকগ্রাউন্ড */
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            transition: background-color 0.3s, color 0.3s; /* মোড পরিবর্তনের স্মুথ অ্যানিমেশন */
+        }
+
+        /* === লাইট মোড (হোয়াইট মোড) বডি স্টাইল === */
+        body.light-mode {
+            background-color: #f5f6f8;
+            color: #000000;
+        }
+
+        /* মোবাইল স্ক্রিন সাইজ লক করার জন্য মেইন অ্যাপ কন্টেইনার */
+        .app-container {
+            width: 100%;
+            max-width: 450px; /* স্ট্যান্ডার্ড মোবাইল উইডথ */
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* ১. টপ গ্রিন সেকশন: ব্যাকগ্রাউন্ড ইমেজ এবং এর উচ্চতা */
+        .top-section {
+            background-image: url('All_image/green_login_background.jpg'); /* অনলাইন লিংক পরিবর্তন করে লোকাল ফোল্ডার পাথ সেট করা হলো */
+            background-size: cover;
+            background-position: center;
+            width: 100%;
+            height: 280px; /* আপনার নির্দেশিত পারফেক্ট সাইজ */
+            border-bottom-left-radius: 32px; /* নিচের দুই কোণা নিখুঁত রাউন্ড */
+            border-bottom-right-radius: 32px;
+            padding: 20px 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            transition: background-image 0.3s ease-in-out;
+        }
+
+        /* হেডার আইকন কন্টেইনার (ডান পাশে একসাথে ৩টি আইকন রাখার জন্য) */
+        .header-icons {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end; /* আইকনগুলোকে ডান পাশে একসাথে রাখার জন্য */
+            align-items: center;
+            gap: 18px; /* আইকনগুলোর মধ্যকার গ্যাপ */
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+
+        /* ইংরেজি ভাষার জন্য আইকন এলাইনমেন্ট পরিবর্তন লজিক */
+        body.en-mode .header-icons {
+            justify-content: flex-end;
+        }
+
+        /* হেডার আইকনগুলোর সাইজ */
+        .header-icons img, .header-icons svg {
+            width: 26px;
+            height: 26px;
+            cursor: pointer;
+        }
+
+        /* মাঝখানের প্রধান লোগো */
+        .main-logo {
+            width: 165px;
+            height: auto;
+            object-fit: contain;
+            margin-top: -5px;
+            transition: content 0.3s;
+        }
+
+        /* লোগোর নিচের সাদা আরবি টেক্সট */
+        .welcome-text {
+            color: #ffffff;
+            font-size: 22px;
+            font-weight: 500;
+            text-align: center;
+            margin-top: 05px;
+            line-height: 1.5;
+        }
+        
+        /* লাইট মোডে টপ সেকশনের টেক্সট কালার পরিবর্তন */
+        body.light-mode .welcome-text {
+            color: #0c4d34; /* লাইট মোডে লেখাটি গাঢ় সবুজ দেখাবে */
+        }
+
+        /* লগইন বাটন: আপনার সেট করা নিখুঁত পজিশন */
+        .login-btn {
+            background-color: #0c4d34; /* হালকা সবুজ ব্যাকগ্রাউন্ড */
+            color: #a3d9c9; /* ভেতরের গাঢ় সবুজ লেখা */
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 16px; /* রাউন্ডেড কর্নার */
+            font-size: 16px;
+            font-weight: 700;
+            text-align: center;
+            text-decoration: none;
+            position: absolute;
+            bottom: 15px; /* বাটনটির সঠিক পজিশন */
+            left: 0;
+            right: 0;
+            width: calc(100% - 48px);
+            margin: 0 auto;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+
+        /* ২. মধ্যবর্তী বার: পাবলিক সার্ভিস এবং ভিউ অল টেক্সট */
+        .mid-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 40px 24px 15px 24px;
+            width: 100%;
+        }
+
+        /* "الخدمات العامة" টেক্সট স্টাইল */
+        .mid-bar .title {
+            color: #ffffff;
+            font-size: 17px;
+            font-weight: 700;
+        }
+        body.light-mode .mid-bar .title {
+            color: #121212; /* লাইট মোডে কালো টেক্সট */
+        }
+
+        /* "عرض الكل" টেক্সট স্টাইল */
+        .mid-bar .view-all {
+            color: #72a99a;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        body.light-mode .mid-bar .view-all {
+            color: #0c4d34;
+        }
+
+        /* ৩. হরাইজন্টাল স্ক্রলিং এরিয়া: বক্সগুলোর কন্টেইনার */
+        .scroll-container {
+            width: 100%;
+            padding: 5px 24px;
+            overflow-x: auto;
+            overflow-y: hidden;
+            scrollbar-width: none;
+        }
+
+        .scroll-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* গ্রিড র‍্যাপার: ২ লাইনে বক্স সাজানোর লজিক */
+        .grid-wrapper {
+            display: grid;
+            grid-template-rows: repeat(2, 1fr);
+            grid-auto-flow: column;
+            grid-auto-columns: calc(50% - 8px);
+            gap: 16px;
+        }
+
+        /* প্রতিটি সিঙ্গেল বক্সের ডিজাইন */
+        .service-box {
+            background-color: #22252a; /* ডার্ক মোডে গাঢ় ধূসর ব্যাকগ্রাউন্ড */
+            border-radius: 20px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 135px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        /* === লাইট মোডে বক্সের ব্যাকগ্রাউন্ড পরিবর্তন === */
+        body.light-mode .service-box {
+            background-color: #ffffff; /* হোয়াইট মোডে সম্পূর্ণ সাদা বক্স */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* হালকা সফট শ্যাডো */
+        }
+
+        /* বক্সের ভেতরের আইকন স্টাইল */
+        .service-box img {
+            width: 42px;
+            height: 42px;
+            margin-bottom: 12px;
+            object-fit: contain;
+        }
+
+        /* BOX এর ভেতরের আরবি টেক্সট স্টাইল */
+        .service-box span {
+            color: #e0e0e0;
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+        body.light-mode .service-box span {
+            color: #333333; /* লাইট মোডে গাঢ় টেক্সট */
+        }
+
+        /* ৪. নিচের ফুটার সেকশন (এটি ফিক্সড নয়, স্ক্রল করলে নিচে দেখা যাবে) */
+        .footer-section {
+            width: 100%;
+            margin-top: 35px;
+            padding-bottom: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .footer-top {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* ফুটারের ছোট নিয়ন সবুজ গ্লোয়িং ডট */
+        .footer-logo-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #00ffaa;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #00ffaa;
+        }
+        body.light-mode .footer-logo-dot {
+            background-color: #0c4d34;
+            box-shadow: none;
+        }
+
+        /* ফুটারের টেক্সট কালার */
+        .footer-section span {
+            color: #666666;
+            font-size: 12px;
+            text-align: center;
+        }
+        body.light-mode .footer-section span {
+            color: #888888;
+        }
+
+        /* ========================================================
+           নতুন যুক্ত করা ল্যাঙ্গুয়েজ সেটিংস পপআপ ওভারলে এবং স্টাইল
+           ======================================================== */
+        .language-overlay {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #121212;
+            z-index: 1000;
+            flex-direction: column;
+            padding: 20px 24px;
+        }
+        body.light-mode .language-overlay {
+            background-color: #f5f6f8;
+        }
+        .lang-header {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 30px;
+        }
+        .done-btn {
+            color: #0c4d34;
+            font-size: 17px;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        body.light-mode .done-btn {
+            color: #0c4d34;
+        }
+        .pref-title {
+            color: #666666;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            letter-spacing: 0.5px;
+            text-align: left;
+        }
+        body.light-mode .pref-title {
+            color: #888888;
+        }
+        .lang-card {
+            background-color: #22252a;
+            border-radius: 20px;
+            padding: 8px 0;
+            width: 100%;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        body.light-mode .lang-card {
+            background-color: #ffffff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        .lang-option-title {
+            font-size: 16px;
+            font-weight: 600;
+            padding: 16px 20px;
+            border-bottom: 1px solid #333333;
+            text-align: left;
+            color: #ffffff;
+        }
+        body.light-mode .lang-option-title {
+            color: #000000;
+            border-bottom: 1px solid #eeeeee;
+        }
+        .lang-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 20px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .lang-row:not(:last-child) {
+            border-bottom: 1px solid #333333;
+        }
+        body.light-mode .lang-row:not(:last-child) {
+            border-bottom: 1px solid #eeeeee;
+        }
+        .lang-text {
+            font-size: 16px;
+            font-weight: 500;
+        }
+        .radio-circle {
+            width: 22px;
+            height: 22px;
+            border: 2px solid #666666;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: border-color 0.2s;
+        }
+        .radio-circle::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            background-color: transparent;
+            border-radius: 50%;
+            transition: background-color 0.2s;
+        }
+        .lang-row.selected .radio-circle {
+            border-color: #0c4d34;
+        }
+        .lang-row.selected .radio-circle::after {
+            background-color: #0c4d34;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+
+        <div class="language-overlay" id="languageOverlay">
+            <div class="lang-header">
+                <span class="done-btn" id="langDoneBtn">Done</span>
+            </div>
+            <div class="pref-title" id="prefTitleText">PREFERENCES</div>
+            <div class="lang-card">
+                <div class="lang-option-title" id="langOptionTitleText">Language</div>
+                
+                <div class="lang-row" id="langArRow" data-lang="ar">
+                    <span class="lang-text" style="font-family: 'Cairo', sans-serif;">العربية</span>
+                    <div class="radio-circle"></div>
+                </div>
+                
+                <div class="lang-row" id="langEnRow" data-lang="en">
+                    <span class="lang-text">English</span>
+                    <div class="radio-circle"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="top-section" id="topSectionArea">
+            
+            <div class="header-icons">
+                <div id="themeToggleBtn" title="Change Mode">
+                    <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: #ffffff;">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </div>
+                <img src="http://localhost/assets/All icon/DJ.png" alt="Notification" id="notiBtn">
+                <img src="http://localhost/assets/All icon/GJ.png" alt="Settings" id="settingsBtn">
+            </div>
+
+            <img src="All_image/white_absher_logo.png" alt="Absher Logo" class="main-logo" id="mainAppLogo">
+
+            <div class="welcome-text" id="welcomeText">
+                خدمات متوفرة على مدار الساعة طوال<br>الأسبوع
+            </div>
+
+            <a href="login.html" class="login-btn" id="loginButton">تسجيل الدخول</a>
+
+        </div>
+
+        <div class="mid-bar">
+            <span class="title" id="midBarTitle">الخدمات العامة</span>
+            <a href="#" class="view-all" id="viewAllBtn">عرض الكل</a>
+        </div>
+
+        <div class="scroll-container">
+            <div class="grid-wrapper">
+                
+                <div class="service-box">
+                    <img src="http://localhost/assets/All icon/Fs (1).png" alt="Icon 1" class="service-icon" data-dark="http://localhost/assets/All icon/Fs (1).png" data-light="http://localhost/assets/All icon/Aa1.png">
+                    <span id="boxText1">خدمات التوثيق</span>
+                </div>
+
+                <div class="service-box">
+                    <img src="http://localhost/assets/All icon/Gy (1).png" alt="Icon 2" class="service-icon" data-dark="http://localhost/assets/All icon/Gy (1).png" data-light="http://localhost/assets/All icon/Aa2.png">
+                    <span id="boxText2">عرض الوثائق الرقمية</span>
+                </div>
+
+                <div class="service-box">
+                    <img src="http://localhost/assets/All icon/FH.png" alt="Icon 3" class="service-icon" data-dark="http://localhost/assets/All icon/FH.png" data-light="http://localhost/assets/All icon/Aa3.png">
+                    <span id="boxText3">إدارة الهوية الرقمية</span>
+                </div>
+
+                <div class="service-box">
+                    <img src="http://localhost/assets/All icon/Fx (1).png" alt="Icon 4" class="service-icon" data-dark="http://localhost/assets/All icon/Fx (1).png" data-light="http://localhost/assets/All icon/Aa4.png">
+                    <span id="boxText4">وثيقة الزائر الرقمية</span>
+                </div>
+
+                <div class="service-box">
+                    <img src="http://localhost/assets/All icon/Ck (1).png" alt="Icon 5" class="service-icon" data-dark="http://localhost/assets/All icon/Ck (1).png" data-light="http://localhost/assets/All icon/Aa5.png">
+                    <span id="boxText5">مواعيد الأحوال المدنية</span>
+                </div>
+
+                <div class="service-box">
+                    <img src="http://localhost/assets/All icon/Gy (1).png" alt="Icon 6" class="service-icon" data-dark="http://localhost/assets/All icon/Gy (1).png" data-light="http://localhost/assets/All icon/Aa6.png">
+                    <span id="boxText6">موقع تفعيل أبشر</span>
+                </div>
+
+                <div class="service-box">
+                    <img src="http://localhost/assets/All icon/Ge (1).png" alt="Icon 7" class="service-icon" data-dark="http://localhost/assets/All icon/Ge (1).png" data-light="http://localhost/assets/All icon/Aa7.png">
+                    <span id="boxText7">مواعيد الجوازات</span>
+                </div>
+
+                <div class="service-box">
+                    <img src="http://localhost/assets/All icon/FI.png" alt="Icon 8" class="service-icon" data-dark="http://localhost/assets/All icon/FI.png" data-light="http://localhost/assets/All icon/Aa8.png">
+                    <span id="boxText8">موثق أبشر</span>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="footer-section">
+            <div class="footer-top">
+                <div class="footer-logo-dot"></div>
+                <span id="footerTopText">تطوير وتشغيل مركز المعلومات الوطني</span>
+            </div>
+            <span id="footerBottomText">جميع الحقوق محفوظة لوزارة الداخلية</span>
+        </div>
+
+    </div>
+
+    <script>
+        // ==================== ⚡ গ্লোবাল অটো ফোল্ডার সার্চ লজিক ⚡ ====================
+        // এই ফাংশনটি ইমেজের নাম ট্র্যাক করে All icon এর ভেতরের ১-৫ ফোল্ডার অটোমেটিক স্ক্যান করবে
+        function checkAndFixIconPaths() {
+            const folders = ['folder1', 'folder2', 'folder3', 'folder4', 'folder5', 'folder6'];
+            
+            // ১. এইচটিএমএল-এর সব ইমেজ ট্যাগ স্ক্যান করার লজিক
+            document.querySelectorAll('img').forEach(img => {
+                const currentSrc = img.src || img.getAttribute('src');
+                if (currentSrc && currentSrc.includes('All icon/')) {
+                    // ⚠️ নিচের লাইনটি পরিবর্তন করেছি: img.src = validPath এর পরিবর্তে setAttribute ব্যবহার করছি
+                    findValidPath(img, currentSrc, (validPath) => { img.setAttribute('src', validPath); });
+                }
+            });
+
+            // ২. জাভাস্ক্রিপ্টের ভেতরের ডাইনামিক ইমেজ এলিমেন্টগুলো ট্র্যাক করার লজিক
+            const originalNotiSrc = notiBtn.src;
+            const originalSettingsSrc = settingsBtn.src;
+
+            // লাইট/ডার্ক মোড টগল করার সময় ৫টি ফোল্ডার অটো চেক করার ইন্টারসেপ্টর
+            Object.defineProperty(notiBtn, 'src', {
+                set: function(newSrc) {
+                    if (newSrc.includes('All icon/')) {
+                        findValidPath(notiBtn, newSrc, (validPath) => { this.setAttribute('src', validPath); });
+                    } else { this.setAttribute('src', newSrc); }
+                },
+                get: function() { return this.getAttribute('src'); }
+            });
+
+            Object.defineProperty(settingsBtn, 'src', {
+                set: function(newSrc) {
+                    if (newSrc.includes('All icon/')) {
+                        findValidPath(settingsBtn, newSrc, (validPath) => { this.setAttribute('src', validPath); });
+                    } else { this.setAttribute('src', newSrc); }
+                },
+                get: function() { return this.getAttribute('src'); }
+            });
+
+            serviceIcons.forEach(icon => {
+                let darkPath = icon.getAttribute('data-dark');
+                let lightPath = icon.getAttribute('data-light');
+                
+                if(darkPath && darkPath.includes('All icon/')) {
+                    findValidPath(icon, darkPath, (validPath) => icon.setAttribute('data-dark', validPath));
+                }
+                if(lightPath && lightPath.includes('All icon/')) {
+                    findValidPath(icon, lightPath, (validPath) => icon.setAttribute('data-light', validPath));
+                }
+            });
+
+            // মূল পাথ খোঁজার ফাংশন
+            function findValidPath(element, fullSrc, callback) {
+                const imageName = fullSrc.split('All icon/')[1];
+                let folderIndex = 0;
+
+                function tryPath() {
+                    if (folderIndex >= folders.length) return;
+                    const testPath = `All icon/${folders[folderIndex]}/${imageName}`;
+                    const imgTest = new Image();
+                    imgTest.onload = function() { callback(testPath); };
+                    imgTest.onerror = function() { folderIndex++; tryPath(); };
+                    imgTest.src = testPath;
+                }
+                tryPath();
+            }
+        }
+        
+        // ==================== Supabase কনফিগারেশন (ভবিষ্যতের জন্য প্রস্তুত) ====================
+        const SUPABASE_URL = 'https://xbnvnfzibxjjfaqheonc.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhibnZuZnppYnhqamZhcWhlb25jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODExNzc5MDMsImV4cCI6MjA5Njc1MzkwM30.bgTc6vfNKL2IRxh6eM3UmBamyKMuQabfPpOlXVyZLLY';
+        
+        // যদি লগইন করা থাকে তাহলে সরাসরি ড্যাশবোর্ডে পাঠানোর লজিক (অপশনাল)
+        async function checkSessionAndRedirect() {
+            try {
+                const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+                const { data: { session }, error } = await supabase.auth.getSession();
+                if (!error && session) {
+                    // ইউজার ইতিমধ্যে লগইন করা আছে, সরাসরি ড্যাশবোর্ডে পাঠান
+                    window.location.href = 'dashboard.html';
+                }
+            } catch (e) {
+                // Supabase লোড না হলে কিছু করবে না
+                console.log('Supabase not available yet, staying on landing page');
+            }
+        }
+
+        // ডার্ক/লাইট মোড হ্যান্ডলিং এলিমেন্টসমূহ
+        const themeToggleBtn = document.getElementById('themeToggleBtn');
+        const themeIcon = document.getElementById('themeIcon');
+        const mainAppLogo = document.getElementById('mainAppLogo');
+        const notiBtn = document.getElementById('notiBtn');
+        const settingsBtn = document.getElementById('settingsBtn');
+        const topSectionArea = document.getElementById('topSectionArea');
+        const serviceIcons = document.querySelectorAll('.service-icon');
+
+        // নতুন যুক্ত করা ল্যাঙ্গুয়েজ এলিমেন্টসমূহ
+        const languageOverlay = document.getElementById('languageOverlay');
+        const langDoneBtn = document.getElementById('langDoneBtn');
+        const langArRow = document.getElementById('langArRow');
+        const langEnRow = document.getElementById('langEnRow');
+
+        // ডিকশনারি ডেটা (টেক্সট পরিবর্তনের জন্য)
+        const translations = {
+            ar: {
+                welcome: "خدمات متوفرة على مدار الساعة طوال<br>الأسبوع",
+                login: "تسجيل الدخول",
+                midTitle: "الخدمات العامة",
+                viewAll: "عرض الكل",
+                box1: "خدمات التوثيق",
+                box2: "عرض الوثائق الرقمية",
+                box3: "إدارة الهوية الرقمية",
+                box4: "وثيقة الزائر الرقمية",
+                box5: "مواعيد الأحوال المدنية",
+                box6: "موقع تفعيل أبشر",
+                box7: "مواعيد الجوازات",
+                box8: "موثق أبشر",
+                footerTop: "تطوير وتشغيل مركز المعلومات الوطني",
+                footerBottom: "جميع الحقوق محفوظة لوزارة الداخلية",
+                done: "تم",
+                pref: "تفضيلات",
+                langTitle: "اللغة"
+            },
+            en: {
+                welcome: "Absher E-Services 24/7",
+                login: "Log In",
+                midTitle: "Public Services",
+                viewAll: "See All",
+                box1: "Authentication Services",
+                box2: "View Digital Documents",
+                box3: "Manage Digital Identity",
+                box4: "Visitor Digital Document",
+                box5: "Civil Affairs Appointment",
+                box6: "Absher Activation Sites",
+                box7: "Passport Appointments",
+                box8: "Absher Authenticator",
+                footerTop: "Developed and operated by the National Information Center",
+                footerBottom: "All rights reserved to the Ministry of Interior",
+                done: "Done",
+                pref: "PREFERENCES",
+                langTitle: "Language"
+            }
+        };
+
+        // লোকাল স্টোরেজ থেকে থিম লোড করার ইনিশিয়াল লজিক
+        let currentTheme = localStorage.getItem('theme') || 'dark';
+        if (currentTheme === 'light') {
+            document.body.classList.add('light-mode');
+            applyLightModeStyles();
+        } else {
+            document.body.classList.remove('light-mode');
+            applyDarkModeStyles();
+        }
+
+        // লোকাল স্টোরেজ থেকে ভাষা লোড করার ইনিশিয়াল লজিক
+        let currentLang = localStorage.getItem('language') || 'ar';
+        applyLanguage(currentLang);
+
+        // থিম পরিবর্তনের ফাংশনালিটি
+        themeToggleBtn.addEventListener('click', function() {
+            document.body.classList.toggle('light-mode');
+            const isLightMode = document.body.classList.contains('light-mode');
+            
+            if (isLightMode) {
+                localStorage.setItem('theme', 'light');
+                applyLightModeStyles();
+            } else {
+                localStorage.setItem('theme', 'dark');
+                applyDarkModeStyles();
+            }
+        });
+
+        function applyLightModeStyles() {
+            topSectionArea.style.backgroundImage = "url('All_image/white_login_background.jpg')";
+            mainAppLogo.src = 'All_image/green_absher_logo.png';
+            notiBtn.src = 'http://localhost/assets/All icon/BB1.png';
+            settingsBtn.src = 'http://localhost/assets/All icon/Ss1.png';
+            serviceIcons.forEach(icon => {
+                icon.src = icon.getAttribute('data-light');
+            });
+            // 👇 এইラインটি যুক্ত করো (ফ্ল্যাটারকে লাইট মোডের মেসেজ পাঠাবে)
+    if (window.FlutterThemeChannel) {
+        window.FlutterThemeChannel.postMessage('light');
+    }
+            const isLight = document.body.classList.contains('light-mode');
+            if (isLight) {
+                const currentLangSetting = localStorage.getItem('language') || 'ar';
+                if(currentLangSetting === 'en') {
+                    themeIcon.innerHTML = `<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>`;
+                    themeIcon.style.color = '#0c4d34';
+                } else {
+                    themeIcon.innerHTML = `<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>`;
+                    themeIcon.style.color = '#0c4d34';
+                }
+            }
+        }
+
+        function applyDarkModeStyles() {
+            topSectionArea.style.backgroundImage = "url('All_image/green_login_background.jpg')";
+            mainAppLogo.src = 'All_image/white_absher_logo.png';
+            notiBtn.src = 'http://localhost/assets/All icon/DJ.png';
+            settingsBtn.src = 'http://localhost/assets/All icon/GJ.png';
+            serviceIcons.forEach(icon => {
+                icon.src = icon.getAttribute('data-dark');
+            });
+            themeIcon.innerHTML = `<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>`;
+            themeIcon.style.color = '#ffffff';
+            // 👇 এই লাইনটি যুক্ত করো (ফ্ল্যাটারকে ডার্ক মোডের মেসেজ পাঠাবে)
+    if (window.FlutterThemeChannel) {
+        window.FlutterThemeChannel.postMessage('dark');
+    }
+        }
+
+        // ভাষা পরিবর্তন করার মেইন লজিক ও ইন্টারফেস আপডেট
+        function applyLanguage(lang) {
+            const data = translations[lang];
+            
+            // HTML ট্যাগ ও ডিরেকশন পরিবর্তন
+            const htmlTag = document.documentElement;
+            if (lang === 'en') {
+                htmlTag.setAttribute('lang', 'en');
+                htmlTag.setAttribute('dir', 'ltr');
+                document.body.classList.add('en-mode');
+            } else {
+                htmlTag.setAttribute('lang', 'ar');
+                htmlTag.setAttribute('dir', 'rtl');
+                document.body.classList.remove('en-mode');
+            }
+
+            // টেক্সট রিপ্লেসমেন্ট
+            document.getElementById('welcomeText').innerHTML = data.welcome;
+            document.getElementById('loginButton').textContent = data.login;
+            document.getElementById('midBarTitle').textContent = data.midTitle;
+            document.getElementById('viewAllBtn').textContent = data.viewAll;
+            document.getElementById('boxText1').textContent = data.box1;
+            document.getElementById('boxText2').textContent = data.box2;
+            document.getElementById('boxText3').textContent = data.box3;
+            document.getElementById('boxText4').textContent = data.box4;
+            document.getElementById('boxText5').textContent = data.box5;
+            document.getElementById('boxText6').textContent = data.box6;
+            document.getElementById('boxText7').textContent = data.box7;
+            document.getElementById('boxText8').textContent = data.box8;
+            document.getElementById('footerTopText').textContent = data.footerTop;
+            document.getElementById('footerBottomText').textContent = data.footerBottom;
+
+            // ল্যাঙ্গুয়েজ স্ক্রিনের টেক্সট আপডেট
+            langDoneBtn.textContent = data.done;
+            document.getElementById('prefTitleText').textContent = data.pref;
+            document.getElementById('langOptionTitleText').textContent = data.langTitle;
+
+            // রেডিও বাটন সিলেকশন স্টাইল আপডেট
+            if (lang === 'ar') {
+                langArRow.classList.add('selected');
+                langEnRow.classList.remove('selected');
+            } else {
+                langEnRow.classList.add('selected');
+                langArRow.classList.remove('selected');
+            }
+        }
+
+        // সেটিংস বাটনে ক্লিক করলে ভাষা পরিবর্তন স্ক্রিন প্রদর্শন করা
+        settingsBtn.addEventListener('click', function() {
+            languageOverlay.style.display = 'flex';
+        });
+
+        // ভাষা পরিবর্তনের অপশনে ক্লিক হ্যান্ডলিং
+        langArRow.addEventListener('click', function() {
+            currentLang = 'ar';
+            langArRow.classList.add('selected');
+            langEnRow.classList.remove('selected');
+        });
+
+        // ভাষা পরিবর্তনের অপশনে ক্লিক হ্যান্ডলিং
+        langEnRow.addEventListener('click', function() {
+            currentLang = 'en';
+            langEnRow.classList.add('selected');
+            langArRow.classList.remove('selected');
+        });
+
+        // "Done" বাটনে ক্লিক করলে ডাটা লোকালস্টোরেজে সেভ হবে এবং স্ক্রিন বন্ধ হবে
+        langDoneBtn.addEventListener('click', function() {
+            localStorage.setItem('language', currentLang);
+            applyLanguage(currentLang);
+            languageOverlay.style.display = 'none';
+        });
+
+        // লগইন বাটনে ক্লিক হ্যান্ডলার - সরাসরি login.html ফাইলে নিয়ে যাবে
+        document.getElementById('loginButton').addEventListener('click', function(event) {
+            event.preventDefault(); // ডিফল্ট অ্যাকশন বন্ধ করা
+            window.location.href = 'login.html'; // লগইন পেজের লিংক
+        });
+
+        // নোটিফিকেশন অ্যালার্ট
+        notiBtn.addEventListener('click', function() {
+            alert("Notifications clicked");
+        });
+
+        // পেজ লোড হওয়ার পর অটোমেটিক সেশন চেক (যদি Supabase লোড থাকে)
+        window.addEventListener('DOMContentLoaded', function() {
+            // লোকাল স্টোরেজ থেকে থিম ও ভাষা সেট করা আগেই হয়ে গেছে
+            // এখন চেক করব Supabase লোড হয়েছে কিনা এবং ইউজার লগইন করা কিনা
+            if (typeof window.supabase !== 'undefined') {
+                checkSessionAndRedirect();
+            }
+            
+            // 👇 এই লাইনটি স্ক্রিপ্টের শেষে রান হবে যা তোমার লোকালহোস্ট পাথগুলোকে ১-৫ ফোল্ডারে ডাইনামিকলি রিডাইরেক্ট করবে।
+            checkAndFixIconPaths();
+            
+            // ⚡ নিচের অংশটি যোগ করেছি: পাথ ঠিক হওয়ার পর থিম আবার অ্যাপ্লাই করে আইকন রিফ্রেশ
+            if (document.body.classList.contains('light-mode')) {
+                applyLightModeStyles();
+            } else {
+                applyDarkModeStyles();
+            }
+        });
+    </script>
+</body>
+</html>

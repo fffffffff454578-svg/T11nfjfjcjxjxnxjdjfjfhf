@@ -1,0 +1,4156 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" id="appHtml" class="dark-theme">
+<!-- 
+  ⚙️ appHtml: This ID controls the theme and language of the entire app. 
+  class="dark-theme": Default theme set to dark mode. 
+  lang="en" dir="ltr": Default language English with left-to-right layout.
+  ✅ Excellent: Theme and language are loaded from localStorage, so setting them on any page affects all pages.
+-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Absher Dashboard</title>
+    <!-- Supabase JS library (v2) - included for connection -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- Lottie Animation Library -->
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.13/lottie.min.js"></script>
+    <script>
+        // সমস্ত localhost/assets/All icon পাথকে সরাসরি All icon/-এ রূপান্তর
+document.querySelectorAll('img').forEach(function(img) {
+    var src = img.getAttribute('src');
+    if (src && src.includes('localhost/assets/All icon/')) {
+        img.setAttribute('src', src.replace('All icon/', 'All icon/'));
+    }
+});
+    </script>
+    <style>
+        /* ================================================================
+           🎨 CUSTOM LOCAL FONT
+           ================================================================ */
+        @font-face {
+            font-family: 'AbsherCustomFont';
+            src: url('fonts/MyArabicFont.woff2') format('woff2');
+            font-weight: 400 700;
+            font-style: normal;
+        }
+
+        /* ================================================================
+           🌗 DARK THEME CSS VARIABLES
+           ================================================================ */
+        :root.dark-theme, #appHtml.dark-theme {
+            --body-bg: #171717;
+            --text-main: #ffffff;
+            --card-bg: #25282d;
+            --text-sub: #888888;
+            --header-bg: #0c4d34;
+            --top-mint-bg: #0c4d34;
+            --bottom-nav-bg: #121212;
+            --nav-border: #222222;
+            --row-border: #2f333a;
+            --radio-bg: #464a52;
+            --settings-header-bg: #171717;
+            --settings-header-border: #222222;
+            --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            --item-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            --notification-unread-bg: #1a3a2a;
+            --notification-read-bg: #25282d;
+            --notification-dot-color: #4db380;
+            --notification-time-color: #666666;
+            --digital-card-bg: linear-gradient(135deg, #fbfbfd 0%, #edf1f6 100%);
+            --digital-card-text: #000000;
+            --digital-card-accent: #0c4d34;
+            --services-card-bg: #25282d;
+            --services-card-border: #33373e;
+            --services-title-color: #ffffff;
+            --services-search-bg: #2a2d33;
+            --services-search-border: #33373e;
+            --family-empty-icon-color: #555;
+        }
+
+        /* ================================================================
+           ☀️ LIGHT THEME CSS VARIABLES
+           ================================================================ */
+        #appHtml.light-theme {
+            --body-bg: #ffffff;
+            --text-main: #1a1a1a;
+            --card-bg: #ffffff;
+            --text-sub: #757b78;
+            --header-bg: #eef4f1;
+            --top-mint-bg: #eef4f1;
+            --bottom-nav-bg: #ffffff;
+            --nav-border: #f0f4f2;
+            --row-border: #f7f9f8;
+            --radio-bg: #e0e5e2;
+            --settings-header-bg: #eef4f1;
+            --settings-header-border: #e2e8e5;
+            --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            --item-shadow: 0 2px 12px rgba(0, 0, 0, 0.03);
+            --notification-unread-bg: #e8f5e9;
+            --notification-read-bg: #ffffff;
+            --notification-dot-color: #0d6f4a;
+            --notification-time-color: #999999;
+            --digital-card-bg: linear-gradient(135deg, #fbfbfd 0%, #edf1f6 100%);
+            --digital-card-text: #000000;
+            --digital-card-accent: #0c4d34;
+            --services-card-bg: #ffffff;
+            --services-card-border: #f1f3f2;
+            --services-title-color: #1a1a1a;
+            --services-search-bg: #f5f7fa;
+            --services-search-border: #e8eaed;
+            --family-empty-icon-color: #bbb;
+        }
+
+        /* ================================================================
+           🏗️ GLOBAL RESET & BASE STYLES
+           ================================================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'AbsherCustomFont', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* ================================================================
+           📱 BODY & MAIN CONTAINER
+           ================================================================ */
+        body {
+    background-color: var(--body-bg);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    overflow-x: hidden;
+    will-change: background-color;  /* এই লাইনটুকুই শুধু বাড়তি */
+    transition: background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), color 0.4s ease;
+}
+
+        .app-container {
+            width: 100%;
+            max-width: 450px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            background-color: var(--body-bg);
+            padding-bottom: 95px;
+            height: 100vh;
+            overflow-y: auto;
+            scroll-behavior: smooth;
+            transition: background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        /* ================================================================
+           🧩 FIXED TOP HEADER AREA
+           ================================================================ */
+        .header-fixed-wrapper {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 10;
+            background-color: var(--header-bg);
+            transition: background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        #appHtml.dark-theme .header-fixed-wrapper {
+            background-color: #0c4d34;
+        }
+        #appHtml.light-theme .header-fixed-wrapper {
+            background-color: var(--header-bg);
+            border-bottom: none;
+        }
+
+        .top-header-banner {
+            padding: 20px 20px 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            position: relative;
+            width: 180px;
+            height: 38px;
+        }
+
+        .main-logo {
+            height: 38px;
+            width: auto;
+            object-fit: contain;
+            position: absolute;
+            left: 0;
+            transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 1;
+        }
+        html[dir="rtl"] .main-logo {
+            left: auto;
+            right: 0;
+        }
+
+        .header-title-text {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-main);
+            position: absolute;
+            left: 0;
+            transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateY(10px);
+            pointer-events: none;
+        }
+        #appHtml.dark-theme .header-title-text {
+            color: #ffffff;
+        }
+        #appHtml.light-theme .header-title-text {
+            color: #0d6f4a; 
+        }
+        html[dir="rtl"] .header-title-text {
+            left: auto;
+            right: 0;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .header-icon {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        .header-icon:active {
+            transform: scale(0.9);
+        }
+
+        .notification-icon-wrapper {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -6px;
+            right: -8px;
+            background-color: #e74c3c;
+            color: #ffffff;
+            font-size: 10px;
+            font-weight: 700;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s ease;
+        }
+
+        .notification-badge:empty {
+            display: none;
+        }
+
+        html[dir="rtl"] .notification-badge {
+            right: auto;
+            left: -8px;
+        }
+
+        /* ================================================================
+           🟩 GREEN BANNER EXTENSION
+           ================================================================ */
+        .green-banner-extension {
+            background-color: #0c4d34;
+            height: 45px;
+            width: 100%;
+            position: absolute;
+            top: 70px;
+            left: 0;
+            z-index: 1;
+            transition: transform 0.2s ease, background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        #appHtml.light-theme .green-banner-extension {
+            background-color: var(--top-mint-bg); 
+        }
+
+        /* ================================================================
+           📄 MAIN CONTENT SCROLL AREA
+           ================================================================ */
+        .main-content {
+            padding: 0 20px;
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            z-index: 2;
+            position: relative;
+        }
+
+        /* ================================================================
+           👤 PROFILE CARD
+           ================================================================ */
+        .profile-card {
+            background-color: var(--card-bg);
+            border-radius: 17px; 
+            padding: 18px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: var(--card-shadow); 
+            width: 100%;
+            height: 90px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: background-color 0.4s, box-shadow 0.4s, transform 0.2s ease;
+            border: 1px solid transparent;
+        }
+        .profile-card:active {
+            transform: scale(0.98);
+        }
+        #appHtml.light-theme .profile-card {
+            border: 1px solid #f1f3f2; 
+        }
+
+        .profile-img-container {
+    width: 60px;
+    height: 60px;
+    border-radius: 14px;   /* 50% ছিল, এখন 14px – বক্সের মতো রাউন্ডেড */
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    flex-shrink: 0;
+    transition: background-color 0.4s;
+}
+        #appHtml.light-theme .profile-img-container {
+            background-color: transparent;
+        }
+
+        .profile-avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;   /* আগে contain ছিল, এখন cover */
+    transition: opacity 0.2s ease;
+}
+
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .profile-name {
+            font-size: 19px;
+            font-weight: 700;
+            color: var(--text-main);
+            letter-spacing: 0.5px;
+        }
+
+        .profile-id {
+            font-size: 14px;
+            color: var(--text-sub);
+            font-weight: 500;
+        }
+
+        /* ================================================================
+           🔍 SEARCH BAR
+           ================================================================ */
+        .search-container {
+            width: 100%;
+            background-color: var(--card-bg);
+            border-radius: 15px; 
+            height: 64px;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            gap: 12px;
+            margin-bottom: 25px;
+            cursor: pointer;
+            transition: background-color 0.4s, box-shadow 0.4s, transform 0.2s ease;
+            box-shadow: var(--item-shadow);
+            border: 1px solid transparent;
+        }
+        .search-container:active {
+            transform: scale(0.99);
+        }
+        #appHtml.light-theme .search-container {
+            border: 1px solid #f1f3f2;
+        }
+
+        .search-icon {
+            width: 22px;
+            height: 22px;
+            transition: transform 0.3s ease;
+        }
+        #appHtml.light-theme .search-icon {
+            stroke: #0d6f4a;
+        }
+
+        .search-placeholder {
+            font-size: 15px;
+            color: var(--text-sub);
+            font-weight: 500;
+        }
+        #appHtml.light-theme .search-placeholder {
+            color: #757b78; 
+        }
+
+        /* ================================================================
+           🏷️ SECTION TITLE
+           ================================================================ */
+        .section-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 15px;
+            padding-left: 20px;
+            z-index: 2;
+        }
+        /* RTL (আরবি) মোডে ডানে প্যাডিং */
+html[dir="rtl"] .section-title {
+    padding-right: 25px;
+}
+
+        /* ================================================================
+           🌀 LOTTIE LOADING CONTAINER
+           ================================================================ */
+        .lottie-card-placeholder {
+    width: 100%;
+    aspect-ratio: 1.58 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;      /* ব্যাকগ্রাউন্ড সরানো */
+    border: none;                 /* কোনো বর্ডার থাকবে না */
+    box-shadow: none;             /* ছায়া সরানো */
+    border-radius: 0;            /* চাইলে গোলাও রাখতে পারো, কিন্তু ফাঁকা রাখাই ভালো */
+    margin-bottom: 30px;
+}
+        #lottieCardInner {
+            width: 231px;
+            height: 101px;
+        }
+
+        /* ================================================================
+           🆔 DIGITAL ID CARD
+           ================================================================ */
+        .digital-card {
+            width: 100%;
+            background: var(--digital-card-bg);
+            border-radius: 16px;
+            padding: 20px;
+            color: var(--digital-card-text);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+            position: relative;
+            aspect-ratio: 1.58 / 1;
+            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* ✅ Resident card image layer */
+        .card-bg-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            display: none;
+        }
+
+        .card-inner-mock {
+            width: 100%;
+            height: 100%;
+            opacity: 0.08;
+            background-image: radial-gradient(#0c4d34 1px, transparent 1px);
+            background-size: 10px 10px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .card-header-text {
+            text-align: center;
+            font-size: 14px;
+            font-weight: 700;
+            color: #0c4d34;
+            z-index: 1;
+        }
+
+        .digital-card-body {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            z-index: 1;
+        }
+
+        .digital-card-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        .digital-card-id {
+            font-size: 13px;
+            color: #555555;
+            font-weight: 500;
+        }
+
+        .digital-card-expiry {
+            font-size: 11px;
+            color: #777777;
+            font-weight: 500;
+        }
+
+        .digital-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            z-index: 1;
+        }
+
+        .digital-card-version {
+            font-size: 10px;
+            color: #999999;
+        }
+
+        /* ================================================================
+           ⚡ QUICK ACCESS SECTION
+           ================================================================ */
+        .quick-access-section {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    margin-top: 5px;
+    position: relative;
+    padding-bottom: 10px;
+    padding-left: 0px;    /* নতুন – বাম পাশে ফাঁকা */
+    padding-right: 0px;   /* নতুন – ডান পাশে ফাঁকা */
+}
+
+        .quick-access-bg-image {
+            position: absolute;
+            top: -55px;
+            left: -20px;
+            right: -20px;
+            bottom: 0;
+            width: auto;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-radius: 0px;
+            z-index: 0;
+            transition: background-image 0.4s ease;
+        }
+
+        .full-width-card {
+            width: 100%;
+            background-color: var(--card-bg);
+            border-radius: 20px; 
+            padding: 18px;
+            margin-bottom: 20px;
+            margin-top: 15px;
+            top: 5px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            cursor: pointer;
+            box-shadow: var(--item-shadow);
+            transition: background-color 0.4s, transform 0.2s ease;
+            border: 1px solid transparent;
+            position: relative;
+            z-index: 1;
+        }
+        .full-width-card:active {
+            transform: scale(0.98);
+        }
+        #appHtml.light-theme .full-width-card {
+            border: 1px solid #f6f8f7;
+        }
+
+        .card-main-icon {
+            width: 54px;
+            height: 54px;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+
+        .card-text-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .card-main-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .card-sub-title {
+            font-size: 13px;
+            color: var(--text-sub);
+            line-height: 1.3;
+        }
+
+        .two-column-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .grid-card {
+            background-color: var(--card-bg);
+            border-radius: 20px; 
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+            cursor: pointer;
+            box-shadow: var(--item-shadow);
+            min-height: 125px;
+            transition: background-color 0.4s, transform 0.2s ease;
+            border: 1px solid transparent;
+        }
+        .grid-card:active {
+            transform: scale(0.96);
+        }
+        #appHtml.light-theme .grid-card {
+            border: 1px solid #f6f8f7;
+        }
+
+        .grid-card-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-main);
+            line-height: 1.3;
+        }
+
+        .dynamic-cards-container {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ================================================================
+           🔘 FLOATING ACTION BUTTON
+           ================================================================ */
+        .floating-fab {
+            position: fixed;
+            bottom: 105px;
+            right: calc(50% - 205px);
+            width: 56px;
+            height: 56px;
+            cursor: pointer;
+            z-index: 100;
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .floating-fab:active {
+            transform: scale(0.9);
+        }
+
+        @media (max-width: 450px) {
+            .floating-fab { right: 20px; }
+            html[dir="rtl"] .floating-fab { left: 20px; right: auto; }
+        }
+
+        .fab-icon { width: 100%; height: 100%; object-fit: contain; }
+
+        /* ================================================================
+           🧭 BOTTOM NAVIGATION BAR
+           ================================================================ */
+        .bottom-nav-bar {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 450px;
+            background-color: var(--bottom-nav-bg);
+            height: 75px;
+            display: flex;
+            align-items: center;
+            border-top: 1px solid var(--nav-border);
+            padding-bottom: 10px;
+            z-index: 900;
+            transition: background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.4s ease;
+        }
+
+        html[dir="rtl"] .bottom-nav-bar {
+            flex-direction: row-reverse;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            gap: 4px;
+            flex: 1;
+            transition: transform 0.15s ease;
+        }
+        .nav-item:active {
+            transform: scale(0.95);
+        }
+
+        .nav-icon {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+            transition: transform 0.2s ease;
+        }
+
+        .nav-text {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--text-sub);
+            transition: color 0.3s ease;
+        }
+
+        .nav-item.active .nav-text {
+            color: #4db380;
+        }
+        #appHtml.light-theme .nav-item.active .nav-text {
+            color: #0d6f4a; 
+        }
+
+        /* ================================================================
+           🆕 SERVICES PAGE STYLES
+           ================================================================ */
+        .services-page {
+            padding: 0 16px;
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            z-index: 2;
+            position: relative;
+        }
+
+        .services-page.hidden {
+            display: none;
+        }
+
+        .services-page .page-title {
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--services-title-color);
+            margin-bottom: 18px;
+        }
+
+        .services-page .search-container {
+            width: 100%;
+            background: var(--services-search-bg);
+            border-radius: 14px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            gap: 12px;
+            margin-bottom: 22px;
+            border: 1px solid var(--services-search-border);
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .services-page .search-container .search-icon {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+
+        .services-page .search-container .search-placeholder {
+            font-size: 15px;
+            color: var(--text-sub);
+            font-weight: 500;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            width: 100%;
+            padding-bottom: 20px;
+        }
+
+        .service-card {
+            background: var(--services-card-bg);
+            border-radius: 18px;
+            padding: 20px 16px 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 14px;
+            cursor: pointer;
+            box-shadow: var(--item-shadow);
+            min-height: 130px;
+            transition: 0.3s;
+            border: 1px solid var(--services-card-border);
+        }
+        .service-card:active {
+            transform: scale(0.96);
+        }
+        .service-icon {
+            width: 44px;
+            height: 44px;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+        .service-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--services-title-color);
+            line-height: 1.3;
+            letter-spacing: 0.2px;
+        }
+
+        /* ================================================================
+           🆕 FAMILY PAGE STYLES
+           ================================================================ */
+        .family-page {
+            padding: 0 16px;
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            z-index: 2;
+            position: relative;
+        }
+
+        .family-page.hidden {
+            display: none;
+        }
+
+        .family-page .page-title {
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 18px;
+        }
+
+        .empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            flex: 1;
+            padding: 40px 20px;
+            min-height: 300px;
+        }
+        .empty-icon {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 20px;
+            fill: none;
+            stroke: var(--family-empty-icon-color);
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .empty-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 10px;
+        }
+        .empty-sub {
+            font-size: 14px;
+            color: var(--text-sub);
+            max-width: 280px;
+            line-height: 1.5;
+        }
+
+        /* ================================================================
+           🆕 WORKERS PAGE STYLES
+           ================================================================ */
+        .workers-page {
+            padding: 0 16px;
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            z-index: 2;
+            position: relative;
+        }
+
+        .workers-page.hidden {
+            display: none;
+        }
+
+        .workers-page .page-title {
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 18px;
+        }
+
+        /* ================================================================
+           🆕 OTHER PAGE STYLES (সংযোজন)
+           ================================================================ */
+        .other-page {
+            padding: 0 0px;
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            z-index: 2;
+            position: relative;
+        }
+        .other-page.hidden {
+            display: none;
+        }
+        .other-page .page-title {
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 18px;
+        }
+        .other-page .search-container {
+            width: 100%;
+            background: var(--services-search-bg);
+            border-radius: 14px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            gap: 12px;
+            margin-bottom: 20px;
+            border: 1px solid var(--services-search-border);
+            transition: 0.3s;
+        }
+        .services-images-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            width: 100%;
+        }
+        .service-image-item {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .service-image-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+
+        /* ================================================================
+           🔔 NOTIFICATION OVERLAY
+           ================================================================ */
+        .notification-overlay {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translate(-50%, 100%);
+            width: 100%;
+            max-width: 450px;
+            height: 100vh;
+            background-color: var(--body-bg);
+            z-index: 800;
+            overflow-y: auto;
+            transition: transform 0.45s cubic-bezier(0.1, 0.76, 0.55, 0.94), background-color 0.4s;
+            padding-bottom: 120px;
+        }
+
+        .notification-overlay.open {
+            transform: translate(-50%, 0);
+        }
+
+        .notification-header {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            height: 70px;
+            border-bottom: 1px solid var(--nav-border);
+            position: sticky;
+            top: 0;
+            background-color: var(--header-bg);
+            z-index: 10;
+            gap: 15px;
+            transition: background-color 0.4s;
+        }
+
+        .notification-back-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .notification-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        #appHtml.dark-theme .notification-title {
+            color: #ffffff;
+        }
+
+        #appHtml.light-theme .notification-title {
+            color: #1a1a1a;
+        }
+
+        .notification-list {
+            padding: 10px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .notification-item {
+            background-color: var(--notification-unread-bg);
+            border-radius: 14px;
+            padding: 16px;
+            display: flex;
+            gap: 12px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s ease;
+            position: relative;
+            border: 1px solid transparent;
+        }
+
+        .notification-item:active {
+            transform: scale(0.98);
+        }
+
+        #appHtml.light-theme .notification-item {
+            border: 1px solid #e8e8e8;
+        }
+
+        .notification-item.read {
+            background-color: var(--notification-read-bg);
+        }
+
+        .notification-dot {
+            width: 10px;
+            height: 10px;
+            background-color: var(--notification-dot-color);
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 4px;
+        }
+
+        .notification-item.read .notification-dot {
+            background-color: transparent;
+            border: 1px solid var(--text-sub);
+        }
+
+        .notification-content {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            flex: 1;
+        }
+
+        .notification-item-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .notification-item-message {
+            font-size: 13px;
+            color: var(--text-sub);
+            line-height: 1.4;
+        }
+
+        .notification-item-time {
+            font-size: 11px;
+            color: var(--notification-time-color);
+            font-weight: 500;
+        }
+
+        .notification-empty {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-sub);
+            font-size: 15px;
+        }
+
+        /* ================================================================
+           ⚙️ SETTINGS SCREEN OVERLAY
+           ================================================================ */
+        .settings-screen-overlay {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translate(-50%, 100%);
+            width: 100%;
+            max-width: 450px;
+            height: 100vh;
+            background-color: var(--body-bg);
+            z-index: 800;
+            overflow-y: auto;
+            transition: transform 0.45s cubic-bezier(0.1, 0.76, 0.55, 0.94), background-color 0.4s;
+            padding-bottom: 120px;
+        }
+
+        .settings-screen-overlay.open {
+            transform: translate(-50%, 0); 
+        }
+
+        .settings-header {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            height: 70px;
+            border-bottom: 1px solid var(--settings-header-border);
+            position: sticky;
+            top: 0;
+            background-color: var(--settings-header-bg);
+            z-index: 10;
+            transition: background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.4s ease;
+        }
+
+        .close-settings-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            outline: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-right: 15px;
+            transition: transform 0.2s ease;
+        }
+        .close-settings-btn:active {
+            transform: scale(0.85);
+        }
+        html[dir="rtl"] .close-settings-btn {
+            padding-right: 0;
+            padding-left: 15px;
+        }
+
+        .settings-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .settings-content {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .settings-group-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-sub);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .settings-box {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: background-color 0.4s, box-shadow 0.4s;
+            box-shadow: var(--item-shadow);
+            border: 1px solid transparent;
+        }
+        #appHtml.light-theme .settings-box {
+            border: 1px solid #f1f3f2;
+        }
+
+        .settings-row {
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--row-border);
+            transition: border-color 0.3s, background-color 0.2s ease;
+        }
+
+        .settings-row:last-child {
+            border-bottom: none;
+        }
+
+        .row-left-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            flex: 1;
+            padding-right: 10px;
+        }
+
+        .row-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-main);
+        }
+
+        .row-desc {
+            font-size: 12px;
+            color: var(--text-sub);
+            line-height: 1.4;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 28px;
+            flex-shrink: 0;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: var(--radio-bg);
+            transition: .3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #4db380;
+        }
+        #appHtml.light-theme input:checked + .slider {
+            background-color: #0d6f4a;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(22px);
+        }
+        html[dir="rtl"] input:checked + .slider:before {
+            transform: translateX(-22px);
+        }
+
+        .radio-option-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            width: 100%;
+            justify-content: space-between;
+        }
+
+        .custom-radio {
+            width: 22px;
+            height: 22px;
+            border: 2px solid var(--text-sub);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: border-color 0.2s, background-color 0.2s;
+            flex-shrink: 0;
+        }
+
+        .radio-option-wrapper input[type="radio"] {
+            display: none;
+        }
+
+        .radio-option-wrapper input[type="radio"]:checked + .custom-radio {
+            border-color: #4db380;
+        }
+        #appHtml.light-theme .radio-option-wrapper input[type="radio"]:checked + .custom-radio {
+            border-color: #0d6f4a;
+        }
+
+        .radio-option-wrapper input[type="radio"]:checked + .custom-radio::after {
+            content: "";
+            width: 12px;
+            height: 12px;
+            background-color: #4db380;
+            border-radius: 50%;
+            transition: background-color 0.2s;
+        }
+        #appHtml.light-theme .radio-option-wrapper input[type="radio"]:checked + .custom-radio::after {
+            background-color: #0d6f4a;
+        }
+
+        .delete-identity-btn {
+            width: 100%;
+            background-color: var(--card-bg);
+            border: none;
+            color: var(--text-main);
+            font-size: 16px;
+            font-weight: 500;
+            padding: 16px;
+            border-radius: 16px;
+            text-align: left;
+            cursor: pointer;
+            box-shadow: var(--item-shadow);
+            transition: background-color 0.3s, transform 0.2s ease;
+        }
+        .delete-identity-btn:active {
+            transform: scale(0.98);
+        }
+        html[dir="rtl"] .delete-identity-btn {
+            text-align: right;
+        }
+
+        .logout-outline-btn {
+            width: 100%;
+            background: none;
+            border: 1px solid #4db380;
+            color: #4db380;
+            font-size: 16px;
+            font-weight: 600;
+            padding: 14px;
+            border-radius: 12px;
+            cursor: pointer;
+            margin-top: 15px;
+            text-align: center;
+            transition: background-color 0.2s, color 0.2s, transform 0.2s ease;
+        }
+        .logout-outline-btn:active {
+            transform: scale(0.98);
+        }
+        #appHtml.light-theme .logout-outline-btn {
+            border-color: #0d6f4a;
+            color: #0d6f4a;
+        }
+
+        /* =============================================================
+           🔥 "MY PROFILE" OVERLAY SCREEN
+           ============================================================= */
+        .profile-view-overlay {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translate(-50%, 100%);
+            width: 100%;
+            max-width: 450px;
+            height: 100vh;
+            background-color: var(--body-bg);
+            z-index: 800;
+            overflow-y: auto;
+            transition: transform 0.45s cubic-bezier(0.1, 0.76, 0.55, 0.94), background-color 0.4s;
+            padding-bottom: 120px;
+        }
+
+        .profile-view-overlay.open {
+            transform: translate(-50%, 0);
+        }
+
+        .profile-view-header {
+            background-color: #0c4d34;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            height: 90px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            gap: 15px;
+            transition: background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        #appHtml.light-theme .profile-view-header {
+            background-color: var(--top-mint-bg);
+        }
+
+        .profile-back-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            outline: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s ease;
+        }
+        .profile-back-btn:active {
+            transform: scale(0.85);
+        }
+        #appHtml.light-theme .profile-back-btn svg {
+            stroke: #0d6f4a;
+        }
+        html[dir="rtl"] .profile-back-btn svg {
+            transform: rotate(180deg); 
+        }
+
+        .profile-view-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #ffffff;
+        }
+        #appHtml.light-theme .profile-view-title {
+            color: #1a1a1a;
+        }
+
+        .profile-green-zone {
+            background-color: #0c4d34;
+            height: 120px;
+            position: relative;
+            width: 100%;
+            margin-bottom: 140px;
+            transition: background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        #appHtml.light-theme .profile-green-zone {
+            background-color: var(--top-mint-bg);
+        }
+
+        .profile-floating-card {
+            position: absolute;
+            top: 40px;
+            left: 20px;
+            right: 20px;
+            background-color: var(--card-bg);
+            border-radius: 20px; 
+            padding: 55px 16px 16px 16px;
+            text-align: center;
+            box-shadow: var(--card-shadow);
+            overflow: visible; 
+            transition: background-color 0.4s, box-shadow 0.4s;
+            border: 1px solid transparent;
+        }
+        #appHtml.light-theme .profile-floating-card {
+            border: 1px solid #f1f3f2;
+        }
+
+        .floating-avatar-box {
+            position: absolute;
+            top: -42px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 85px;
+            height: 85px;
+            border-radius: 14px;
+            overflow: hidden;
+            background-color: transparent;
+            border: none;
+            box-shadow: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            transition: border-color 0.4s, background-color 0.4s;
+        }
+        #appHtml.light-theme .floating-avatar-box {
+            background-color: transparent;
+        }
+
+        .floating-avatar-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;   /* আগে contain ছিল, এখন cover */
+}
+
+        .floating-user-name {
+            font-size: 19px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 4px;
+        }
+
+        .floating-id-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .floating-id-text {
+            font-size: 14px;
+            color: var(--text-sub);
+            font-weight: 500;
+        }
+
+        .copy-action-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            outline: none;
+            display: flex;
+            align-items: center;
+            transition: transform 0.2s ease;
+        }
+        .copy-action-btn:active {
+            transform: scale(0.85);
+        }
+
+        .copy-action-btn img {
+            width: 16px;
+            height: 16px;
+            object-fit: contain;
+        }
+
+        .personal-details-trigger {
+            border-top: 1px solid var(--row-border);
+            padding-top: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            color: #4db380;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: border-color 0.4s, color 0.3s, transform 0.2s ease;
+        }
+        .personal-details-trigger:active {
+            transform: scale(0.98);
+        }
+        #appHtml.light-theme .personal-details-trigger {
+            color: #0d6f4a; 
+        }
+        
+        .personal-details-trigger span.arrow {
+            font-size: 12px;
+        }
+        html[dir="rtl"] .personal-details-trigger span.arrow {
+            transform: rotate(180deg);
+        }
+
+        .profile-view-body {
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            background-color: var(--body-bg);
+            transition: background-color 0.4s;
+        }
+
+        .profile-menu-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            width: 100%;
+        }
+
+        .profile-grid-card {
+            background-color: var(--card-bg);
+            border-radius: 20px; 
+            padding: 18px 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 15px;
+            cursor: pointer;
+            box-shadow: var(--item-shadow);
+            transition: background-color 0.4s, transform 0.2s ease;
+            border: 1px solid transparent;
+        }
+        .profile-grid-card:active {
+            transform: scale(0.96);
+        }
+        #appHtml.light-theme .profile-grid-card {
+            border: 1px solid #f6f8f7;
+        }
+
+        .profile-grid-card img {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+        }
+
+        .profile-grid-card span {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .profile-combo-box {
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transition: background-color 0.4s;
+            box-shadow: var(--item-shadow);
+            border: 1px solid transparent;
+        }
+        #appHtml.light-theme .profile-combo-box {
+            border: 1px solid #f6f8f7;
+        }
+
+        .profile-combo-row {
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            cursor: pointer;
+            border-bottom: 1px solid var(--row-border);
+            transition: border-color 0.3s, background-color 0.2s ease, transform 0.15s ease;
+        }
+        .profile-combo-row:active {
+            background-color: rgba(0,0,0,0.02);
+        }
+        #appHtml.dark-theme .profile-combo-row:active {
+            background-color: rgba(255,255,255,0.02);
+        }
+
+        .profile-combo-row:last-child {
+            border-bottom: none;
+        }
+
+        .profile-combo-row img {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+        }
+
+        .profile-combo-row span {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .travel-records-banner {
+            width: 100%;
+            height: 125px;
+            border-radius: 20px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            cursor: pointer;
+            box-shadow: var(--item-shadow);
+            transition: transform 0.2s ease;
+        }
+        .travel-records-banner:active {
+            transform: scale(0.98);
+        }
+
+        .travel-tag-capsule {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: rgba(60, 60, 60, 0.7);
+            backdrop-filter: blur(4px);
+            padding: 3px 10px;
+            border-radius: 20px;
+            color: #ffffff;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .travel-records-banner h3 {
+            color: #ffffff;
+            font-size: 19px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .travel-records-banner p {
+            color: #dddddd;
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 1.3;
+        }
+
+        .profile-full-card {
+            width: 100%;
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            cursor: pointer;
+            box-shadow: var(--item-shadow);
+            transition: background-color 0.4s, transform 0.2s ease;
+            border: 1px solid transparent;
+        }
+        .profile-full-card:active {
+            transform: scale(0.98);
+        }
+        #appHtml.light-theme .profile-full-card {
+            border: 1px solid #f6f8f7;
+        }
+
+        .profile-full-card img {
+            width: 26px;
+            height: 26px;
+            object-fit: contain;
+        }
+
+        .profile-full-card span {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        /* ==========================================================================
+           🆕 ADVANCED DETAILS OVERLAY
+           ========================================================================== */
+        .advanced-details-overlay {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translate(-50%, 100%);
+            width: 100%;
+            max-width: 450px;
+            height: 100vh;
+            background-color: var(--body-bg);
+            z-index: 800;
+            overflow-y: auto;
+            transition: transform 0.45s cubic-bezier(0.1, 0.76, 0.55, 0.94), background-color 0.4s;
+            padding-bottom: 120px;
+        }
+
+        .advanced-details-overlay.open {
+            transform: translate(-50%, 0);
+        }
+
+        .advanced-header {
+            background-color: var(--card-bg);
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            height: 70px;
+            border-bottom: 1px solid var(--nav-border);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            gap: 15px;
+            transition: background-color 0.4s;
+        }
+
+        #appHtml.light-theme .advanced-header {
+            background-color: #ffffff;
+            border-bottom: 1px solid #eee;
+        }
+
+        .advanced-back-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #appHtml.light-theme .advanced-back-btn svg {
+            stroke: #0d6f4a;
+        }
+
+        .advanced-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .advanced-content {
+            padding: 11px 13px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .amt-deposit-card {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 18px;
+            box-shadow: var(--item-shadow);
+            border: 1px solid transparent;
+            transition: background-color 0.4s;
+        }
+        #appHtml.light-theme .amt-deposit-card {
+            border: 1px solid #f1f3f2;
+        }
+
+        .amt-deposit-card p {
+            font-size: 13px;
+            color: var(--text-sub);
+            font-weight: 500;
+        }
+
+        .amt-deposit-card h3 {
+            font-size: 18px;
+            color: var(--text-main);
+            font-weight: 700;
+            margin-top: 2px;
+        }
+
+        .document-accordion-card {
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--item-shadow);
+            border: 1px solid transparent;
+            transition: background-color 0.4s;
+        }
+        #appHtml.light-theme .document-accordion-card {
+            border: 1px solid #f1f3f2;
+        }
+
+        .doc-trigger-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px;
+            cursor: pointer;
+        }
+
+        .doc-head-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .doc-head-left img.mini-icon {
+            width: 45px;
+            height: 45px;
+            object-fit: contain;
+        }
+
+        .doc-head-left img.avatar-square {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        .doc-head-left h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .doc-trigger-head .arrow-toggle-icon {
+            font-size: 13px;
+            color: var(--text-sub);
+            font-weight: bold;
+            transition: transform 0.2s ease;
+        }
+
+        .doc-expanded-body {
+            padding: 0 18px 18px 18px;
+            border-top: 1px solid var(--row-border);
+        }
+
+        .collapsible-node .doc-expanded-body {
+            display: none;
+        }
+        .collapsible-node.expanded .doc-expanded-body {
+            display: block;
+        }
+
+        .data-field-wrapper {
+            margin-top: 22px;
+            position: relative;
+        }
+
+        .data-field-wrapper label {
+            display: block;
+            font-size: 12px;
+            color: var(--text-main);
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .data-field-wrapper .field-inner-value {
+            font-size: 15px;
+            color: var(--text-sub);
+            font-weight: 600;
+            padding-right: 30px;
+        }
+
+        html[dir="rtl"] .data-field-wrapper .field-inner-value {
+            padding-right: 0;
+            padding-left: 30px;
+        }
+
+        .green-inline-copy {
+            position: absolute;
+            right: 0;
+            bottom: 2px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px;
+        }
+        html[dir="rtl"] .green-inline-copy {
+            right: auto;
+            left: 0;
+        }
+
+        .green-inline-copy img {
+            width: 18px;
+            height: 18px;
+            object-fit: contain;
+        }
+
+        .hajj-badge-capsule {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background-color: #e6f4ee;
+            color: #0d6f4a;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            margin-top: 4px;
+        }
+
+        .hajj-badge-capsule::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background-color: #0d6f4a;
+            border-radius: 50%;
+        }
+
+        .native-toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background-color: rgba(0,0,0,0.85);
+            color: white;
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 500;
+            opacity: 0;
+            z-index: 2000;
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+        .native-toast.visible {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        /* My Passport আইকন */
+#prof-icon-passport {
+    width: 45px !important;
+    height: 45px !important;
+    object-fit: contain;
+}
+
+/* My Resident ID আইকন */
+#prof-icon-resident {
+    width: 45px !important;
+    height: 45px !important;
+    object-fit: contain;
+}
+
+/* Labor Importations আইকন */
+#prof-icon-labor {
+    width: 45px !important;
+    height: 45px !important;
+    object-fit: contain;
+}
+    </style>
+</head>
+<body>
+
+    <div class="app-container" id="mainAppContainer">
+
+        <div class="header-fixed-wrapper">
+            <div class="top-header-banner">
+                <div class="header-left">
+                    <img src="All_image/white_absher_logo.png" alt="Absher" class="main-logo" id="headerLogo">
+                    <span class="header-title-text" id="headerTitle" data-lang="home_title">Home</span>
+                </div>
+                <div class="header-right">
+                    <div class="notification-icon-wrapper" onclick="toggleNotificationOverlay(true)" title="Notifications">
+                        <img src="All icon/DJ.png" alt="Notification" class="header-icon" id="notificationIconNav">
+                        <span class="notification-badge" id="notificationBadge"></span>
+                    </div>
+                    <img src="All icon/GJ.png" alt="Settings" class="header-icon" id="settingsIconNav" onclick="toggleSettings(true)">
+                </div>
+            </div>
+        </div>
+        
+        <div class="green-banner-extension" id="greenBanner"></div>
+
+        <!-- ===== ড্যাশবোর্ড কন্টেন্ট ===== -->
+        <div id="main-dashboard">
+            <div class="main-content">
+                
+                <div class="profile-card" onclick="toggleProfileView(true)">
+                    <div class="profile-img-container">
+                        <img src="All icon/AD.png" alt="Profile" class="profile-avatar" id="liveProfileIcon">
+                    </div>
+                    <div class="profile-info">
+                        <div class="profile-name" id="displayUserName">༊ᵖʳᵒᶠᵉˢˢᵒʳ᭄</div>
+                        <div class="profile-id"><span data-lang="id_label">ID No.:</span> <span id="displayIqama">2000000000</span></div>
+                    </div>
+                </div>
+
+                <div class="search-container">
+                    <svg class="search-icon" id="liveSearchIconSvg" viewBox="0 0 24 24" fill="none" stroke="#0c4d34" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <img src="All icon/Ey (1).png" alt="Search" class="search-icon" id="liveSearchIconImg" style="display: none; object-fit: contain;">
+                    <div class="search-placeholder" data-lang="search_placeholder">Look for a Service</div>
+                </div>
+
+                <div class="section-title" data-lang="digital_docs_title">My Digital Documents</div>
+
+                <!-- 🌀 LOTTIE LOADING -->
+                <div class="lottie-card-placeholder" id="lottieCardContainer">
+                    <div id="lottieCardInner"></div>
+                </div>
+
+                <!-- 🆔 DIGITAL ID CARD (hidden until data loads) -->
+                <div class="digital-card" id="digitalResidentCard" style="display:none;">
+                    <!-- ✅ Resident Card Image as background -->
+                    <img id="residentCardImage" class="card-bg-image" alt="Resident Card" />
+                    <div class="card-inner-mock"></div>
+                </div>
+
+                <div class="section-title" data-lang="quick_access_title">Quick Access</div>
+                
+                <div class="quick-access-section">
+                    
+                    <div class="quick-access-bg-image" id="quickAccessBgImage"></div>
+
+                    <div id="defaultQuickAccessCards">
+                        <div class="full-width-card">
+                            <img src="All icon/Hg.png" alt="Vehicles" class="card-main-icon" id="icon-vehicles">
+                            <div class="card-text-container">
+                                <span class="card-main-title" data-lang="my_vehicles">My Vehicles</span>
+                                <span class="card-sub-title" data-lang="my_vehicles_sub">View details, renew documents, report accidents, and much more.</span>
+                            </div>
+                        </div>
+
+                        <div class="two-column-grid">
+                            
+                            <div class="grid-card">
+                                <img src="All icon/Fx (1).png" alt="Auth" class="card-main-icon" id="grid-icon-1">
+                                <span class="grid-card-title" data-lang="auth_services">Authentication Services</span>
+                            </div>
+
+                            <div class="grid-card">
+                                <img src="All icon/Fi (1).png" alt="Travel" class="card-main-icon" id="grid-icon-2">
+                                <span class="grid-card-title" data-lang="absher_travel">Absher Travel</span>
+                            </div>
+
+                            <div class="grid-card">
+                                <img src="All icon/Fp (1).png" alt="Accident" class="card-main-icon" id="grid-icon-3">
+                                <span class="grid-card-title" data-lang="report_accident">Report Minor Accident</span>
+                            </div>
+
+                            <div class="grid-card">
+                                <img src="All icon/Fg (1).png" alt="Violations" class="card-main-icon" id="grid-icon-4">
+                                <span class="grid-card-title" data-lang="traffic_violations">Traffic Violations</span>
+                            </div>
+
+                        </div>
+
+                        <div class="full-width-card">
+                            <img src="All icon/Hs.png" alt="Weapons" class="card-main-icon" id="icon-weapons">
+                            <div class="card-text-container">
+                                <span class="card-main-title" data-lang="my_weapons">My Weapons</span>
+                                <span class="card-sub-title" data-lang="my_weapons_sub">View weapons details, issue and view carry permits.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dynamic-cards-container" id="dynamicCardsContainer" style="display:none;"></div>
+
+                </div>
+
+            </div>
+        </div> <!-- /#main-dashboard -->
+
+        <!-- ===== সার্ভিস পেজ (শুরুতে লুকানো) ===== -->
+        <div id="services-page" class="services-page hidden">
+            <h1 class="page-title" data-lang="my_services">My Services</h1>
+
+            <div class="search-container">
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="#0c4d34" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <div class="search-placeholder" data-lang="search_services">Search by Service...</div>
+            </div>
+
+            <div class="services-grid">
+    <div class="service-card" onclick="alert('Register Newborn')">
+        <img src="All icon/DA.png" alt="Newborn" class="service-icon" id="srv-newborn">
+        <span class="service-title" data-lang="srv_newborn">Register Newborn</span>
+    </div>
+    <div class="service-card" onclick="alert('Renew Driving License')">
+        <img src="All icon/EX.png" alt="Driving" class="service-icon" id="srv-driving">
+        <span class="service-title" data-lang="srv_driving">Renew Driving License</span>
+    </div>
+    <div class="service-card" onclick="alert('Renew Resident ID')">
+        <img src="All icon/ES.png" alt="Resident" class="service-icon" id="srv-resident">
+        <span class="service-title" data-lang="srv_resident">Renew Resident ID</span>
+    </div>
+    <div class="service-card" onclick="alert('Authentication Services')">
+        <img src="All icon/Fx (1).png" alt="Auth" class="service-icon" id="srv-auth">
+        <span class="service-title" data-lang="srv_auth">Authentication Services</span>
+    </div>
+    <div class="service-card" onclick="alert('Update Resident')">
+        <img src="All icon/ER.png" alt="Update" class="service-icon" id="srv-update">
+        <span class="service-title" data-lang="srv_update">Update Resident</span>
+    </div>
+    <div class="service-card" onclick="alert('Report Minor Accident')">
+        <img src="All icon/Fp (1).png" alt="Accident" class="service-icon" id="srv-accident">
+        <span class="service-title" data-lang="srv_accident">Report Minor Accident</span>
+    </div>
+    <div class="service-card" onclick="alert('Update Resident Photo')">
+        <img src="All icon/FA.png" alt="Photo" class="service-icon" id="srv-photo">
+        <span class="service-title" data-lang="srv_photo">Update Resident Photo</span>
+    </div>
+    <div class="service-card" onclick="alert('Update Passport Information')">
+        <img src="All icon/Ed (1).png" alt="Passport" class="service-icon" id="srv-passport">
+        <span class="service-title" data-lang="srv_passport">Update Passport Information</span>
+    </div>
+</div>
+        </div> <!-- /#services-page -->
+
+        <!-- ===== ফ্যামিলি পেজ (hidden by default) ===== -->
+        <div id="family-page" class="family-page hidden">
+            <h1 class="page-title" data-lang="family_title">Family</h1>
+
+            <div class="search-container">
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="#0c4d34" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <div class="search-placeholder" data-lang="search_family">Search by name, ID</div>
+            </div>
+
+            <div class="empty-state">
+                <!-- কাস্টম SVG আইকন -->
+                <img class="empty-icon" id="familyEmptyIcon" alt="No Family">
+                <div class="empty-title" data-lang="no_family_title">No Family Members</div>
+                <div class="empty-sub" data-lang="no_family_sub">Once you have family members, they will display here.</div>
+            </div>
+        </div> <!-- /#family-page -->
+
+        <!-- ===== ওয়ার্কার্স পেজ (hidden by default) ===== -->
+        <div id="workers-page" class="workers-page hidden">
+            <h1 class="page-title" data-lang="workers_title">Workers</h1>
+
+            <div class="search-container">
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="#0c4d34" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <div class="search-placeholder" data-lang="search_workers">Search by name, ID</div>
+            </div>
+
+            <div class="empty-state">
+                <!-- কাস্টম SVG আইকন (ওয়ার্কার) -->
+                <img class="empty-icon" id="workersEmptyIcon" alt="No Workers">
+                <div class="empty-title" data-lang="no_workers_title">No Workers</div>
+                <div class="empty-sub" data-lang="no_workers_sub">Once you have workers under your sponsorship they will display here.</div>
+            </div>
+        </div> <!-- /#workers-page -->
+
+        <!-- ===== OTHER PAGE (সংযোজন) ===== -->
+        <div id="other-page" class="other-page hidden">
+            <h1 class="page-title" data-lang="other_title">Other Services</h1>
+
+            <div class="search-container">
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <div class="search-placeholder" data-lang="search_placeholder">Search by Service</div>
+            </div>
+
+            <!-- তিনটি ইমেজ ফুল-উইডথ -->
+            <div class="services-images-container">
+                <div class="service-image-item">
+                    <img src="All_image/D_01.png" alt="Services 1" id="service-img-1" loading="lazy">
+                </div>
+                <div class="service-image-item">
+                    <img src="All_image/D_02.png" alt="Services 2" id="service-img-2" loading="lazy">
+                </div>
+                <div class="service-image-item">
+                    <img src="All_image/D_03.png" alt="Services 3" id="service-img-3" loading="lazy">
+                </div>
+            </div>
+        </div> <!-- /#other-page -->
+
+        <div class="floating-fab">
+            <img src="All icon/fa1.png" alt="Chat" class="fab-icon" id="fabChatIcon">
+        </div>
+
+        <div class="bottom-nav-bar" id="bottomNavBar">
+            <div class="nav-item active" onclick="switchMenu(this, 'home')">
+                <img src="All icon/Du (1).png" alt="Home" class="nav-icon" id="icon-home">
+                <span class="nav-text" data-lang="menu_home">Home</span>
+            </div>
+            <div class="nav-item" onclick="switchMenu(this, 'services')">
+                <img src="All icon/Dv.png" alt="Services" class="nav-icon" id="icon-services">
+                <span class="nav-text" data-lang="menu_services">Services</span>
+            </div>
+            <div class="nav-item" onclick="switchMenu(this, 'family')">
+                <img src="All icon/Dr (1).png" alt="Family" class="nav-icon" id="icon-family">
+                <span class="nav-text" data-lang="menu_family">Family</span>
+            </div>
+            <div class="nav-item" onclick="switchMenu(this, 'workers')">
+                <img src="All icon/Dz (1).png" alt="Workers" class="nav-icon" id="icon-workers">
+                <span class="nav-text" data-lang="menu_workers">Workers</span>
+            </div>
+            <div class="nav-item" onclick="switchMenu(this, 'other')">
+                <img src="All icon/Dx (1).png" alt="Other" class="nav-icon" id="icon-other">
+                <span class="nav-text" data-lang="menu_other">Other</span>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="notification-overlay" id="notificationOverlay">
+        
+        <div class="notification-header">
+            <button class="notification-back-btn" onclick="toggleNotificationOverlay(false)">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+            </button>
+            <div class="notification-title" data-lang="notifications_title">Notifications</div>
+        </div>
+
+        <div class="notification-list" id="notificationList">
+            <div class="notification-empty" id="notificationEmpty">No notifications yet</div>
+        </div>
+    </div>
+
+
+    <div class="settings-screen-overlay" id="settingsOverlay">
+        
+        <div class="settings-header">
+            <button class="close-settings-btn" onclick="toggleSettings(false)">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4db380" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" id="closeSettingsSvg">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <div class="settings-title" data-lang="set_title">Settings</div>
+        </div>
+
+        <div class="settings-content">
+            
+            <div>
+                <div class="settings-group-title" data-lang="set_acc_details">Account Details</div>
+                <div class="settings-box">
+                    <div class="settings-row" style="gap: 16px;">
+                        <div class="profile-img-container" style="width: 60px; height: 60px;">
+                            <img src="All icon/AD.png" alt="Profile" class="profile-avatar" id="settingsProfileIcon">
+                        </div>
+                        <div class="profile-info">
+                            <div class="profile-name" style="font-size: 16px;">༊ᵖʳᵒᶠᵉˢˢᵒʳ᭄</div>
+                            <div class="profile-id" style="font-size: 13px;"><span data-lang="id_label">ID No.:</span> 2000000000</div>
+                        </div>
+                    </div>
+                    <div class="settings-row" style="cursor: pointer;">
+                        <span class="row-title" data-lang="set_auth">Absher Authenticator</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="settings-group-title" data-lang="set_privacy">Privacy and Security</div>
+                <div class="settings-box">
+                    <div class="settings-row">
+                        <div class="row-left-info">
+                            <span class="row-title" data-lang="set_bio_title">Use Biometrics</span>
+                            <span class="row-desc" data-lang="set_bio_desc">Biometrics are required to access your Digital Documents and Absher Authenticator while logged out, and allows you to stay logged in for longer.</span>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="settings-row">
+                        <div class="row-left-info">
+                            <span class="row-title" data-lang="set_blur_title">Blur images</span>
+                            <span class="row-desc" data-lang="set_blur_desc">All images for woman will be blurred and not fully visible.</span>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="settings-group-title" data-lang="set_preferences">Preferences</div>
+                
+                <div class="settings-box" style="margin-bottom: 15px;">
+                    <div class="settings-row"><span class="row-title" style="font-weight: 600;" data-lang="set_lang_label">Language</span></div>
+                    
+                    <div class="settings-row">
+                        <label class="radio-option-wrapper">
+                            <span class="row-title">عربي</span>
+                            <input type="radio" name="lang_select" value="ar" id="radioAr" onclick="changeLanguageMode('ar')">
+                            <span class="custom-radio"></span>
+                        </label>
+                    </div>
+
+                    <div class="settings-row">
+                        <label class="radio-option-wrapper">
+                            <span class="row-title">English</span>
+                            <input type="radio" name="lang_select" value="en" id="radioEn" checked onclick="changeLanguageMode('en')">
+                            <span class="custom-radio"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="settings-box" style="margin-bottom: 15px;">
+                    <div class="settings-row"><span class="row-title" style="font-weight: 600;" data-lang="set_theme_label">Theme</span></div>
+                    
+                    <div class="settings-row">
+                        <label class="radio-option-wrapper">
+                            <span class="row-title" data-lang="theme_dark">Dark Theme</span>
+                            <input type="radio" name="theme_select" value="dark" id="radioThemeDark" checked onclick="applyAppTheme('dark')">
+                            <span class="custom-radio"></span>
+                        </label>
+                    </div>
+
+                    <div class="settings-row">
+                        <label class="radio-option-wrapper">
+                            <span class="row-title" data-lang="theme_light">Light Theme</span>
+                            <input type="radio" name="theme_select" value="light" id="radioThemeLight" onclick="applyAppTheme('light')">
+                            <span class="custom-radio"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <button class="delete-identity-btn" data-lang="set_delete_id">Delete Your Digital Identity</button>
+
+            <div>
+                <div class="settings-group-title" data-lang="set_support">Support</div>
+                <div class="settings-box">
+                    <div class="settings-row"><span class="row-title" data-lang="sup_center">Support Center</span></div>
+                    <div class="settings-row"><span class="row-title" data-lang="sup_guide">App Services Guide</span></div>
+                    <div class="settings-row"><span class="row-title" data-lang="sup_access">Accessibility Guide</span></div>
+                    <div class="settings-row"><span class="row-title" data-lang="sup_chat">Live Chat</span></div>
+                    <div class="settings-row"><span class="row-title" data-lang="sup_faq">FAQs</span></div>
+                    <div class="settings-row"><span class="row-title" data-lang="sup_policy">Privacy Policy</span></div>
+                </div>
+                <button class="logout-outline-btn" id="logoutButton" data-lang="btn_logout">Log Out</button>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="profile-view-overlay" id="profileViewOverlay">
+        
+        <div class="profile-view-header">
+            <button class="profile-back-btn" onclick="goBack()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+            </button>
+            <div class="profile-view-title" data-lang="prof_title">My Profile</div>
+        </div>
+
+        <div class="profile-green-zone">
+            <div class="profile-floating-card">
+                <div class="floating-avatar-box">
+                    <img src="All icon/AD.png" alt="Profile" id="profileViewAvatar">
+                </div>
+                <div class="floating-user-name" id="floatingUserName">Loading...</div>
+                <div class="floating-id-row">
+                    <div class="floating-id-text"><span data-lang="id_label">ID No.:</span> <span id="floatingIqama">Loading...</span></div>
+                    <button class="copy-action-btn" onclick="copyIdNumber()" title="Copy ID">
+                        <img src="All icon/Cb (1).png" alt="Copy" id="profileCopyIdIcon">
+                    </button>
+                </div>
+                <div class="personal-details-trigger" onclick="toggleAdvancedOverlay('personalDetailsOverlay', true)">
+                    <span data-lang="prof_personal_details">My Personal Details</span>
+                    <span class="arrow">&gt;</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="profile-view-body">
+            
+            <div class="profile-menu-grid">
+                <div class="profile-grid-card" onclick="toggleAdvancedOverlay('passportDetailsOverlay', true)">
+                    <img src="All icon/Ed (1).png" alt="Passport" id="prof-icon-passport">
+                    <span data-lang="prof_passport">My Passport</span>
+                </div>
+                <div class="profile-grid-card" onclick="toggleAdvancedOverlay('residentDetailsOverlay', true)">
+                    <img src="All icon/ES.png" alt="Resident ID" id="prof-icon-resident">
+                    <span data-lang="prof_resident">My Resident ID</span>
+                </div>
+            </div>
+
+            <div class="profile-combo-box">
+                <div class="profile-combo-row" onclick="toggleAdvancedOverlay('visaDetailsOverlay', true)">
+                    <img src="All icon/Fk (1).png" alt="Visa" id="prof-icon-visa">
+                    <span data-lang="prof_visa">My Visa</span>
+                </div>
+                <div class="profile-combo-row" onclick="toggleAdvancedOverlay('licenseDetailsOverlay', true)">
+                    <img src="All icon/EX.png" alt="Driving License" id="prof-icon-license">
+                    <span data-lang="prof_license">My Driving License</span>
+                </div>
+            </div>
+
+            <div class="travel-records-banner" id="travelRecordsBanner" style="background-image: url('All_image/inside.jpg');">
+                <div class="travel-tag-capsule" id="travelStatusTag" data-lang="prof_travel_tag">Inside Kingdom</div>
+                <h3 data-lang="prof_travel_title">My Travel Records</h3>
+                <p data-lang="prof_travel_sub">Find your last trips details</p>
+            </div>
+
+            <div class="profile-full-card" onclick="toggleAdvancedOverlay('laborDetailsOverlay', true)">
+                <img src="All icon/Ht.png" alt="Labor" id="prof-icon-labor">
+                <span data-lang="prof_labor">Labor Importations</span>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="advanced-details-overlay" id="passportDetailsOverlay">
+        <div class="advanced-header">
+            <button class="advanced-back-btn" onclick="goBack()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+            </button>
+            <div class="advanced-title">My Passport</div>
+        </div>
+        <div class="advanced-content">
+            <div class="amt-deposit-card">
+                <p>Amount deposit</p>
+                <h3 id="passportAmountDeposit">SAR 0.00</h3>
+            </div>
+            <div class="document-accordion-card">
+                <div class="doc-trigger-head">
+                    <div class="doc-head-left">
+                        <img id="passportMiniIcon" src="All icon/Ed (1).png" alt="Passport Icon" class="mini-icon">
+                        <h3>Normal Passport</h3>
+                    </div>
+                    <span class="arrow-toggle-icon">︿</span>
+                </div>
+                <div class="doc-expanded-body">
+                    <div class="data-field-wrapper">
+                        <label>Passport Number</label>
+                        <div class="field-inner-value" id="passTextVal">-</div>
+                        <div class="green-inline-copy" onclick="triggerNativeCopy('passTextVal')">
+                            <img src="All icon/Cb (1).png" alt="Copy">
+                        </div>
+                    </div>
+                    <div class="data-field-wrapper">
+                        <label>Type</label>
+                        <div class="field-inner-value">Normal</div>
+                    </div>
+                    <div class="data-field-wrapper">
+                        <label>Issuing Date</label>
+                        <div class="field-inner-value" id="passIssuingDate">-</div>
+                    </div>
+                    <div class="data-field-wrapper">
+                        <label>Expiry Date</label>
+                        <div class="field-inner-value" id="passExpiryDate">-</div>
+                    </div>
+                    <div class="data-field-wrapper">
+                        <label>Issuing City</label>
+                        <div class="field-inner-value" id="passIssuingCity">-</div>
+                    </div>
+                    <div class="data-field-wrapper">
+                        <label>Status</label>
+                        <div class="field-inner-value">-</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="advanced-details-overlay" id="residentDetailsOverlay">
+        <div class="advanced-header">
+            <button class="advanced-back-btn" onclick="goBack()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+            </button>
+            <div class="advanced-title">My Resident ID</div>
+        </div>
+        <div class="advanced-content">
+            <div class="document-accordion-card">
+                <div class="doc-trigger-head">
+                    <div class="doc-head-left">
+                        <img src="All icon/EX.png" alt="Resident Icon" class="mini-icon">
+                        <h3>My Resident ID</h3>
+                    </div>
+                    <span class="arrow-toggle-icon">︿</span>
+                </div>
+                <div class="doc-expanded-body">
+                    <div class="data-field-wrapper">
+                        <label>Resident ID Number</label>
+                        <div class="field-inner-value" id="resTextVal">-</div>
+                        <div class="green-inline-copy" onclick="triggerNativeCopy('resTextVal')">
+                            <img src="All icon/Cb (1).png" alt="Copy">
+                        </div>
+                    </div>
+                    <div class="data-field-wrapper">
+                        <label>ID Version</label>
+                        <div class="field-inner-value">1</div>
+                    </div>
+                    <div class="data-field-wrapper">
+                        <label>Issuing Date</label>
+                        <div class="field-inner-value" id="residentIssuingDate">-</div>
+                    </div>
+                    <div class="data-field-wrapper">
+                        <label>Expiry Date</label>
+                        <div class="field-inner-value" id="residentExpiryDate">-</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="advanced-details-overlay" id="personalDetailsOverlay">
+        <div class="advanced-header">
+            <button class="advanced-back-btn" onclick="goBack()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+            </button>
+            <div class="advanced-title">My Personal Details</div>
+        </div>
+        <div class="advanced-content">
+
+            <div class="document-accordion-card collapsible-node expanded" id="nodePersonal">
+                <div class="doc-trigger-head" onclick="triggerNodeToggle('nodePersonal')">
+                    <div class="doc-head-left">
+                        <img src="All icon/AD.png" alt="Avatar" class="avatar-square" id="personalBodyAvatar">
+                    </div>
+                    <h3>Personal Details</h3>
+                    <span class="arrow-toggle-icon">︿</span>
+                </div>
+                <div class="doc-expanded-body">
+                    <div class="data-field-wrapper">
+                        <label>Name</label>
+                        <div class="field-inner-value" id="personalName">-</div>
+                    </div>
+                    <div class="data-field-wrapper">
+                        <label>Birth City</label>
+                        <div class="field-inner-value" id="birthCity">-</div>
+                    </div>
+                    <div class="data-field-wrapper">
+                        <label>Birth Country/Region</label>
+                        <div class="field-inner-value" id="birthCountry">-</div>
+                    </div>
+                    <div class="data-field-wrapper">
+                        <label>Date of Birth</label>
+                        <div class="field-inner-value" id="dateOfBirth">-</div>
+                    </div>
+                    <div class="data-field-wrapper">
+                        <label>Marital Status</label>
+                        <div class="field-inner-value" id="maritalStatus">-</div>
+                    </div>
+                    <div class="data-field-wrapper">
+                        <label>No. of sponsorship transfers</label>
+                        <div class="field-inner-value" id="sponsorTransfers">0</div>
+                    </div>
+                    <div class="data-field-wrapper">
+                        <label>Religion</label>
+                        <div class="field-inner-value" id="religion">-</div>
+                    </div>
+                    <div class="data-field-wrapper">
+                        <label>Work Permit</label>
+                        <div class="field-inner-value" id="workPermit">-</div>
+                    </div>
+                    <div class="data-field-wrapper">
+                        <label>Biometrics Collected</label>
+                        <div class="field-inner-value" id="biometricsCollected">-</div>
+                    </div>
+                    <div class="data-field-wrapper">
+                        <label>Travel Status</label>
+                        <div class="field-inner-value" id="travelStatus">-</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="document-accordion-card collapsible-node" id="nodeSponsor">
+                <div class="doc-trigger-head" onclick="triggerNodeToggle('nodeSponsor')">
+                    <div class="doc-head-left">
+                        <img src="All icon/ha3.png" alt="Sponsor" class="mini-icon" style="border-radius:50%">
+                        <h3>Sponsor Details</h3>
+                    </div>
+                    <span class="arrow-toggle-icon">﹀</span>
+                </div>
+                <div class="doc-expanded-body">
+                    <div class="data-field-wrapper">
+                        <label>Sponsor Name</label>
+                        <div class="field-inner-value" id="sponsorName" style="direction: rtl; text-align: left;">-</div>
+                    </div>
+                    <div class="data-field-wrapper">
+                        <label>Sponsor ID Number</label>
+                        <div class="field-inner-value" id="sTextVal">-</div>
+                        <div class="green-inline-copy" onclick="triggerNativeCopy('sTextVal')">
+                            <img src="All icon/Cb (1).png" alt="Copy">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="document-accordion-card collapsible-node" id="nodeInsurance">
+                <div class="doc-trigger-head" onclick="triggerNodeToggle('nodeInsurance')">
+                    <div class="doc-head-left">
+                        <img src="All icon/ha2.png" alt="Insurance" class="mini-icon">
+                        <h3>Health Insurance</h3>
+                    </div>
+                    <span class="arrow-toggle-icon">﹀</span>
+                </div>
+                <div class="doc-expanded-body">
+                    <div class="data-field-wrapper">
+                        <label>Insurance Company</label>
+                        <div class="field-inner-value" id="insuranceCompany">-</div>
+                    </div>
+                    <div class="data-field-wrapper">
+                        <label>Issuing Date</label>
+                        <div class="field-inner-value" id="insuranceIssuingDate">-</div>
+                    </div>
+                    <div class="data-field-wrapper">
+                        <label>Expiry Date</label>
+                        <div class="field-inner-value" id="insuranceExpiryDate">-</div>
+                    </div>
+                    <div class="data-field-wrapper">
+                        <label>Blood Type</label>
+                        <div class="field-inner-value" id="bloodType">-</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="document-accordion-card collapsible-node" id="nodeHajj">
+                <div class="doc-trigger-head" onclick="triggerNodeToggle('nodeHajj')">
+                    <div class="doc-head-left">
+                        <img src="All icon/ha1.png" alt="Hajj" class="mini-icon">
+                        <h3>Hajj Details</h3>
+                    </div>
+                    <span class="arrow-toggle-icon">﹀</span>
+                </div>
+                <div class="doc-expanded-body">
+                    <div class="data-field-wrapper">
+                        <label>Hajj Status</label>
+                        <div class="hajj-badge-capsule" id="hajjStatus">-</div>
+                    </div>
+                    <div class="data-field-wrapper">
+                        <label>Last Hajj Year</label>
+                        <div class="field-inner-value" id="lastHajjYear">-</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ===== VISA DETAILS OVERLAY (improved with empty state) ===== -->
+    <div class="advanced-details-overlay" id="visaDetailsOverlay">
+        <div class="advanced-header">
+            <button class="advanced-back-btn" onclick="goBack()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+            </button>
+            <div class="advanced-title">My Visa</div>
+        </div>
+        <div class="advanced-content">
+            <!-- Empty state (hidden if data exists) -->
+            <div class="empty-state" id="visaEmptyState" style="display:none;">
+                <img class="empty-icon" id="visaEmptyIcon" alt="No Visa">
+                <div class="empty-title" data-lang="no_visa_title">No Visa</div>
+                <div class="empty-sub" data-lang="no_visa_sub">Once admin adds your visa details, they will appear here.</div>
+            </div>
+            <!-- Existing no-visa-msg kept as is (but will be hidden by JS) -->
+            <span id="no-visa-msg" style="display:none; text-align:center; padding:20px; font-size:18px; font-weight:600; color:var(--text-sub);">No Visa</span>
+            <!-- Visa data accordion (hidden when empty) -->
+            <div class="document-accordion-card" id="visaAccordionCard">
+                <div class="doc-trigger-head">
+                    <div class="doc-head-left">
+                        <img src="All icon/Fk (1).png" alt="Visa Icon" class="mini-icon">
+                        <h3>Visa Details</h3>
+                    </div>
+                    <span class="arrow-toggle-icon">︿</span>
+                </div>
+                <div class="doc-expanded-body">
+                    <div class="data-field-wrapper">
+                        <label>Visa Number</label>
+                        <div class="field-inner-value" id="visaNumber">-</div>
+                    </div>
+                    <div class="data-field-wrapper">
+                        <label>Visa Type</label>
+                        <div class="field-inner-value" id="visaType">-</div>
+                    </div>
+                    <div class="data-field-wrapper">
+                        <label>Issuing Date</label>
+                        <div class="field-inner-value" id="visaIssueDate">-</div>
+                    </div>
+                    <div class="data-field-wrapper">
+                        <label>Expiry Date</label>
+                        <div class="field-inner-value" id="visaExpiryDate">-</div>
+                    </div>
+                    <div class="data-field-wrapper">
+                        <label>Status</label>
+                        <div class="field-inner-value" id="visaStatus">-</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== DRIVING LICENSE DETAILS OVERLAY (improved with empty state) ===== -->
+    <div class="advanced-details-overlay" id="licenseDetailsOverlay">
+        <div class="advanced-header">
+            <button class="advanced-back-btn" onclick="goBack()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+            </button>
+            <div class="advanced-title">My Driving License</div>
+        </div>
+        <div class="advanced-content">
+            <!-- Empty state -->
+            <div class="empty-state" id="licenseEmptyState" style="display:none;">
+                <img class="empty-icon" id="licenseEmptyIcon" alt="No License">
+                <div class="empty-title" data-lang="no_license_title">No Driving License</div>
+                <div class="empty-sub" data-lang="no_license_sub">Once admin adds your license, it will appear here.</div>
+            </div>
+            <span id="no-license-msg" style="display:none; text-align:center; padding:20px; font-size:18px; font-weight:600; color:var(--text-sub);">No Driving License</span>
+            <div class="document-accordion-card" id="licenseAccordionCard">
+                <div class="doc-trigger-head">
+                    <div class="doc-head-left">
+                        <img src="All icon/EX.png" alt="License Icon" class="mini-icon">
+                        <h3>License Details</h3>
+                    </div>
+                    <span class="arrow-toggle-icon">︿</span>
+                </div>
+                <div class="doc-expanded-body">
+                    <div class="data-field-wrapper">
+                        <label>License Number</label>
+                        <div class="field-inner-value" id="licenseNumber">-</div>
+                    </div>
+                    <div class="data-field-wrapper">
+                        <label>License Type</label>
+                        <div class="field-inner-value" id="licenseType">-</div>
+                    </div>
+                    <div class="data-field-wrapper">
+                        <label>Issuing Date</label>
+                        <div class="field-inner-value" id="licenseIssueDate">-</div>
+                    </div>
+                    <div class="data-field-wrapper">
+                        <label>Expiry Date</label>
+                        <div class="field-inner-value" id="licenseExpiryDate">-</div>
+                    </div>
+                    <div class="data-field-wrapper">
+                        <label>Status</label>
+                        <div class="field-inner-value" id="licenseStatus">-</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== LABOR DETAILS OVERLAY (improved with empty state) ===== -->
+    <div class="advanced-details-overlay" id="laborDetailsOverlay">
+        <div class="advanced-header">
+            <button class="advanced-back-btn" onclick="goBack()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+            </button>
+            <div class="advanced-title">Labor Importations</div>
+        </div>
+        <div class="advanced-content">
+            <!-- Empty state -->
+            <div class="empty-state" id="laborEmptyState" style="display:none;">
+                <img class="empty-icon" id="laborEmptyIcon" alt="No Labor">
+                <div class="empty-title" data-lang="no_labor_title">No Labor</div>
+                <div class="empty-sub" data-lang="no_labor_sub">Once admin adds labor details, they will appear here.</div>
+            </div>
+            <span id="no-labor-msg" style="display:none; text-align:center; padding:20px; font-size:18px; font-weight:600; color:var(--text-sub);">No Labor</span>
+            <div class="document-accordion-card" id="laborAccordionCard">
+                <div class="doc-trigger-head">
+                    <div class="doc-head-left">
+                        <img src="All icon/Ht.png" alt="Labor Icon" class="mini-icon">
+                        <h3>Labor Details</h3>
+                    </div>
+                    <span class="arrow-toggle-icon">︿</span>
+                </div>
+                <div class="doc-expanded-body">
+                    <div class="data-field-wrapper">
+                        <label>Total Workers</label>
+                        <div class="field-inner-value" id="laborTotalWorkers">-</div>
+                    </div>
+                    <div class="data-field-wrapper">
+                        <label>Active Requests</label>
+                        <div class="field-inner-value" id="laborActiveRequests">-</div>
+                    </div>
+                    <div class="data-field-wrapper">
+                        <label>Last Request Date</label>
+                        <div class="field-inner-value" id="laborLastRequestDate">-</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="appGlobalToast" class="native-toast">Copied to clipboard</div>
+
+
+    <script>
+        const BASE_ICON_PATH = "All_image/";
+        // ================================================================
+        // 🌍 LANGUAGE LIBRARY
+        // ================================================================
+        const languageLibrary = {
+            en: {
+                home_title: "Home",
+                id_label: "ID No.:",
+                search_placeholder: "Look for a Service",
+                digital_docs_title: "My Digital Documents",
+                quick_access_title: "Quick Access",
+                my_vehicles: "My Vehicles",
+                my_vehicles_sub: "View details, renew documents, report accidents, and much more.",
+                auth_services: "Authentication Services",
+                absher_travel: "Absher Travel",
+                report_accident: "Report Minor Accident",
+                traffic_violations: "Traffic Violations",
+                my_weapons: "My Weapons",
+                my_weapons_sub: "View weapons details, issue and view carry permits.",
+                menu_home: "Home",
+                menu_services: "Services",
+                menu_family: "Family",
+                menu_workers: "Workers",
+                menu_other: "Other",
+                set_title: "Settings",
+                set_acc_details: "Account Details",
+                set_auth: "Absher Authenticator",
+                set_privacy: "Privacy and Security",
+                set_bio_title: "Use Biometrics",
+                set_bio_desc: "Biometrics are required to access your Digital Documents and Absher Authenticator while logged out, and allows you to stay logged in for longer.",
+                set_blur_title: "Blur images",
+                set_blur_desc: "All images for woman will be blurred and not fully visible.",
+                set_preferences: "Preferences",
+                set_lang_label: "Language",
+                set_theme_label: "Theme",
+                theme_dark: "Dark Theme",
+                theme_light: "Light Theme",
+                set_cal_label: "Calendar",
+                set_cal_desc: "Where possible, all dates will be displayed as Gregorian",
+                set_delete_id: "Delete Your Digital Identity",
+                set_support: "Support",
+                sup_center: "Support Center",
+                sup_guide: "App Services Guide",
+                sup_access: "Accessibility Guide",
+                sup_chat: "Live Chat",
+                sup_faq: "FAQs",
+                sup_policy: "Privacy Policy",
+                btn_logout: "Log Out",
+                prof_title: "My Profile",
+                prof_personal_details: "My Personal Details",
+                prof_passport: "My Passport",
+                prof_resident: "My Resident ID",
+                prof_visa: "My Visa",
+                prof_license: "My Driving License",
+                prof_travel_tag: "Inside Kingdom",
+                prof_travel_title: "My Travel Records",
+                prof_travel_sub: "Find your last trips details",
+                prof_labor: "Labor Importations",
+                notifications_title: "Notifications",
+                no_notifications: "No notifications yet",
+                my_services: "My Services",
+                search_services: "Search by Service...",
+                srv_newborn: "Register Newborn",
+                srv_driving: "Renew Driving License",
+                srv_resident: "Renew Resident ID",
+                srv_auth: "Authentication Services",
+                srv_update: "Update Resident",
+                srv_accident: "Report Minor Accident",
+                srv_photo: "Update Resident Photo",
+                srv_passport: "Update Passport Information",
+                // Family page
+                family_title: "Family",
+                search_family: "Search by name, ID",
+                no_family_title: "No Family Members",
+                no_family_sub: "Once you have family members, they will display here.",
+                // Workers page
+                workers_title: "Workers",
+                search_workers: "Search by name, ID",
+                no_workers_title: "No Workers",
+                no_workers_sub: "Once you have workers under your sponsorship they will display here.",
+                // New empty states for advanced overlays
+                no_visa_title: "No Visa",
+                no_visa_sub: "Once admin adds your visa details, they will appear here.",
+                no_license_title: "No Driving License",
+                no_license_sub: "Once admin adds your license, it will appear here.",
+                no_labor_title: "No Labor",
+                no_labor_sub: "Once admin adds labor details, they will appear here.",
+                // Other page
+                other_title: "Other Services"
+            },
+            ar: {
+                home_title: "الرئيسية",
+                id_label: "رقم الهوية:",
+                search_placeholder: "البحث عن خدمة",
+                digital_docs_title: "وثائقي الرقمية",
+                quick_access_title: "الوصول السريع",
+                my_vehicles: "مركباتي",
+                my_vehicles_sub: "عرض التفاصيل، تجديد الوثائق، الإبلاغ عن الحوادث، والمزيد.",
+                auth_services: "خدمات التوثق",
+                absher_travel: "أبشر سفر",
+                report_accident: "تسجيل حادث بسيط",
+                traffic_violations: "المخالفات المرورية",
+                my_weapons: "أسلحتي",
+                my_weapons_sub: "عرض تفاصيل الأسلحة وإصدار وعرض تصاريح السلاح.",
+                menu_home: "الرئيسية",
+                menu_services: "خدماتي",
+                menu_family: "عائلتي",
+                menu_workers: "عمالتي",
+                menu_other: "خدمات أخرى",
+                set_title: "الإعدادات",
+                set_acc_details: "تفاصيل الحساب",
+                set_auth: "جهاز التحقق أبشر",
+                set_privacy: "الخصوصية والأمان",
+                set_bio_title: "استخدام الخصائص الحيوية",
+                set_bio_desc: "الخصائص الحيوية مطلوبة للوصول إلى وثائقك الرقمية وجهاز التحقق أبشر أثناء تسجيل الخروج وتتيح لك البقاء قيد تسجيل الدخول لفترة أطول.",
+                set_blur_title: "تغبيش الصور",
+                set_blur_desc: "سيتم تغبيش جميع صور النساء ولن تكون مرئية بالكامل.",
+                set_preferences: "التفضيلات",
+                set_lang_label: "اللغة",
+                set_theme_label: "المظهر",
+                theme_dark: "المظهر الداكن",
+                theme_light: "المظهر الفاتح",
+                set_cal_label: "التقويم",
+                set_cal_desc: "حيثما أمكن، سيتم عرض جميع التواريخ بالتقويم الميلادي",
+                set_delete_id: "حذف هويتك الرقمية",
+                set_support: "الدعم",
+                sup_center: "مركز الدعم",
+                sup_guide: "دليل خدمات التطبيق",
+                sup_access: "دليل إمكانية الوصول",
+                sup_chat: "المحادثة المباشرة",
+                sup_faq: "الأسئلة الشائعة",
+                sup_policy: "سياسة الخصوصية",
+                btn_logout: "تسجيل الخروج",
+                prof_title: "ملفي الشخصي",
+                prof_personal_details: "معلوماتي الشخصية",
+                prof_passport: "جواز السفر",
+                prof_resident: "معلومات هوية المقيم",
+                prof_visa: "معلومات التأشيرة",
+                prof_license: "رخص القيادة",
+                prof_travel_tag: "داخل المملكة",
+                prof_travel_title: "سجل السفر",
+                prof_travel_sub: "استعرض تفاصيل آخر رحلاتك",
+                prof_labor: "طلبات الاستقدام",
+                notifications_title: "الإشعارات",
+                no_notifications: "لا توجد إشعارات",
+                my_services: "خدماتي",
+                search_services: "ابحث عن خدمة...",
+                srv_newborn: "تسجيل مولود جديد",
+                srv_driving: "تجديد رخصة القيادة",
+                srv_resident: "تجديد هوية المقيم",
+                srv_auth: "خدمات التوثيق",
+                srv_update: "تحديث بيانات المقيم",
+                srv_accident: "الإبلاغ عن حادث بسيط",
+                srv_photo: "تحديث صورة المقيم",
+                srv_passport: "تحديث معلومات جواز السفر",
+                // Family page
+                family_title: "العائلة",
+                search_family: "ابحث بالاسم أو الهوية",
+                no_family_title: "لا يوجد أفراد عائلة",
+                no_family_sub: "بمجرد أن يكون لديك أفراد عائلة، سيظهرون هنا.",
+                // Workers page
+                workers_title: "العمال",
+                search_workers: "ابحث بالاسم أو الهوية",
+                no_workers_title: "لا يوجد عمال",
+                no_workers_sub: "بمجرد أن يكون لديك عمال تحت كفالتك، سيظهرون هنا.",
+                // New empty states for advanced overlays
+                no_visa_title: "لا توجد تأشيرة",
+                no_visa_sub: "بمجرد أن يقوم المشرف بإضافة تفاصيل التأشيرة الخاصة بك، ستظهر هنا.",
+                no_license_title: "لا توجد رخصة قيادة",
+                no_license_sub: "بمجرد أن يقوم المشرف بإضافة رخصتك، ستظهر هنا.",
+                no_labor_title: "لا توجد عمالة",
+                no_labor_sub: "بمجرد أن يقوم المشرف بإضافة تفاصيل العمالة، ستظهر هنا.",
+                // Other page
+                other_title: "خدمات أخرى"
+            }
+        };
+
+        // ================================================================
+        // 🎨 THEME ICON LIBRARY
+        // ================================================================
+        const themeIconLibrary = {
+            dark: {
+                logo: "All_image/white_absher_logo.png",
+                vehicles: "All icon/Hg.png",
+                grid1: "All icon/Fx (1).png",
+                grid2: "All icon/Fi (1).png",
+                grid3: "All icon/Fp (1).png",
+                grid4: "All icon/Fg (1).png",
+                profPassport: "All icon/Ed (1).png",
+                profResident: "All icon/ES.png",
+                profVisa: "All icon/Fk (1).png",
+                profLicense: "All icon/EX.png",
+                profLabor: "All icon/Ht.png",
+                quickBg: "All_image/gr1.jpg",
+                weapons: "All icon/Hs.png",
+                notificationIcon: "All icon/DJ.png",
+                settingsIcon: "All icon/GJ.png",
+                navHome: "All icon/Du (1).png",
+                navServices: "All icon/Dv.png",
+                navFamily: "All icon/Dr (1).png",
+                navWorkers: "All icon/Dz (1).png",
+                navOther: "All icon/Dx (1).png",
+                srv_newborn: "All icon/DA.png",
+                srv_driving: "All icon/EX.png",
+                srv_resident: "All icon/ES.png",
+                srv_auth: "All icon/Fx (1).png",
+                srv_update: "All icon/ER.png",
+                srv_accident: "All icon/Fp (1).png",
+                srv_photo: "All icon/FA.png",
+                srv_passport: "All icon/Ed (1).png",
+                otherImg1: "All_image/D_01.png",
+                otherImg2: "All_image/D_02.png",
+                otherImg3: "All_image/D_03.png"
+            },
+            light: {
+                logo: "All_image/green_absher_logo.png",
+                vehicles: "All icon/c.png",
+                grid1: "All icon/f.png",
+                grid2: "All icon/m.png",
+                grid3: "All icon/L.png",
+                grid4: "All icon/BG.png",
+                profPassport: "All icon/pas.png",
+                profResident: "All icon/resident.png",
+                profVisa: "All icon/visa.png",
+                profLicense: "All icon/LL.png",
+                profLabor: "All icon/Laver.png",
+                quickBg: "All_image/wh1.jpg",
+                weapons: "All icon/p.png",
+                notificationIcon: "All icon/BB1.png",
+                settingsIcon: "All icon/Ss1.png",
+                navHome: "All icon/hom.png",
+                navServices: "All icon/ser.png",
+                navFamily: "All icon/fam.png",
+                navWorkers: "All icon/wark.png",
+                navOther: "All icon/Other.png",
+                srv_newborn: "All icon/DA.png",
+                srv_driving: "All icon/LL.png",
+                srv_resident: "All icon/resident.png",
+                srv_auth: "All icon/f.png",
+                srv_update: "All icon/ER.png",
+                srv_accident: "All icon/L.png",
+                srv_photo: "All icon/FA.png",
+                srv_passport: "All icon/pas.png",
+                otherImg1: "All_image/O_01.png",
+                otherImg2: "All_image/O_02.png",
+                otherImg3: "All_image/O_03.png"
+            }
+        };
+
+        // ================================================================
+        // [SUPABASE] CONFIG & CLIENT INIT
+        // ================================================================
+        const SUPABASE_URL = 'https://xbnvnfzibxjjfaqheonc.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhibnZuZnppYnhqamZhcWhlb25jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODExNzc5MDMsImV4cCI6MjA5Njc1MzkwM30.bgTc6vfNKL2IRxh6eM3UmBamyKMuQabfPpOlXVyZLLY';
+        const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        let currentUserProfile = null;
+        let currentUserDetails = null;
+
+        // ================================================================
+        // 🌀 LOAD LOTTIE ANIMATION
+        // ================================================================
+        function loadLottieAnimation() {
+            const container = document.getElementById('lottieCardInner');
+            if (!container) return;
+
+            if (window.lottieInstance) {
+                window.lottieInstance.destroy();
+                window.lottieInstance = null;
+            }
+
+            if (typeof animationData === 'undefined') {
+                console.error('animationData not found. JSON file missing or not loaded.');
+                container.innerHTML = '<img src="All_image/card.gif" alt="Loading..." style="width:100%;height:100%;object-fit:contain;">';
+                return;
+            }
+
+            window.lottieInstance = lottie.loadAnimation({
+                container: container,
+                renderer: 'svg',
+                loop: true,
+                autoplay: true,
+                animationData: animationData
+            });
+        }
+
+        // ================================================================
+        // 🌓 applyAppTheme(mode)
+        // ================================================================
+        function applyAppTheme(mode) {
+            const htmlTag = document.getElementById('appHtml');
+            const searchSvg = document.getElementById('liveSearchIconSvg');
+            const searchImg = document.getElementById('liveSearchIconImg');
+            const closeSettingsSvg = document.getElementById('closeSettingsSvg');
+            const quickBg = document.getElementById('quickAccessBgImage');
+            const notificationIcon = document.getElementById('notificationIconNav');
+            const settingsIcon = document.getElementById('settingsIconNav');
+
+            localStorage.setItem('theme', mode);
+
+            if (mode === 'light') {
+                htmlTag.classList.remove('dark-theme');
+                htmlTag.classList.add('light-theme');
+                
+                if(document.getElementById('radioThemeLight')) document.getElementById('radioThemeLight').checked = true;
+                
+                document.getElementById('mainAppContainer').style.backgroundImage = "none";
+                
+                const headerLogo = document.getElementById('headerLogo');
+                if(headerLogo) headerLogo.src = themeIconLibrary.light.logo;
+                
+                if(notificationIcon) notificationIcon.src = themeIconLibrary.light.notificationIcon;
+                if(settingsIcon) settingsIcon.src = themeIconLibrary.light.settingsIcon;
+
+                if(quickBg) quickBg.style.backgroundImage = `url('${themeIconLibrary.light.quickBg}')`;
+
+                const iconVehicles = document.getElementById('icon-vehicles');
+                const iconWeapons = document.getElementById('icon-weapons');
+                const gridIcon1 = document.getElementById('grid-icon-1');
+                const gridIcon2 = document.getElementById('grid-icon-2');
+                const gridIcon3 = document.getElementById('grid-icon-3');
+                const gridIcon4 = document.getElementById('grid-icon-4');
+                
+                if(iconVehicles) iconVehicles.src = themeIconLibrary.light.vehicles;
+                if(iconWeapons) iconWeapons.src = themeIconLibrary.light.weapons;
+                if(gridIcon1) gridIcon1.src = themeIconLibrary.light.grid1;
+                if(gridIcon2) gridIcon2.src = themeIconLibrary.light.grid2;
+                if(gridIcon3) gridIcon3.src = themeIconLibrary.light.grid3;
+                if(gridIcon4) gridIcon4.src = themeIconLibrary.light.grid4;
+
+                const profPassport = document.getElementById('prof-icon-passport');
+                const profResident = document.getElementById('prof-icon-resident');
+                const profVisa = document.getElementById('prof-icon-visa');
+                const profLicense = document.getElementById('prof-icon-license');
+                const profLabor = document.getElementById('prof-icon-labor');
+                
+                if(profPassport) profPassport.src = themeIconLibrary.light.profPassport;
+                if(profResident) profResident.src = themeIconLibrary.light.profResident;
+                if(profVisa) profVisa.src = themeIconLibrary.light.profVisa;
+                if(profLicense) profLicense.src = themeIconLibrary.light.profLicense;
+                if(profLabor) profLabor.src = themeIconLibrary.light.profLabor;
+
+                if(searchSvg && searchImg) {
+                    searchSvg.style.display = 'none';
+                    searchImg.style.display = 'block';
+                }
+                if(closeSettingsSvg) closeSettingsSvg.setAttribute('stroke', '#0d6f4a');
+
+                // Other page images
+                document.getElementById('service-img-1').src = themeIconLibrary.light.otherImg1;
+                document.getElementById('service-img-2').src = themeIconLibrary.light.otherImg2;
+                document.getElementById('service-img-3').src = themeIconLibrary.light.otherImg3;
+
+                refreshActiveMenuIcon('light');
+                if(currentUserProfile && currentUserProfile.id) loadDynamicCards(currentUserProfile.id);
+
+                const passportMini = document.getElementById('passportMiniIcon');
+                if (passportMini) passportMini.src = "All icon/pas.png";
+
+                if(document.getElementById('icon-home')) document.getElementById('icon-home').src = themeIconLibrary.light.navHome;
+                if(document.getElementById('icon-services')) document.getElementById('icon-services').src = themeIconLibrary.light.navServices;
+                if(document.getElementById('icon-family')) document.getElementById('icon-family').src = themeIconLibrary.light.navFamily;
+                if(document.getElementById('icon-workers')) document.getElementById('icon-workers').src = themeIconLibrary.light.navWorkers;
+                if(document.getElementById('icon-other')) document.getElementById('icon-other').src = themeIconLibrary.light.navOther;
+
+                // Update services icons if visible
+                updateServiceIcons('light');
+
+            } else {
+                htmlTag.classList.remove('light-theme');
+                htmlTag.classList.add('dark-theme');
+                
+                if(document.getElementById('radioThemeDark')) document.getElementById('radioThemeDark').checked = true;
+                
+                document.getElementById('mainAppContainer').style.backgroundImage = "none";
+                
+                const headerLogo = document.getElementById('headerLogo');
+                if(headerLogo) headerLogo.src = themeIconLibrary.dark.logo;
+                
+                if(notificationIcon) notificationIcon.src = themeIconLibrary.dark.notificationIcon;
+                if(settingsIcon) settingsIcon.src = themeIconLibrary.dark.settingsIcon;
+
+                if(quickBg) quickBg.style.backgroundImage = `url('${themeIconLibrary.dark.quickBg}')`;
+
+                const iconVehicles = document.getElementById('icon-vehicles');
+                const iconWeapons = document.getElementById('icon-weapons');
+                const gridIcon1 = document.getElementById('grid-icon-1');
+                const gridIcon2 = document.getElementById('grid-icon-2');
+                const gridIcon3 = document.getElementById('grid-icon-3');
+                const gridIcon4 = document.getElementById('grid-icon-4');
+                
+                if(iconVehicles) iconVehicles.src = themeIconLibrary.dark.vehicles;
+                if(iconWeapons) iconWeapons.src = themeIconLibrary.dark.weapons;
+                if(gridIcon1) gridIcon1.src = themeIconLibrary.dark.grid1;
+                if(gridIcon2) gridIcon2.src = themeIconLibrary.dark.grid2;
+                if(gridIcon3) gridIcon3.src = themeIconLibrary.dark.grid3;
+                if(gridIcon4) gridIcon4.src = themeIconLibrary.dark.grid4;
+
+                const profPassport = document.getElementById('prof-icon-passport');
+                const profResident = document.getElementById('prof-icon-resident');
+                const profVisa = document.getElementById('prof-icon-visa');
+                const profLicense = document.getElementById('prof-icon-license');
+                const profLabor = document.getElementById('prof-icon-labor');
+                
+                if(profPassport) profPassport.src = themeIconLibrary.dark.profPassport;
+                if(profResident) profResident.src = themeIconLibrary.dark.profResident;
+                if(profVisa) profVisa.src = themeIconLibrary.dark.profVisa;
+                if(profLicense) profLicense.src = themeIconLibrary.dark.profLicense;
+                if(profLabor) profLabor.src = themeIconLibrary.dark.profLabor;
+
+                if(searchSvg && searchImg) {
+                    searchSvg.style.display = 'block';
+                    searchImg.style.display = 'none';
+                }
+                if(closeSettingsSvg) closeSettingsSvg.setAttribute('stroke', '#4db380');
+
+                // Other page images
+                document.getElementById('service-img-1').src = themeIconLibrary.dark.otherImg1;
+                document.getElementById('service-img-2').src = themeIconLibrary.dark.otherImg2;
+                document.getElementById('service-img-3').src = themeIconLibrary.dark.otherImg3;
+
+                refreshActiveMenuIcon('dark');
+                if(currentUserProfile && currentUserProfile.id) loadDynamicCards(currentUserProfile.id);
+
+                const passportMini = document.getElementById('passportMiniIcon');
+                if (passportMini) passportMini.src = "All icon/Ed (1).png";
+
+                if(document.getElementById('icon-home')) document.getElementById('icon-home').src = themeIconLibrary.dark.navHome;
+                if(document.getElementById('icon-services')) document.getElementById('icon-services').src = themeIconLibrary.dark.navServices;
+                if(document.getElementById('icon-family')) document.getElementById('icon-family').src = themeIconLibrary.dark.navFamily;
+                if(document.getElementById('icon-workers')) document.getElementById('icon-workers').src = themeIconLibrary.dark.navWorkers;
+                if(document.getElementById('icon-other')) document.getElementById('icon-other').src = themeIconLibrary.dark.navOther;
+
+                // Update services icons if visible
+                updateServiceIcons('dark');
+            }
+        }
+
+        function updateServiceIcons(mode) {
+            const icons = themeIconLibrary[mode];
+            if (!icons) return;
+            const serviceIds = ['srv-newborn','srv-driving','srv-resident','srv-auth','srv-update','srv-accident','srv-photo','srv-passport'];
+            serviceIds.forEach(id => {
+                const el = document.getElementById(id);
+                if (el && icons[id]) el.src = icons[id];
+            });
+        }
+
+        // ================================================================
+        // ⚙️ toggleSettings(open)
+        // ================================================================
+        function toggleSettings(open) {
+            const overlay = document.getElementById('settingsOverlay');
+            if (open) {
+                overlay.classList.add('open');
+                history.pushState({ screen: 'settings' }, 'Settings', '#settings');
+            } else {
+                overlay.classList.remove('open');
+            }
+        }
+
+        // ================================================================
+        // 👤 toggleProfileView(open)
+        // ================================================================
+        function toggleProfileView(open) {
+            const profOverlay = document.getElementById('profileViewOverlay');
+            if (open) {
+                profOverlay.classList.add('open');
+                history.pushState({ screen: 'profile' }, 'My Profile', '#profile');
+            } else {
+                profOverlay.classList.remove('open');
+            }
+        }
+
+        // ================================================================
+        // 🔔 toggleNotificationOverlay(open)
+        // ================================================================
+        function toggleNotificationOverlay(open) {
+            const overlay = document.getElementById('notificationOverlay');
+            if (open) {
+                overlay.classList.add('open');
+                loadNotifications();
+                history.pushState({ screen: 'notifications' }, 'Notifications', '#notifications');
+            } else {
+                overlay.classList.remove('open');
+            }
+        }
+
+        // ================================================================
+        // 🔔 loadNotifications()
+        // ================================================================
+        async function loadNotifications() {
+            if (!currentUserProfile) return;
+            
+            const { data: notifications, error } = await supabaseClient
+                .from('abs_notifications')
+                .select('*')
+                .eq('user_id', currentUserProfile.id)
+                .order('created_at', { ascending: false });
+
+            if (error) {
+                console.error('Error loading notifications:', error);
+                return;
+            }
+
+            const listContainer = document.getElementById('notificationList');
+            const emptyMsg = document.getElementById('notificationEmpty');
+            
+            if (!notifications || notifications.length === 0) {
+                listContainer.innerHTML = '';
+                listContainer.appendChild(emptyMsg);
+                emptyMsg.style.display = 'block';
+                updateNotificationBadge(0);
+                return;
+            }
+
+            emptyMsg.style.display = 'none';
+            
+            listContainer.innerHTML = notifications.map(notif => {
+                const isRead = notif.is_read;
+                const time = new Date(notif.created_at).toLocaleString();
+                return `
+                    <div class="notification-item ${isRead ? 'read' : ''}" 
+                         onclick="markNotificationAsRead('${notif.id}', this)"
+                         data-notif-id="${notif.id}">
+                        <div class="notification-dot"></div>
+                        <div class="notification-content">
+                            <div class="notification-item-title">${notif.title || 'Notification'}</div>
+                            <div class="notification-item-message">${notif.message || ''}</div>
+                            <div class="notification-item-time">${time}</div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            const unreadCount = notifications.filter(n => !n.is_read).length;
+            updateNotificationBadge(unreadCount);
+        }
+
+        // ================================================================
+        // 🔔 markNotificationAsRead()
+        // ================================================================
+        async function markNotificationAsRead(notifId, element) {
+            await supabaseClient
+                .from('abs_notifications')
+                .update({ is_read: true })
+                .eq('id', notifId);
+            
+            element.classList.add('read');
+            const unreadCount = document.querySelectorAll('.notification-item:not(.read)').length;
+            updateNotificationBadge(unreadCount);
+        }
+
+        // ================================================================
+        // 🔔 updateNotificationBadge()
+        // ================================================================
+        function updateNotificationBadge(count) {
+            const badge = document.getElementById('notificationBadge');
+            if (count > 0) {
+                badge.textContent = count > 99 ? '99+' : count;
+                badge.style.display = 'flex';
+            } else {
+                badge.textContent = '';
+                badge.style.display = 'none';
+            }
+        }
+
+        // ================================================================
+        // goBack()
+        // ================================================================
+        function goBack() {
+            history.back();
+        }
+
+        // ================================================================
+        // copyIdNumber()
+        // ================================================================
+        function copyIdNumber() {
+            const iqamaEl = document.getElementById('floatingIqama');
+            const iqama = iqamaEl ? iqamaEl.innerText : '';
+            navigator.clipboard.writeText(iqama);
+            const htmlLang = document.getElementById('appHtml').getAttribute('lang');
+            if (htmlLang === 'ar') alert("تم نسخ رقم الهوية بنجاح!");
+            else alert("ID Number copied successfully!");
+        }
+
+        // ================================================================
+        // 🈳 changeLanguageMode(lang)
+        // ================================================================
+        function changeLanguageMode(lang) {
+            const htmlTag = document.getElementById('appHtml');
+            localStorage.setItem('language', lang);
+
+            if (lang === 'ar') {
+                htmlTag.setAttribute('dir', 'rtl');
+                htmlTag.setAttribute('lang', 'ar');
+                if(document.getElementById('radioAr')) document.getElementById('radioAr').checked = true;
+            } else {
+                htmlTag.setAttribute('dir', 'ltr');
+                htmlTag.setAttribute('lang', 'en');
+                if(document.getElementById('radioEn')) document.getElementById('radioEn').checked = true;
+            }
+
+            const elementsToTranslate = document.querySelectorAll('[data-lang]');
+            elementsToTranslate.forEach(element => {
+                const key = element.getAttribute('data-lang');
+                if (languageLibrary[lang] && languageLibrary[lang][key]) element.innerText = languageLibrary[lang][key];
+            });
+
+            setTimeout(() => {
+                toggleSettings(false);
+                document.getElementById('mainAppContainer').scrollTop = 0;
+            }, 350);
+        }
+
+        // ================================================================
+        // 📜 SCROLL EVENT HANDLER
+        // ================================================================
+        const appContainer = document.getElementById('mainAppContainer');
+        const headerLogoEl = document.getElementById('headerLogo');
+        const headerTitleEl = document.getElementById('headerTitle');
+        const greenBannerEl = document.getElementById('greenBanner');
+
+        if(appContainer && greenBannerEl && headerLogoEl && headerTitleEl) {
+            appContainer.addEventListener('scroll', () => {
+                let scrollTop = appContainer.scrollTop;
+                greenBannerEl.style.transform = `translateY(${-scrollTop}px)`;
+
+                if (scrollTop > 45) {
+                    appContainer.classList.add('scrolled');
+                    headerLogoEl.style.opacity = '0';
+                    headerLogoEl.style.transform = 'translateY(-10px)';
+                    headerTitleEl.style.opacity = '1';
+                    headerTitleEl.style.transform = 'translateY(0)';
+                } else {
+                    appContainer.classList.remove('scrolled');
+                    headerLogoEl.style.opacity = '1';
+                    headerLogoEl.style.transform = 'translateY(0)';
+                    headerTitleEl.style.opacity = '0';
+                    headerTitleEl.style.transform = 'translateY(10px)';
+                }
+            });
+        }
+
+        // ================================================================
+        // 🎞️ PROFILE IMAGE ANIMATION
+        // ================================================================
+        const profileFrames = ["All icon/AD.png", "All icon/AE.png", "All icon/AC.png"];
+        let currentFrameIndex = 0;
+        const mainProfileElement = document.getElementById('liveProfileIcon');
+        const settingsProfileElement = document.getElementById('settingsProfileIcon');
+        const profileViewElement = document.getElementById('profileViewAvatar');
+        const personalBodyAvatar = document.getElementById('personalBodyAvatar');
+
+        window.profileAnimInterval = null;
+
+        function startProfileAnimation() {
+            if (window.profileAnimInterval) return;
+            if(mainProfileElement && settingsProfileElement) {
+                window.profileAnimInterval = setInterval(() => {
+                    currentFrameIndex = (currentFrameIndex + 1) % profileFrames.length;
+                    if(mainProfileElement) mainProfileElement.src = profileFrames[currentFrameIndex];
+                    if(settingsProfileElement) settingsProfileElement.src = profileFrames[currentFrameIndex];
+                    if(profileViewElement) profileViewElement.src = profileFrames[currentFrameIndex];
+                    if(personalBodyAvatar) personalBodyAvatar.src = profileFrames[currentFrameIndex];
+                }, 500);
+            }
+        }
+
+        function stopProfileAnimation() {
+            if (window.profileAnimInterval) {
+                clearInterval(window.profileAnimInterval);
+                window.profileAnimInterval = null;
+            }
+        }
+
+        startProfileAnimation();
+
+        // ================================================================
+        // 🧭 BOTTOM NAVIGATION BAR (SPA switch)
+        // ================================================================
+        const menuIcons = {
+            home: { white: "All icon/Du (1).png", green: "All icon/hom.png" },
+            services: { white: "All icon/Dv.png", green: "All icon/ser.png" },
+            family: { white: "All icon/Dr (1).png", green: "All icon/fam.png" },
+            workers: { white: "All icon/Dz (1).png", green: "All icon/wark.png" },
+            other: { white: "All icon/Dx (1).png", green: "All icon/Other.png" }
+        };
+
+        let currentActiveMenu = 'home';
+
+        function switchMenu(selectedItem, menuName) {
+            // Reset All icons to white
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            document.getElementById('icon-home').src = menuIcons.home.white;
+            document.getElementById('icon-services').src = menuIcons.services.white;
+            document.getElementById('icon-family').src = menuIcons.family.white;
+            document.getElementById('icon-workers').src = menuIcons.workers.white;
+            document.getElementById('icon-other').src = menuIcons.other.white;
+
+            selectedItem.classList.add('active');
+            currentActiveMenu = menuName;
+            document.getElementById(`icon-${menuName}`).src = menuIcons[menuName].green;
+
+            // Update header title based on active menu
+            const headerTitle = document.getElementById('headerTitle');
+            if (headerTitle) {
+                const langKey = `${menuName}_title`; // e.g., home_title, services_title, but we have home_title, my_services...
+                // Map menu names to existing title keys
+                const titleKeyMap = {
+                    home: 'home_title',
+                    services: 'my_services',
+                    family: 'family_title',
+                    workers: 'workers_title',
+                    other: 'other_title'
+                };
+                headerTitle.setAttribute('data-lang', titleKeyMap[menuName]);
+                // Update text based on current language
+                const currentLang = document.getElementById('appHtml').getAttribute('lang') || 'en';
+                headerTitle.innerText = languageLibrary[currentLang][titleKeyMap[menuName]];
+            }
+
+            // Hide all sections
+            const mainDashboard = document.getElementById('main-dashboard');
+            const servicesPage = document.getElementById('services-page');
+            const familyPage = document.getElementById('family-page');
+            const workersPage = document.getElementById('workers-page');
+            const otherPage = document.getElementById('other-page');
+
+            if (mainDashboard) mainDashboard.style.display = 'none';
+            if (servicesPage) servicesPage.classList.add('hidden');
+            if (familyPage) familyPage.classList.add('hidden');
+            if (workersPage) workersPage.classList.add('hidden');
+            if (otherPage) otherPage.classList.add('hidden');
+
+            if (menuName === 'home') {
+                if (mainDashboard) mainDashboard.style.display = 'block';
+            } else if (menuName === 'services') {
+                if (servicesPage) servicesPage.classList.remove('hidden');
+            } else if (menuName === 'family') {
+                if (familyPage) familyPage.classList.remove('hidden');
+            } else if (menuName === 'workers') {
+                if (workersPage) workersPage.classList.remove('hidden');
+            } else if (menuName === 'other') {
+                if (otherPage) otherPage.classList.remove('hidden');
+            }
+        }
+
+        function refreshActiveMenuIcon(theme) {
+            const icons = {
+                home: document.getElementById('icon-home'),
+                services: document.getElementById('icon-services'),
+                family: document.getElementById('icon-family'),
+                workers: document.getElementById('icon-workers'),
+                other: document.getElementById('icon-other')
+            };
+            for (let key in icons) {
+                if (icons[key]) icons[key].src = (currentActiveMenu === key) ? menuIcons[key].green : menuIcons[key].white;
+            }
+        }
+
+        // ================================================================
+        // ✅ BROWSER BACK BUTTON HANDLING
+        // ================================================================
+        window.addEventListener('popstate', function(event) {
+            const overlays = [
+                'laborDetailsOverlay', 'licenseDetailsOverlay', 'visaDetailsOverlay',
+                'personalDetailsOverlay', 'residentDetailsOverlay', 'passportDetailsOverlay',
+                'profileViewOverlay', 'notificationOverlay', 'settingsOverlay'
+            ];
+            for (const id of overlays) {
+                const el = document.getElementById(id);
+                if (el && el.classList.contains('open')) {
+                    el.classList.remove('open');
+                    return;
+                }
+            }
+        });
+
+        function syncFromStorage() {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            const savedLang = localStorage.getItem('language') || 'en';
+            applyAppTheme(savedTheme);
+            changeLanguageMode(savedLang);
+        }
+
+        // ================================================================
+        // 🆕 toggleAdvancedOverlay()
+        // ================================================================
+        function toggleAdvancedOverlay(overlayId, open) {
+            const element = document.getElementById(overlayId);
+            if(element) {
+                if(open) {
+                    element.classList.add('open');
+                    history.pushState({ screen: overlayId }, overlayId, `#${overlayId}`);
+                } else {
+                    element.classList.remove('open');
+                }
+            }
+        }
+
+        // ================================================================
+        // 📂 triggerNodeToggle()
+        // ================================================================
+        function triggerNodeToggle(nodeId) {
+            const node = document.getElementById(nodeId);
+            if(!node) return;
+            
+            const indicator = node.querySelector('.doc-trigger-head .arrow-toggle-icon');
+            
+            if(node.classList.contains('expanded')) {
+                node.classList.remove('expanded');
+                if(indicator) indicator.innerText = "﹀";
+            } else {
+                node.classList.add('expanded');
+                if(indicator) indicator.innerText = "︿";
+            }
+        }
+
+        // ================================================================
+        // 📋 triggerNativeCopy()
+        // ================================================================
+        function triggerNativeCopy(targetElementId) {
+            let element = document.getElementById(targetElementId);
+            let copyText = "";
+            
+            if(element) copyText = element.innerText;
+
+            navigator.clipboard.writeText(copyText).then(() => {
+                fireToastNotification("Copied to clipboard");
+            }).catch(() => {
+                let txtArea = document.createElement('textarea');
+                txtArea.value = copyText;
+                document.body.appendChild(txtArea);
+                txtArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(txtArea);
+                fireToastNotification("Copied to clipboard");
+            });
+        }
+
+        function fireToastNotification(msgText) {
+            const toastNode = document.getElementById('appGlobalToast');
+            if(!toastNode) return;
+            
+            toastNode.innerText = msgText;
+            toastNode.classList.add('visible');
+            setTimeout(() => {
+                toastNode.classList.remove('visible');
+            }, 2000);
+        }
+
+        // ================================================================
+        // ✅ loadDynamicCards()
+        // ================================================================
+        async function loadDynamicCards(userId) {
+            const { data: links, error } = await supabaseClient
+                .from('abs_user_links')
+                .select('*')
+                .eq('user_id', userId)
+                .eq('is_active', true)
+                .order('display_order', { ascending: true });
+
+            const defaultCards = document.getElementById('defaultQuickAccessCards');
+            const dynamicContainer = document.getElementById('dynamicCardsContainer');
+
+            if (!links || links.length === 0) {
+                if (defaultCards) defaultCards.style.display = 'block';
+                if (dynamicContainer) dynamicContainer.style.display = 'none';
+                return;
+            }
+
+            if (defaultCards) defaultCards.style.display = 'none';
+            if (dynamicContainer) dynamicContainer.style.display = 'flex';
+
+            const fullWidthCards = links.filter(l => l.card_type === 'full_width' || !l.card_type);
+            const gridCards = links.filter(l => l.card_type === 'grid');
+
+            let html = '';
+            fullWidthCards.forEach(link => {
+                html += `
+                    <div class="full-width-card" onclick="window.open('${link.link_url || '#'}', '_blank')">
+                        <img src="${link.icon_url || 'All icon/Hg.png'}" alt="${link.title}" class="card-main-icon">
+                        <div class="card-text-container">
+                            <span class="card-main-title">${link.title || 'Card'}</span>
+                            ${link.subtitle ? `<span class="card-sub-title">${link.subtitle}</span>` : ''}
+                        </div>
+                    </div>
+                `;
+            });
+
+            if (gridCards.length > 0) {
+                html += '<div class="two-column-grid">';
+                gridCards.forEach(link => {
+                    html += `
+                        <div class="grid-card" onclick="window.open('${link.link_url || '#'}', '_blank')">
+                            <img src="${link.icon_url || 'All icon/Fx (1).png'}" alt="${link.title}" class="card-main-icon">
+                            <span class="grid-card-title">${link.title || 'Card'}</span>
+                        </div>
+                    `;
+                });
+                html += '</div>';
+            }
+
+            dynamicContainer.innerHTML = html;
+        }
+
+        // ================================================================
+        // [SUPABASE] CUSTOM SESSION BASED DATA LOAD & UI UPDATE
+        // ================================================================
+        async function initDashboard() {
+            syncFromStorage();
+
+            const currentTheme = localStorage.getItem('theme') || 'dark';
+            const jsonFile = currentTheme === 'light' ? 'Absher_whit.json' : 'Absher_dark.json';
+
+            const oldScript = document.getElementById('lottieJsonScript');
+            if (oldScript) oldScript.remove();
+
+            const script = document.createElement('script');
+            script.id = 'lottieJsonScript';
+            script.src = jsonFile;
+            document.head.appendChild(script);
+
+            script.onload = function() {
+                loadLottieAnimation();
+            };
+            script.onerror = function() {
+                console.error('Failed to load Lottie JSON:', jsonFile);
+                const container = document.getElementById('lottieCardInner');
+                if (container) container.innerHTML = '<img src="All_image/card.gif" alt="Loading..." style="width:100%;height:100%;object-fit:contain;">';
+            };
+
+            const iqama = localStorage.getItem('user_iqama');
+            if (!iqama) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            const { data: userProfile, error: userError } = await supabaseClient
+                .from('abs_users')
+                .select('full_name, profile_pic_url, iqama, id, screenshot_blocked')
+                .eq('iqama', iqama)
+                .maybeSingle();
+
+            if (userError || !userProfile) {
+                alert('User profile not found');
+                localStorage.removeItem('user_iqama');
+                window.location.href = 'login.html';
+                return;
+            }
+
+            currentUserProfile = userProfile;
+
+            const { data: details } = await supabaseClient
+                .from('abs_user_details')
+                .select('*')
+                .eq('user_id', userProfile.id)
+                .maybeSingle();
+
+            currentUserDetails = details;
+
+            updateAllUI(userProfile, details);
+            
+            applyAppTheme(currentTheme);
+            
+            await loadDynamicCards(userProfile.id);
+            
+            loadUnreadNotificationCount(userProfile.id);
+
+            document.getElementById('logoutButton').addEventListener('click', () => {
+                localStorage.removeItem('user_iqama');
+                window.location.href = 'login.html';
+            });
+
+            const lottiePlaceholder = document.getElementById('lottieCardContainer');
+            const digitalCard = document.getElementById('digitalResidentCard');
+            if (lottiePlaceholder && digitalCard) {
+                lottiePlaceholder.style.display = 'none';
+                digitalCard.style.display = 'flex';
+            }
+
+            // Screenshot blocking logic
+            if (currentUserProfile && currentUserProfile.screenshot_blocked) {
+                if (window.Android && window.Android.setScreenshotBlocked) {
+                    window.Android.setScreenshotBlocked(true);
+                }
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'PrintScreen' || (e.ctrlKey && e.key === 'p')) {
+                        e.preventDefault();
+                        alert('Screenshot is blocked by admin.');
+                    }
+                });
+                document.addEventListener('contextmenu', e => e.preventDefault());
+                document.addEventListener('visibilitychange', function() {
+                    if (document.visibilityState === 'hidden') {
+                        document.body.style.opacity = '0';
+                        setTimeout(() => { document.body.style.opacity = '1'; }, 500);
+                    }
+                });
+            } else {
+                if (window.Android && window.Android.setScreenshotBlocked) {
+                    window.Android.setScreenshotBlocked(false);
+                }
+            }
+
+            // Resident card click → QR viewer
+            const residentCard = document.getElementById('digitalResidentCard');
+            if (residentCard && currentUserDetails) {
+                residentCard.style.cursor = 'pointer';
+                residentCard.addEventListener('click', function() {
+                    localStorage.setItem('viewCardImage', currentUserDetails.resident_card_image_url || '');
+                    localStorage.setItem('viewCardQR', currentUserDetails.resident_card_qr_url || '');
+                    window.location.href = 'qr.html';
+                });
+            }
+
+            // Show dashboard by default, hide others
+            document.getElementById('main-dashboard').style.display = 'block';
+            document.getElementById('services-page').classList.add('hidden');
+            document.getElementById('family-page').classList.add('hidden');
+            document.getElementById('workers-page').classList.add('hidden');
+            document.getElementById('other-page').classList.add('hidden');
+            
+            // Set home active
+            const homeNav = document.querySelector('.nav-item[onclick*="home"]');
+            if (homeNav) switchMenu(homeNav, 'home');
+        }
+
+        async function loadUnreadNotificationCount(userId) {
+            const { count, error } = await supabaseClient
+                .from('abs_notifications')
+                .select('*', { count: 'exact', head: true })
+                .eq('user_id', userId)
+                .eq('is_read', false);
+            
+            if (!error) {
+                updateNotificationBadge(count || 0);
+            }
+        }
+
+        function updateAllUI(userProfile, details) {
+            const displayUserName = document.getElementById('displayUserName');
+            const displayIqama = document.getElementById('displayIqama');
+            if(displayUserName) displayUserName.innerText = userProfile.full_name || 'User';
+            if(displayIqama) displayIqama.innerText = userProfile.iqama || '';
+            
+            if (userProfile.profile_pic_url) {
+                stopProfileAnimation();
+                const liveProfileIcon = document.getElementById('liveProfileIcon');
+                const settingsProfileIcon = document.getElementById('settingsProfileIcon');
+                const profileViewAvatar = document.getElementById('profileViewAvatar');
+                const personalBodyAvatar = document.getElementById('personalBodyAvatar');
+                
+                if(liveProfileIcon) liveProfileIcon.src = userProfile.profile_pic_url;
+                if(settingsProfileIcon) settingsProfileIcon.src = userProfile.profile_pic_url;
+                if(profileViewAvatar) profileViewAvatar.src = userProfile.profile_pic_url;
+                if(personalBodyAvatar) personalBodyAvatar.src = userProfile.profile_pic_url;
+            }
+
+            const floatingUserName = document.getElementById('floatingUserName');
+            const floatingIqama = document.getElementById('floatingIqama');
+            if(floatingUserName) floatingUserName.innerText = userProfile.full_name || 'User';
+            if(floatingIqama) floatingIqama.innerText = userProfile.iqama || '';
+            
+            const settingsProfileName = document.querySelector('.settings-box .profile-name');
+            if (settingsProfileName) settingsProfileName.innerText = userProfile.full_name || 'User';
+            const settingsProfileId = document.querySelector('.settings-box .profile-id');
+            if (settingsProfileId) {
+                settingsProfileId.innerHTML = `<span data-lang="id_label">ID No.:</span> ${userProfile.iqama || ''}`;
+            }
+
+            // Digital card data (though text elements are hidden)
+            const digitalCardName = document.getElementById('digitalCardName');
+            const digitalCardId = document.getElementById('digitalCardId');
+            const digitalCardExpiry = document.getElementById('digitalCardExpiry');
+            if(digitalCardName) digitalCardName.innerText = userProfile.full_name || '---';
+            if(digitalCardId) digitalCardId.innerText = `ID: ${(details && details.resident_id_number) ? details.resident_id_number : '---'}`;
+            if(digitalCardExpiry) digitalCardExpiry.innerText = `Expiry: ${(details && details.resident_id_expiry) ? details.resident_id_expiry : '---'}`;
+
+            // Resident Card Image
+            const cardImage = document.getElementById('residentCardImage');
+            if (cardImage) {
+                if (details && details.resident_card_image_url) {
+                    cardImage.src = details.resident_card_image_url;
+                    cardImage.style.display = 'block';
+                    const mock = document.querySelector('#digitalResidentCard .card-inner-mock');
+                    if (mock) mock.style.display = 'none';
+                } else {
+                    cardImage.style.display = 'none';
+                }
+            }
+
+            const passTextVal = document.getElementById('passTextVal');
+            const passIssuingDate = document.getElementById('passIssuingDate');
+            const passExpiryDate = document.getElementById('passExpiryDate');
+            const passIssuingCity = document.getElementById('passIssuingCity');
+            const passportAmountDeposit = document.getElementById('passportAmountDeposit');
+            
+            if(passTextVal) passTextVal.innerText = (details && details.passport_number) ? details.passport_number : '-';
+            if(passIssuingDate) passIssuingDate.innerText = (details && details.passport_issue_date) ? details.passport_issue_date : '-';
+            if(passExpiryDate) passExpiryDate.innerText = (details && details.passport_expiry) ? details.passport_expiry : '-';
+            if(passIssuingCity) passIssuingCity.innerText = (details && details.passport_issue_city) ? details.passport_issue_city : '-';
+            if(passportAmountDeposit) {
+                passportAmountDeposit.innerText = `SAR ${parseFloat((details && details.amount_deposit) || 0).toFixed(2)}`;
+            }
+
+            const resTextVal = document.getElementById('resTextVal');
+            const residentIssuingDate = document.getElementById('residentIssuingDate');
+            const residentExpiryDate = document.getElementById('residentExpiryDate');
+            
+            if(resTextVal) resTextVal.innerText = (details && details.resident_id_number) ? details.resident_id_number : '-';
+            if(residentIssuingDate) residentIssuingDate.innerText = (details && details.resident_id_issue_date) ? details.resident_id_issue_date : '-';
+            if(residentExpiryDate) residentExpiryDate.innerText = (details && details.resident_id_expiry) ? details.resident_id_expiry : '-';
+
+            const personalName = document.getElementById('personalName');
+            const birthCity = document.getElementById('birthCity');
+            const birthCountry = document.getElementById('birthCountry');
+            const dateOfBirth = document.getElementById('dateOfBirth');
+            const maritalStatus = document.getElementById('maritalStatus');
+            const sponsorTransfers = document.getElementById('sponsorTransfers');
+            const religion = document.getElementById('religion');
+            const workPermit = document.getElementById('workPermit');
+            const biometricsCollected = document.getElementById('biometricsCollected');
+            const travelStatus = document.getElementById('travelStatus');
+            
+            if(personalName) personalName.innerText = userProfile.full_name || '-';
+            if(birthCity) birthCity.innerText = (details && details.birth_place) ? details.birth_place : '-';
+            if(birthCountry) birthCountry.innerText = (details && details.birth_country) ? details.birth_country : '-';
+            if(dateOfBirth) dateOfBirth.innerText = (details && details.birth_date) ? details.birth_date : '-';
+            if(maritalStatus) maritalStatus.innerText = (details && details.marital_status) ? details.marital_status : '-';
+            if(sponsorTransfers) sponsorTransfers.innerText = (details && details.sponsor_transfers) ? details.sponsor_transfers : '0';
+            if(religion) religion.innerText = (details && details.religion) ? details.religion : '-';
+            if(workPermit) workPermit.innerText = (details && details.work_permit) ? details.work_permit : '-';
+            if(biometricsCollected) biometricsCollected.innerText = (details && details.biometrics_collected) ? 'Yes' : 'No';
+            if(travelStatus) travelStatus.innerText = (details && details.travel_status) ? details.travel_status : '-';
+            
+            const travelTag = document.getElementById('travelStatusTag');
+            if (travelTag) {
+                travelTag.innerText = (details && details.travel_status === 'Outside') ? 'Outside Kingdom' : 'Inside Kingdom';
+            }
+
+            const sponsorName = document.getElementById('sponsorName');
+            const sTextVal = document.getElementById('sTextVal');
+            
+            if(sponsorName) sponsorName.innerText = (details && details.sponsor_name) ? details.sponsor_name : '-';
+            if(sTextVal) sTextVal.innerText = (details && details.sponsor_iqama) ? details.sponsor_iqama : '-';
+
+            const insuranceCompany = document.getElementById('insuranceCompany');
+            const insuranceIssuingDate = document.getElementById('insuranceIssuingDate');
+            const insuranceExpiryDate = document.getElementById('insuranceExpiryDate');
+            const bloodType = document.getElementById('bloodType');
+            
+            if(insuranceCompany) insuranceCompany.innerText = (details && details.insurance_company) ? details.insurance_company : '-';
+            if(insuranceIssuingDate) insuranceIssuingDate.innerText = (details && details.insurance_issue) ? details.insurance_issue : '-';
+            if(insuranceExpiryDate) insuranceExpiryDate.innerText = (details && details.insurance_expiry) ? details.insurance_expiry : '-';
+            if(bloodType) bloodType.innerText = (details && details.blood_type) ? details.blood_type : '-';
+
+            const hajjStatus = document.getElementById('hajjStatus');
+            const lastHajjYear = document.getElementById('lastHajjYear');
+            
+            if(hajjStatus) hajjStatus.innerText = (details && details.hajj_status) ? details.hajj_status : '-';
+            if(lastHajjYear) lastHajjYear.innerText = (details && details.last_hajj_year) ? details.last_hajj_year : '-';
+
+            const visaNumber = document.getElementById('visaNumber');
+            const visaType = document.getElementById('visaType');
+            const visaIssueDate = document.getElementById('visaIssueDate');
+            const visaExpiryDate = document.getElementById('visaExpiryDate');
+            const visaStatus = document.getElementById('visaStatus');
+            
+            if(visaNumber) visaNumber.innerText = (details && details.visa_number) ? details.visa_number : '-';
+            if(visaType) visaType.innerText = (details && details.visa_type) ? details.visa_type : '-';
+            if(visaIssueDate) visaIssueDate.innerText = (details && details.visa_issue_date) ? details.visa_issue_date : '-';
+            if(visaExpiryDate) visaExpiryDate.innerText = (details && details.visa_expiry_date) ? details.visa_expiry_date : '-';
+            if(visaStatus) visaStatus.innerText = (details && details.visa_status) ? details.visa_status : '-';
+
+            const licenseNumber = document.getElementById('licenseNumber');
+            const licenseType = document.getElementById('licenseType');
+            const licenseIssueDate = document.getElementById('licenseIssueDate');
+            const licenseExpiryDate = document.getElementById('licenseExpiryDate');
+            const licenseStatus = document.getElementById('licenseStatus');
+            
+            if(licenseNumber) licenseNumber.innerText = (details && details.license_number) ? details.license_number : '-';
+            if(licenseType) licenseType.innerText = (details && details.license_type) ? details.license_type : '-';
+            if(licenseIssueDate) licenseIssueDate.innerText = (details && details.license_issue_date) ? details.license_issue_date : '-';
+            if(licenseExpiryDate) licenseExpiryDate.innerText = (details && details.license_expiry_date) ? details.license_expiry_date : '-';
+            if(licenseStatus) licenseStatus.innerText = (details && details.license_status) ? details.license_status : '-';
+
+            const laborTotalWorkers = document.getElementById('laborTotalWorkers');
+            const laborActiveRequests = document.getElementById('laborActiveRequests');
+            const laborLastRequestDate = document.getElementById('laborLastRequestDate');
+            
+            if(laborTotalWorkers) laborTotalWorkers.innerText = (details && details.labor_total_workers) ? details.labor_total_workers : '-';
+            if(laborActiveRequests) laborActiveRequests.innerText = (details && details.labor_active_requests) ? details.labor_active_requests : '-';
+            if(laborLastRequestDate) laborLastRequestDate.innerText = (details && details.labor_last_request_date) ? details.labor_last_request_date : '-';
+            
+            // ✅ UPDATED: Toggle empty state and data accordion for Visa, License, Labor
+            // Visa
+            const visaEmpty = document.getElementById('visaEmptyState');
+            const visaAccordion = document.getElementById('visaAccordionCard');
+            const noVisaMsg = document.getElementById('no-visa-msg');
+            const hasVisaData = details && (details.visa_number || details.visa_type || details.visa_issue_date || details.visa_expiry_date || details.visa_status);
+            if (visaEmpty) visaEmpty.style.display = hasVisaData ? 'none' : 'flex';
+            if (visaAccordion) visaAccordion.style.display = hasVisaData ? '' : 'none';
+            if (noVisaMsg) noVisaMsg.style.display = 'none'; // Always hide old message, using new empty state
+
+            // License
+            const licenseEmpty = document.getElementById('licenseEmptyState');
+            const licenseAccordion = document.getElementById('licenseAccordionCard');
+            const noLicenseMsg = document.getElementById('no-license-msg');
+            const hasLicenseData = details && (details.license_number || details.license_type || details.license_issue_date || details.license_expiry_date || details.license_status);
+            if (licenseEmpty) licenseEmpty.style.display = hasLicenseData ? 'none' : 'flex';
+            if (licenseAccordion) licenseAccordion.style.display = hasLicenseData ? '' : 'none';
+            if (noLicenseMsg) noLicenseMsg.style.display = 'none';
+
+            // Labor
+            const laborEmpty = document.getElementById('laborEmptyState');
+            const laborAccordion = document.getElementById('laborAccordionCard');
+            const noLaborMsg = document.getElementById('no-labor-msg');
+            const hasLaborData = details && (details.labor_total_workers || details.labor_active_requests || details.labor_last_request_date);
+            if (laborEmpty) laborEmpty.style.display = hasLaborData ? 'none' : 'flex';
+            if (laborAccordion) laborAccordion.style.display = hasLaborData ? '' : 'none';
+            if (noLaborMsg) noLaborMsg.style.display = 'none';
+        }
+
+        window.addEventListener('DOMContentLoaded', initDashboard);
+        // Set empty state icon sources
+document.getElementById('familyEmptyIcon').src = BASE_ICON_PATH + "no_family.png";
+document.getElementById('workersEmptyIcon').src = BASE_ICON_PATH + "no_workers.png";
+document.getElementById('visaEmptyIcon').src = BASE_ICON_PATH + "no_visa.png";
+document.getElementById('licenseEmptyIcon').src = BASE_ICON_PATH + "no_license.png";
+document.getElementById('laborEmptyIcon').src = BASE_ICON_PATH + "no_labor.png";
+
+// ========== 🔍 All icon অটো ফোল্ডার স্ক্যানার (Netlify & WebView Compatible) ==========
+(function initAllIconScanner() {
+    const folders = ['folder1', 'folder2', 'folder3', 'folder4', 'folder5', 'folder6'];
+
+    // ফাইলনেম থেকে সঠিক রিলেティブ পাথ খোঁজার ফাংশন
+    function findValidPath(imageName, callback) {
+        let idx = 0;
+        function tryNext() {
+            if (idx >= folders.length) return;
+            const testPath = 'All icon/' + folders[idx] + '/' + imageName; // রিলেটিভ পাথ
+            const img = new Image();
+            img.onload = function() { callback(testPath); };
+            img.onerror = function() { idx++; tryNext(); };
+            img.src = testPath;
+        }
+        tryNext();
+    }
+
+    // ইমেজ এলিমেন্টের src ঠিক করো
+    function fixSrc(imgEl) {
+        // অলরেডি স্ক্যান করা হয়ে গেলে আর বারবার স্ক্যান করবে না
+        if (imgEl.hasAttribute('data-scanned')) return;
+
+        let src = imgEl.getAttribute('src') || imgEl.src;
+        if (!src) return;
+
+        // চেক করবে পাথে all_icon বা All icon আছে কিনা (Case Insensitive)
+        if (src.toLowerCase().includes('all_icon/')) {
+            
+            // নেটলিফাই বা ওয়েবভিউতে ফুল পাথ আসলেও যেন শুধু ফাইলের নামটা (যেমন: DJ.png) কেটে নেয়
+            const urlParts = src.split('/');
+            const imageName = urlParts[urlParts.length - 1]; 
+            
+            // ফাইলের নাম যদি ফাঁকা না হয়
+            if (imageName && imageName.trim() !== "") {
+                findValidPath(imageName, function(validPath) {
+                    imgEl.src = validPath;
+                    imgEl.setAttribute('data-scanned', 'true'); // সেভ লুপ প্রোটেকশন
+                });
+            }
+        }
+    }
+
+    // পেজে থাকা সব ইমেজ একবার স্ক্যান
+    document.querySelectorAll('img').forEach(fixSrc);
+
+    // MutationObserver: ডাইনামিকালি কোনো নতুন ইমেজ বা ড্যাশবোর্ড ডেটা লোড হলে ফিক্স করবে
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.type === 'childList') {
+                mutation.addedNodes.forEach(function(node) {
+                    if (node.tagName === 'IMG') fixSrc(node);
+                    else if (node.querySelectorAll) {
+                        node.querySelectorAll('img').forEach(fixSrc);
+                    }
+                });
+            }
+            if (mutation.type === 'attributes' && 
+                mutation.attributeName === 'src' && 
+                mutation.target.tagName === 'IMG') {
+                fixSrc(mutation.target);
+            }
+        });
+    });
+    
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['src']
+    });
+})();
+
+</script>
+
+</body>
+</html>
