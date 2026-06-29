@@ -15,15 +15,7 @@
     <!-- Lottie Animation Library -->
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.13/lottie.min.js"></script>
-    <script>
-        // সমস্ত localhost/assets/All icon পাথকে সরাসরি All icon/-এ রূপান্তর
-document.querySelectorAll('img').forEach(function(img) {
-    var src = img.getAttribute('src');
-    if (src && src.includes('localhost/assets/All icon/')) {
-        img.setAttribute('src', src.replace('All icon/', 'All icon/'));
-    }
-});
-    </script>
+    
     <style>
         /* ================================================================
            🎨 CUSTOM LOCAL FONT
@@ -1989,10 +1981,10 @@ html[dir="rtl"] .section-title {
                 </div>
                 <div class="header-right">
                     <div class="notification-icon-wrapper" onclick="toggleNotificationOverlay(true)" title="Notifications">
-                        <img src="All icon/DJ.png" alt="Notification" class="header-icon" id="notificationIconNav">
+                        <img src="All_icon/DJ.png" alt="Notification" class="header-icon" id="notificationIconNav">
                         <span class="notification-badge" id="notificationBadge"></span>
                     </div>
-                    <img src="All icon/GJ.png" alt="Settings" class="header-icon" id="settingsIconNav" onclick="toggleSettings(true)">
+                    <img src="All_icon/GJ.png" alt="Settings" class="header-icon" id="settingsIconNav" onclick="toggleSettings(true)">
                 </div>
             </div>
         </div>
@@ -2005,7 +1997,7 @@ html[dir="rtl"] .section-title {
                 
                 <div class="profile-card" onclick="toggleProfileView(true)">
                     <div class="profile-img-container">
-                        <img src="All icon/AD.png" alt="Profile" class="profile-avatar" id="liveProfileIcon">
+                        <img src="All_icon/AD.png" alt="Profile" class="profile-avatar" id="liveProfileIcon">
                     </div>
                     <div class="profile-info">
                         <div class="profile-name" id="displayUserName">༊ᵖʳᵒᶠᵉˢˢᵒʳ᭄</div>
@@ -2018,7 +2010,7 @@ html[dir="rtl"] .section-title {
                         <circle cx="11" cy="11" r="8"></circle>
                         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                     </svg>
-                    <img src="All icon/Ey (1).png" alt="Search" class="search-icon" id="liveSearchIconImg" style="display: none; object-fit: contain;">
+                    <img src="All_icon/Ey (1).png" alt="Search" class="search-icon" id="liveSearchIconImg" style="display: none; object-fit: contain;">
                     <div class="search-placeholder" data-lang="search_placeholder">Look for a Service</div>
                 </div>
 
@@ -2044,7 +2036,7 @@ html[dir="rtl"] .section-title {
 
                     <div id="defaultQuickAccessCards">
                         <div class="full-width-card">
-                            <img src="All icon/Hg.png" alt="Vehicles" class="card-main-icon" id="icon-vehicles">
+                            <img src="All_icon/Hg.png" alt="Vehicles" class="card-main-icon" id="icon-vehicles">
                             <div class="card-text-container">
                                 <span class="card-main-title" data-lang="my_vehicles">My Vehicles</span>
                                 <span class="card-sub-title" data-lang="my_vehicles_sub">View details, renew documents, report accidents, and much more.</span>
@@ -2054,29 +2046,29 @@ html[dir="rtl"] .section-title {
                         <div class="two-column-grid">
                             
                             <div class="grid-card">
-                                <img src="All icon/Fx (1).png" alt="Auth" class="card-main-icon" id="grid-icon-1">
+                                <img src="All_icon/Fx (1).png" alt="Auth" class="card-main-icon" id="grid-icon-1">
                                 <span class="grid-card-title" data-lang="auth_services">Authentication Services</span>
                             </div>
 
                             <div class="grid-card">
-                                <img src="All icon/Fi (1).png" alt="Travel" class="card-main-icon" id="grid-icon-2">
+                                <img src="All_icon/Fi (1).png" alt="Travel" class="card-main-icon" id="grid-icon-2">
                                 <span class="grid-card-title" data-lang="absher_travel">Absher Travel</span>
                             </div>
 
                             <div class="grid-card">
-                                <img src="All icon/Fp (1).png" alt="Accident" class="card-main-icon" id="grid-icon-3">
+                                <img src="All_icon/Fp (1).png" alt="Accident" class="card-main-icon" id="grid-icon-3">
                                 <span class="grid-card-title" data-lang="report_accident">Report Minor Accident</span>
                             </div>
 
                             <div class="grid-card">
-                                <img src="All icon/Fg (1).png" alt="Violations" class="card-main-icon" id="grid-icon-4">
+                                <img src="All_icon/Fg (1).png" alt="Violations" class="card-main-icon" id="grid-icon-4">
                                 <span class="grid-card-title" data-lang="traffic_violations">Traffic Violations</span>
                             </div>
 
                         </div>
 
                         <div class="full-width-card">
-                            <img src="All icon/Hs.png" alt="Weapons" class="card-main-icon" id="icon-weapons">
+                            <img src="All_icon/Hs.png" alt="Weapons" class="card-main-icon" id="icon-weapons">
                             <div class="card-text-container">
                                 <span class="card-main-title" data-lang="my_weapons">My Weapons</span>
                                 <span class="card-sub-title" data-lang="my_weapons_sub">View weapons details, issue and view carry permits.</span>
@@ -2105,35 +2097,35 @@ html[dir="rtl"] .section-title {
 
             <div class="services-grid">
     <div class="service-card" onclick="alert('Register Newborn')">
-        <img src="All icon/DA.png" alt="Newborn" class="service-icon" id="srv-newborn">
+        <img src="All_icon/DA.png" alt="Newborn" class="service-icon" id="srv-newborn">
         <span class="service-title" data-lang="srv_newborn">Register Newborn</span>
     </div>
     <div class="service-card" onclick="alert('Renew Driving License')">
-        <img src="All icon/EX.png" alt="Driving" class="service-icon" id="srv-driving">
+        <img src="All_icon/EX.png" alt="Driving" class="service-icon" id="srv-driving">
         <span class="service-title" data-lang="srv_driving">Renew Driving License</span>
     </div>
     <div class="service-card" onclick="alert('Renew Resident ID')">
-        <img src="All icon/ES.png" alt="Resident" class="service-icon" id="srv-resident">
+        <img src="All_icon/ES.png" alt="Resident" class="service-icon" id="srv-resident">
         <span class="service-title" data-lang="srv_resident">Renew Resident ID</span>
     </div>
     <div class="service-card" onclick="alert('Authentication Services')">
-        <img src="All icon/Fx (1).png" alt="Auth" class="service-icon" id="srv-auth">
+        <img src="All_icon/Fx (1).png" alt="Auth" class="service-icon" id="srv-auth">
         <span class="service-title" data-lang="srv_auth">Authentication Services</span>
     </div>
     <div class="service-card" onclick="alert('Update Resident')">
-        <img src="All icon/ER.png" alt="Update" class="service-icon" id="srv-update">
+        <img src="All_icon/ER.png" alt="Update" class="service-icon" id="srv-update">
         <span class="service-title" data-lang="srv_update">Update Resident</span>
     </div>
     <div class="service-card" onclick="alert('Report Minor Accident')">
-        <img src="All icon/Fp (1).png" alt="Accident" class="service-icon" id="srv-accident">
+        <img src="All_icon/Fp (1).png" alt="Accident" class="service-icon" id="srv-accident">
         <span class="service-title" data-lang="srv_accident">Report Minor Accident</span>
     </div>
     <div class="service-card" onclick="alert('Update Resident Photo')">
-        <img src="All icon/FA.png" alt="Photo" class="service-icon" id="srv-photo">
+        <img src="All_icon/FA.png" alt="Photo" class="service-icon" id="srv-photo">
         <span class="service-title" data-lang="srv_photo">Update Resident Photo</span>
     </div>
     <div class="service-card" onclick="alert('Update Passport Information')">
-        <img src="All icon/Ed (1).png" alt="Passport" class="service-icon" id="srv-passport">
+        <img src="All_icon/Ed (1).png" alt="Passport" class="service-icon" id="srv-passport">
         <span class="service-title" data-lang="srv_passport">Update Passport Information</span>
     </div>
 </div>
@@ -2206,28 +2198,28 @@ html[dir="rtl"] .section-title {
         </div> <!-- /#other-page -->
 
         <div class="floating-fab">
-            <img src="All icon/fa1.png" alt="Chat" class="fab-icon" id="fabChatIcon">
+            <img src="All_icon/fa1.png" alt="Chat" class="fab-icon" id="fabChatIcon">
         </div>
 
         <div class="bottom-nav-bar" id="bottomNavBar">
             <div class="nav-item active" onclick="switchMenu(this, 'home')">
-                <img src="All icon/Du (1).png" alt="Home" class="nav-icon" id="icon-home">
+                <img src="All_icon/Du (1).png" alt="Home" class="nav-icon" id="icon-home">
                 <span class="nav-text" data-lang="menu_home">Home</span>
             </div>
             <div class="nav-item" onclick="switchMenu(this, 'services')">
-                <img src="All icon/Dv.png" alt="Services" class="nav-icon" id="icon-services">
+                <img src="All_icon/Dv.png" alt="Services" class="nav-icon" id="icon-services">
                 <span class="nav-text" data-lang="menu_services">Services</span>
             </div>
             <div class="nav-item" onclick="switchMenu(this, 'family')">
-                <img src="All icon/Dr (1).png" alt="Family" class="nav-icon" id="icon-family">
+                <img src="All_icon/Dr (1).png" alt="Family" class="nav-icon" id="icon-family">
                 <span class="nav-text" data-lang="menu_family">Family</span>
             </div>
             <div class="nav-item" onclick="switchMenu(this, 'workers')">
-                <img src="All icon/Dz (1).png" alt="Workers" class="nav-icon" id="icon-workers">
+                <img src="All_icon/Dz (1).png" alt="Workers" class="nav-icon" id="icon-workers">
                 <span class="nav-text" data-lang="menu_workers">Workers</span>
             </div>
             <div class="nav-item" onclick="switchMenu(this, 'other')">
-                <img src="All icon/Dx (1).png" alt="Other" class="nav-icon" id="icon-other">
+                <img src="All_icon/Dx (1).png" alt="Other" class="nav-icon" id="icon-other">
                 <span class="nav-text" data-lang="menu_other">Other</span>
             </div>
         </div>
@@ -2272,7 +2264,7 @@ html[dir="rtl"] .section-title {
                 <div class="settings-box">
                     <div class="settings-row" style="gap: 16px;">
                         <div class="profile-img-container" style="width: 60px; height: 60px;">
-                            <img src="All icon/AD.png" alt="Profile" class="profile-avatar" id="settingsProfileIcon">
+                            <img src="All_icon/AD.png" alt="Profile" class="profile-avatar" id="settingsProfileIcon">
                         </div>
                         <div class="profile-info">
                             <div class="profile-name" style="font-size: 16px;">༊ᵖʳᵒᶠᵉˢˢᵒʳ᭄</div>
@@ -2391,13 +2383,13 @@ html[dir="rtl"] .section-title {
         <div class="profile-green-zone">
             <div class="profile-floating-card">
                 <div class="floating-avatar-box">
-                    <img src="All icon/AD.png" alt="Profile" id="profileViewAvatar">
+                    <img src="All_icon/AD.png" alt="Profile" id="profileViewAvatar">
                 </div>
                 <div class="floating-user-name" id="floatingUserName">Loading...</div>
                 <div class="floating-id-row">
                     <div class="floating-id-text"><span data-lang="id_label">ID No.:</span> <span id="floatingIqama">Loading...</span></div>
                     <button class="copy-action-btn" onclick="copyIdNumber()" title="Copy ID">
-                        <img src="All icon/Cb (1).png" alt="Copy" id="profileCopyIdIcon">
+                        <img src="All_icon/Cb (1).png" alt="Copy" id="profileCopyIdIcon">
                     </button>
                 </div>
                 <div class="personal-details-trigger" onclick="toggleAdvancedOverlay('personalDetailsOverlay', true)">
@@ -2411,22 +2403,22 @@ html[dir="rtl"] .section-title {
             
             <div class="profile-menu-grid">
                 <div class="profile-grid-card" onclick="toggleAdvancedOverlay('passportDetailsOverlay', true)">
-                    <img src="All icon/Ed (1).png" alt="Passport" id="prof-icon-passport">
+                    <img src="All_icon/Ed (1).png" alt="Passport" id="prof-icon-passport">
                     <span data-lang="prof_passport">My Passport</span>
                 </div>
                 <div class="profile-grid-card" onclick="toggleAdvancedOverlay('residentDetailsOverlay', true)">
-                    <img src="All icon/ES.png" alt="Resident ID" id="prof-icon-resident">
+                    <img src="All_icon/ES.png" alt="Resident ID" id="prof-icon-resident">
                     <span data-lang="prof_resident">My Resident ID</span>
                 </div>
             </div>
 
             <div class="profile-combo-box">
                 <div class="profile-combo-row" onclick="toggleAdvancedOverlay('visaDetailsOverlay', true)">
-                    <img src="All icon/Fk (1).png" alt="Visa" id="prof-icon-visa">
+                    <img src="All_icon/Fk (1).png" alt="Visa" id="prof-icon-visa">
                     <span data-lang="prof_visa">My Visa</span>
                 </div>
                 <div class="profile-combo-row" onclick="toggleAdvancedOverlay('licenseDetailsOverlay', true)">
-                    <img src="All icon/EX.png" alt="Driving License" id="prof-icon-license">
+                    <img src="All_icon/EX.png" alt="Driving License" id="prof-icon-license">
                     <span data-lang="prof_license">My Driving License</span>
                 </div>
             </div>
@@ -2438,7 +2430,7 @@ html[dir="rtl"] .section-title {
             </div>
 
             <div class="profile-full-card" onclick="toggleAdvancedOverlay('laborDetailsOverlay', true)">
-                <img src="All icon/Ht.png" alt="Labor" id="prof-icon-labor">
+                <img src="All_icon/Ht.png" alt="Labor" id="prof-icon-labor">
                 <span data-lang="prof_labor">Labor Importations</span>
             </div>
 
@@ -2465,7 +2457,7 @@ html[dir="rtl"] .section-title {
             <div class="document-accordion-card">
                 <div class="doc-trigger-head">
                     <div class="doc-head-left">
-                        <img id="passportMiniIcon" src="All icon/Ed (1).png" alt="Passport Icon" class="mini-icon">
+                        <img id="passportMiniIcon" src="All_icon/Ed (1).png" alt="Passport Icon" class="mini-icon">
                         <h3>Normal Passport</h3>
                     </div>
                     <span class="arrow-toggle-icon">︿</span>
@@ -2475,7 +2467,7 @@ html[dir="rtl"] .section-title {
                         <label>Passport Number</label>
                         <div class="field-inner-value" id="passTextVal">-</div>
                         <div class="green-inline-copy" onclick="triggerNativeCopy('passTextVal')">
-                            <img src="All icon/Cb (1).png" alt="Copy">
+                            <img src="All_icon/Cb (1).png" alt="Copy">
                         </div>
                     </div>
                     <div class="data-field-wrapper">
@@ -2518,7 +2510,7 @@ html[dir="rtl"] .section-title {
             <div class="document-accordion-card">
                 <div class="doc-trigger-head">
                     <div class="doc-head-left">
-                        <img src="All icon/EX.png" alt="Resident Icon" class="mini-icon">
+                        <img src="All_icon/EX.png" alt="Resident Icon" class="mini-icon">
                         <h3>My Resident ID</h3>
                     </div>
                     <span class="arrow-toggle-icon">︿</span>
@@ -2528,7 +2520,7 @@ html[dir="rtl"] .section-title {
                         <label>Resident ID Number</label>
                         <div class="field-inner-value" id="resTextVal">-</div>
                         <div class="green-inline-copy" onclick="triggerNativeCopy('resTextVal')">
-                            <img src="All icon/Cb (1).png" alt="Copy">
+                            <img src="All_icon/Cb (1).png" alt="Copy">
                         </div>
                     </div>
                     <div class="data-field-wrapper">
@@ -2564,7 +2556,7 @@ html[dir="rtl"] .section-title {
             <div class="document-accordion-card collapsible-node expanded" id="nodePersonal">
                 <div class="doc-trigger-head" onclick="triggerNodeToggle('nodePersonal')">
                     <div class="doc-head-left">
-                        <img src="All icon/AD.png" alt="Avatar" class="avatar-square" id="personalBodyAvatar">
+                        <img src="All_icon/AD.png" alt="Avatar" class="avatar-square" id="personalBodyAvatar">
                     </div>
                     <h3>Personal Details</h3>
                     <span class="arrow-toggle-icon">︿</span>
@@ -2616,7 +2608,7 @@ html[dir="rtl"] .section-title {
             <div class="document-accordion-card collapsible-node" id="nodeSponsor">
                 <div class="doc-trigger-head" onclick="triggerNodeToggle('nodeSponsor')">
                     <div class="doc-head-left">
-                        <img src="All icon/ha3.png" alt="Sponsor" class="mini-icon" style="border-radius:50%">
+                        <img src="All_icon/ha3.png" alt="Sponsor" class="mini-icon" style="border-radius:50%">
                         <h3>Sponsor Details</h3>
                     </div>
                     <span class="arrow-toggle-icon">﹀</span>
@@ -2630,7 +2622,7 @@ html[dir="rtl"] .section-title {
                         <label>Sponsor ID Number</label>
                         <div class="field-inner-value" id="sTextVal">-</div>
                         <div class="green-inline-copy" onclick="triggerNativeCopy('sTextVal')">
-                            <img src="All icon/Cb (1).png" alt="Copy">
+                            <img src="All_icon/Cb (1).png" alt="Copy">
                         </div>
                     </div>
                 </div>
@@ -2639,7 +2631,7 @@ html[dir="rtl"] .section-title {
             <div class="document-accordion-card collapsible-node" id="nodeInsurance">
                 <div class="doc-trigger-head" onclick="triggerNodeToggle('nodeInsurance')">
                     <div class="doc-head-left">
-                        <img src="All icon/ha2.png" alt="Insurance" class="mini-icon">
+                        <img src="All_icon/ha2.png" alt="Insurance" class="mini-icon">
                         <h3>Health Insurance</h3>
                     </div>
                     <span class="arrow-toggle-icon">﹀</span>
@@ -2667,7 +2659,7 @@ html[dir="rtl"] .section-title {
             <div class="document-accordion-card collapsible-node" id="nodeHajj">
                 <div class="doc-trigger-head" onclick="triggerNodeToggle('nodeHajj')">
                     <div class="doc-head-left">
-                        <img src="All icon/ha1.png" alt="Hajj" class="mini-icon">
+                        <img src="All_icon/ha1.png" alt="Hajj" class="mini-icon">
                         <h3>Hajj Details</h3>
                     </div>
                     <span class="arrow-toggle-icon">﹀</span>
@@ -2711,7 +2703,7 @@ html[dir="rtl"] .section-title {
             <div class="document-accordion-card" id="visaAccordionCard">
                 <div class="doc-trigger-head">
                     <div class="doc-head-left">
-                        <img src="All icon/Fk (1).png" alt="Visa Icon" class="mini-icon">
+                        <img src="All_icon/Fk (1).png" alt="Visa Icon" class="mini-icon">
                         <h3>Visa Details</h3>
                     </div>
                     <span class="arrow-toggle-icon">︿</span>
@@ -2764,7 +2756,7 @@ html[dir="rtl"] .section-title {
             <div class="document-accordion-card" id="licenseAccordionCard">
                 <div class="doc-trigger-head">
                     <div class="doc-head-left">
-                        <img src="All icon/EX.png" alt="License Icon" class="mini-icon">
+                        <img src="All_icon/EX.png" alt="License Icon" class="mini-icon">
                         <h3>License Details</h3>
                     </div>
                     <span class="arrow-toggle-icon">︿</span>
@@ -2817,7 +2809,7 @@ html[dir="rtl"] .section-title {
             <div class="document-accordion-card" id="laborAccordionCard">
                 <div class="doc-trigger-head">
                     <div class="doc-head-left">
-                        <img src="All icon/Ht.png" alt="Labor Icon" class="mini-icon">
+                        <img src="All_icon/Ht.png" alt="Labor Icon" class="mini-icon">
                         <h3>Labor Details</h3>
                     </div>
                     <span class="arrow-toggle-icon">︿</span>
@@ -3027,66 +3019,66 @@ html[dir="rtl"] .section-title {
         const themeIconLibrary = {
             dark: {
                 logo: "All_image/white_absher_logo.png",
-                vehicles: "All icon/Hg.png",
-                grid1: "All icon/Fx (1).png",
-                grid2: "All icon/Fi (1).png",
-                grid3: "All icon/Fp (1).png",
-                grid4: "All icon/Fg (1).png",
-                profPassport: "All icon/Ed (1).png",
-                profResident: "All icon/ES.png",
-                profVisa: "All icon/Fk (1).png",
-                profLicense: "All icon/EX.png",
-                profLabor: "All icon/Ht.png",
+                vehicles: "All_icon/Hg.png",
+                grid1: "All_icon/Fx (1).png",
+                grid2: "All_icon/Fi (1).png",
+                grid3: "All_icon/Fp (1).png",
+                grid4: "All_icon/Fg (1).png",
+                profPassport: "All_icon/Ed (1).png",
+                profResident: "All_icon/ES.png",
+                profVisa: "All_icon/Fk (1).png",
+                profLicense: "All_icon/EX.png",
+                profLabor: "All_icon/Ht.png",
                 quickBg: "All_image/gr1.jpg",
-                weapons: "All icon/Hs.png",
-                notificationIcon: "All icon/DJ.png",
-                settingsIcon: "All icon/GJ.png",
-                navHome: "All icon/Du (1).png",
-                navServices: "All icon/Dv.png",
-                navFamily: "All icon/Dr (1).png",
-                navWorkers: "All icon/Dz (1).png",
-                navOther: "All icon/Dx (1).png",
-                srv_newborn: "All icon/DA.png",
-                srv_driving: "All icon/EX.png",
-                srv_resident: "All icon/ES.png",
-                srv_auth: "All icon/Fx (1).png",
-                srv_update: "All icon/ER.png",
-                srv_accident: "All icon/Fp (1).png",
-                srv_photo: "All icon/FA.png",
-                srv_passport: "All icon/Ed (1).png",
+                weapons: "All_icon/Hs.png",
+                notificationIcon: "All_icon/DJ.png",
+                settingsIcon: "All_icon/GJ.png",
+                navHome: "All_icon/Du (1).png",
+                navServices: "All_icon/Dv.png",
+                navFamily: "All_icon/Dr (1).png",
+                navWorkers: "All_icon/Dz (1).png",
+                navOther: "All_icon/Dx (1).png",
+                srv_newborn: "All_icon/DA.png",
+                srv_driving: "All_icon/EX.png",
+                srv_resident: "All_icon/ES.png",
+                srv_auth: "All_icon/Fx (1).png",
+                srv_update: "All_icon/ER.png",
+                srv_accident: "All_icon/Fp (1).png",
+                srv_photo: "All_icon/FA.png",
+                srv_passport: "All_icon/Ed (1).png",
                 otherImg1: "All_image/D_01.png",
                 otherImg2: "All_image/D_02.png",
                 otherImg3: "All_image/D_03.png"
             },
             light: {
                 logo: "All_image/green_absher_logo.png",
-                vehicles: "All icon/c.png",
-                grid1: "All icon/f.png",
-                grid2: "All icon/m.png",
-                grid3: "All icon/L.png",
-                grid4: "All icon/BG.png",
-                profPassport: "All icon/pas.png",
-                profResident: "All icon/resident.png",
-                profVisa: "All icon/visa.png",
-                profLicense: "All icon/LL.png",
-                profLabor: "All icon/Laver.png",
+                vehicles: "All_icon/c.png",
+                grid1: "All_icon/f.png",
+                grid2: "All_icon/m.png",
+                grid3: "All_icon/L.png",
+                grid4: "All_icon/BG.png",
+                profPassport: "All_icon/pas.png",
+                profResident: "All_icon/resident.png",
+                profVisa: "All_icon/visa.png",
+                profLicense: "All_icon/LL.png",
+                profLabor: "All_icon/Laver.png",
                 quickBg: "All_image/wh1.jpg",
-                weapons: "All icon/p.png",
-                notificationIcon: "All icon/BB1.png",
-                settingsIcon: "All icon/Ss1.png",
-                navHome: "All icon/hom.png",
-                navServices: "All icon/ser.png",
-                navFamily: "All icon/fam.png",
-                navWorkers: "All icon/wark.png",
-                navOther: "All icon/Other.png",
-                srv_newborn: "All icon/DA.png",
-                srv_driving: "All icon/LL.png",
-                srv_resident: "All icon/resident.png",
-                srv_auth: "All icon/f.png",
-                srv_update: "All icon/ER.png",
-                srv_accident: "All icon/L.png",
-                srv_photo: "All icon/FA.png",
-                srv_passport: "All icon/pas.png",
+                weapons: "All_icon/p.png",
+                notificationIcon: "All_icon/BB1.png",
+                settingsIcon: "All_icon/Ss1.png",
+                navHome: "All_icon/hom.png",
+                navServices: "All_icon/ser.png",
+                navFamily: "All_icon/fam.png",
+                navWorkers: "All_icon/wark.png",
+                navOther: "All_icon/Other.png",
+                srv_newborn: "All_icon/DA.png",
+                srv_driving: "All_icon/LL.png",
+                srv_resident: "All_icon/resident.png",
+                srv_auth: "All_icon/f.png",
+                srv_update: "All_icon/ER.png",
+                srv_accident: "All_icon/L.png",
+                srv_photo: "All_icon/FA.png",
+                srv_passport: "All_icon/pas.png",
                 otherImg1: "All_image/O_01.png",
                 otherImg2: "All_image/O_02.png",
                 otherImg3: "All_image/O_03.png"
@@ -3201,7 +3193,7 @@ html[dir="rtl"] .section-title {
                 if(currentUserProfile && currentUserProfile.id) loadDynamicCards(currentUserProfile.id);
 
                 const passportMini = document.getElementById('passportMiniIcon');
-                if (passportMini) passportMini.src = "All icon/pas.png";
+                if (passportMini) passportMini.src = "All_icon/pas.png";
 
                 if(document.getElementById('icon-home')) document.getElementById('icon-home').src = themeIconLibrary.light.navHome;
                 if(document.getElementById('icon-services')) document.getElementById('icon-services').src = themeIconLibrary.light.navServices;
@@ -3269,7 +3261,7 @@ html[dir="rtl"] .section-title {
                 if(currentUserProfile && currentUserProfile.id) loadDynamicCards(currentUserProfile.id);
 
                 const passportMini = document.getElementById('passportMiniIcon');
-                if (passportMini) passportMini.src = "All icon/Ed (1).png";
+                if (passportMini) passportMini.src = "All_icon/Ed (1).png";
 
                 if(document.getElementById('icon-home')) document.getElementById('icon-home').src = themeIconLibrary.dark.navHome;
                 if(document.getElementById('icon-services')) document.getElementById('icon-services').src = themeIconLibrary.dark.navServices;
@@ -3491,7 +3483,7 @@ html[dir="rtl"] .section-title {
         // ================================================================
         // 🎞️ PROFILE IMAGE ANIMATION
         // ================================================================
-        const profileFrames = ["All icon/AD.png", "All icon/AE.png", "All icon/AC.png"];
+        const profileFrames = ["All_icon/AD.png", "All_icon/AE.png", "All_icon/AC.png"];
         let currentFrameIndex = 0;
         const mainProfileElement = document.getElementById('liveProfileIcon');
         const settingsProfileElement = document.getElementById('settingsProfileIcon');
@@ -3526,17 +3518,17 @@ html[dir="rtl"] .section-title {
         // 🧭 BOTTOM NAVIGATION BAR (SPA switch)
         // ================================================================
         const menuIcons = {
-            home: { white: "All icon/Du (1).png", green: "All icon/hom.png" },
-            services: { white: "All icon/Dv.png", green: "All icon/ser.png" },
-            family: { white: "All icon/Dr (1).png", green: "All icon/fam.png" },
-            workers: { white: "All icon/Dz (1).png", green: "All icon/wark.png" },
-            other: { white: "All icon/Dx (1).png", green: "All icon/Other.png" }
+            home: { white: "All_icon/Du (1).png", green: "All_icon/hom.png" },
+            services: { white: "All_icon/Dv.png", green: "All_icon/ser.png" },
+            family: { white: "All_icon/Dr (1).png", green: "All_icon/fam.png" },
+            workers: { white: "All_icon/Dz (1).png", green: "All_icon/wark.png" },
+            other: { white: "All_icon/Dx (1).png", green: "All_icon/Other.png" }
         };
 
         let currentActiveMenu = 'home';
 
         function switchMenu(selectedItem, menuName) {
-            // Reset All icons to white
+            // Reset All_icons to white
             document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
             document.getElementById('icon-home').src = menuIcons.home.white;
             document.getElementById('icon-services').src = menuIcons.services.white;
@@ -3726,7 +3718,7 @@ html[dir="rtl"] .section-title {
             fullWidthCards.forEach(link => {
                 html += `
                     <div class="full-width-card" onclick="window.open('${link.link_url || '#'}', '_blank')">
-                        <img src="${link.icon_url || 'All icon/Hg.png'}" alt="${link.title}" class="card-main-icon">
+                        <img src="${link.icon_url || 'All_icon/Hg.png'}" alt="${link.title}" class="card-main-icon">
                         <div class="card-text-container">
                             <span class="card-main-title">${link.title || 'Card'}</span>
                             ${link.subtitle ? `<span class="card-sub-title">${link.subtitle}</span>` : ''}
@@ -3740,7 +3732,7 @@ html[dir="rtl"] .section-title {
                 gridCards.forEach(link => {
                     html += `
                         <div class="grid-card" onclick="window.open('${link.link_url || '#'}', '_blank')">
-                            <img src="${link.icon_url || 'All icon/Fx (1).png'}" alt="${link.title}" class="card-main-icon">
+                            <img src="${link.icon_url || 'All_icon/Fx (1).png'}" alt="${link.title}" class="card-main-icon">
                             <span class="grid-card-title">${link.title || 'Card'}</span>
                         </div>
                     `;
@@ -4077,78 +4069,7 @@ document.getElementById('visaEmptyIcon').src = BASE_ICON_PATH + "no_visa.png";
 document.getElementById('licenseEmptyIcon').src = BASE_ICON_PATH + "no_license.png";
 document.getElementById('laborEmptyIcon').src = BASE_ICON_PATH + "no_labor.png";
 
-// ========== 🔍 All icon অটো ফোল্ডার স্ক্যানার (Netlify & WebView Compatible) ==========
-(function initAllIconScanner() {
-    const folders = ['folder1', 'folder2', 'folder3', 'folder4', 'folder5', 'folder6'];
 
-    // ফাইলনেম থেকে সঠিক রিলেティブ পাথ খোঁজার ফাংশন
-    function findValidPath(imageName, callback) {
-        let idx = 0;
-        function tryNext() {
-            if (idx >= folders.length) return;
-            const testPath = 'All icon/' + folders[idx] + '/' + imageName; // রিলেটিভ পাথ
-            const img = new Image();
-            img.onload = function() { callback(testPath); };
-            img.onerror = function() { idx++; tryNext(); };
-            img.src = testPath;
-        }
-        tryNext();
-    }
-
-    // ইমেজ এলিমেন্টের src ঠিক করো
-    function fixSrc(imgEl) {
-        // অলরেডি স্ক্যান করা হয়ে গেলে আর বারবার স্ক্যান করবে না
-        if (imgEl.hasAttribute('data-scanned')) return;
-
-        let src = imgEl.getAttribute('src') || imgEl.src;
-        if (!src) return;
-
-        // চেক করবে পাথে all_icon বা All icon আছে কিনা (Case Insensitive)
-        if (src.toLowerCase().includes('all_icon/')) {
-            
-            // নেটলিফাই বা ওয়েবভিউতে ফুল পাথ আসলেও যেন শুধু ফাইলের নামটা (যেমন: DJ.png) কেটে নেয়
-            const urlParts = src.split('/');
-            const imageName = urlParts[urlParts.length - 1]; 
-            
-            // ফাইলের নাম যদি ফাঁকা না হয়
-            if (imageName && imageName.trim() !== "") {
-                findValidPath(imageName, function(validPath) {
-                    imgEl.src = validPath;
-                    imgEl.setAttribute('data-scanned', 'true'); // সেভ লুপ প্রোটেকশন
-                });
-            }
-        }
-    }
-
-    // পেজে থাকা সব ইমেজ একবার স্ক্যান
-    document.querySelectorAll('img').forEach(fixSrc);
-
-    // MutationObserver: ডাইনামিকালি কোনো নতুন ইমেজ বা ড্যাশবোর্ড ডেটা লোড হলে ফিক্স করবে
-    const observer = new MutationObserver(function(mutations) {
-        mutations.forEach(function(mutation) {
-            if (mutation.type === 'childList') {
-                mutation.addedNodes.forEach(function(node) {
-                    if (node.tagName === 'IMG') fixSrc(node);
-                    else if (node.querySelectorAll) {
-                        node.querySelectorAll('img').forEach(fixSrc);
-                    }
-                });
-            }
-            if (mutation.type === 'attributes' && 
-                mutation.attributeName === 'src' && 
-                mutation.target.tagName === 'IMG') {
-                fixSrc(mutation.target);
-            }
-        });
-    });
-    
-    observer.observe(document.body, {
-        childList: true,
-        subtree: true,
-        attributes: true,
-        attributeFilter: ['src']
-    });
-})();
 
 </script>
 
