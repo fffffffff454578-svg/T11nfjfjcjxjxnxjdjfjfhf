@@ -13,9 +13,7 @@
     <!-- Supabase JS library (v2) - included for connection -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <!-- Lottie Animation Library -->
-    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.13/lottie.min.js"></script>
-    
     <style>
         /* ================================================================
            🎨 CUSTOM LOCAL FONT
@@ -108,15 +106,14 @@
            📱 BODY & MAIN CONTAINER
            ================================================================ */
         body {
-    background-color: var(--body-bg);
-    color: var(--text-main);
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    overflow-x: hidden;
-    will-change: background-color;  /* এই লাইনটুকুই শুধু বাড়তি */
-    transition: background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), color 0.4s ease;
-}
+            background-color: var(--body-bg);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            overflow-x: hidden;
+            transition: background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), color 0.4s ease;
+        }
 
         .app-container {
             width: 100%;
@@ -3528,7 +3525,7 @@ html[dir="rtl"] .section-title {
         let currentActiveMenu = 'home';
 
         function switchMenu(selectedItem, menuName) {
-            // Reset All_icons to white
+            // Reset all icons to white
             document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
             document.getElementById('icon-home').src = menuIcons.home.white;
             document.getElementById('icon-services').src = menuIcons.services.white;
@@ -4068,9 +4065,19 @@ document.getElementById('workersEmptyIcon').src = BASE_ICON_PATH + "no_workers.p
 document.getElementById('visaEmptyIcon').src = BASE_ICON_PATH + "no_visa.png";
 document.getElementById('licenseEmptyIcon').src = BASE_ICON_PATH + "no_license.png";
 document.getElementById('laborEmptyIcon').src = BASE_ICON_PATH + "no_labor.png";
+    </script>
+    <script>
+  // রাইট ক্লিক বন্ধ
+  document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+  });
 
-
-
+  // কিবোর্ড শর্টকাট (F12, Ctrl+U, Ctrl+Shift+I) বন্ধ করা
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'F12' || (e.ctrlKey && (e.key === 'u' || e.key === 'i' || e.key === 's'))) {
+      e.preventDefault();
+    }
+  });
 </script>
 
 </body>
